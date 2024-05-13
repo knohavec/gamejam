@@ -508,37 +508,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1505695136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &963438101
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 963438103}
-  m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &963438103
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963438101}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.47, y: 1.11, z: 0.03199947}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1080858591
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,8 +585,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 4396617263823734113, guid: e6cca5883a9534a46a45cccf191d94d3, type: 3}
-  base_enemies: 8
-  enemies_per_sec: 0.5
+  base_enemies: 5
+  enemies_per_sec: 1
   time_between_waves: 5
   difficulty_scaling: 0.75
 --- !u!1 &1122945909
@@ -13038,4 +13007,3 @@ SceneRoots:
   - {fileID: 1080858592}
   - {fileID: 2078727045}
   - {fileID: 1505695136}
-  - {fileID: 963438103}
