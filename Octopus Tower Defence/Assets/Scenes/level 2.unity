@@ -496,11 +496,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0bdeaa1be7343a44b430f0846328f50, type: 3}
---- !u!4 &471513757 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4665003638280291326, guid: 48dce4c3f76bbec4f858068e23bb923e, type: 3}
-  m_PrefabInstance: {fileID: 4498775886424090577}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &615634520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -844,8 +839,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38b8d46d37153d4f9d92d7a6cf69cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8253400573787693529, guid: 331d3fbcabad4f4459639a84e71b48d3, type: 3}
-  baseTransform: {fileID: 471513757}
+  enemyPrefab: {fileID: 5367574389041764012, guid: 5840aebddd1193b40887b278d11ce98c, type: 3}
+  baseTransform: {fileID: 2051383401}
   enemiesPerSecond: 0.1
   enemiesPerWave: 5
   timeBetweenWaves: 5
@@ -955,6 +950,11 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!4 &2051383401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6981461147250150397, guid: 48dce4c3f76bbec4f858068e23bb923e, type: 3}
+  m_PrefabInstance: {fileID: 4498775886424090577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2068619945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1077,6 +1077,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3387020683435651405, guid: 48dce4c3f76bbec4f858068e23bb923e, type: 3}
+      propertyPath: m_Name
+      value: BASE_CENTER
+      objectReference: {fileID: 0}
     - target: {fileID: 4665003638280291326, guid: 48dce4c3f76bbec4f858068e23bb923e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
