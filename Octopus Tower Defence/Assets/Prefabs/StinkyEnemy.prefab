@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7260701227778818022}
   - component: {fileID: 5490101338652248342}
   - component: {fileID: 1943195364030349780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StinkyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5490101338652248342}
-  moveSpeed: 2
+  moveSpeed: 5
