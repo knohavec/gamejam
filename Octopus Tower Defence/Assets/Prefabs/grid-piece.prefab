@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1436279873149673397}
   - component: {fileID: 7801900008946824516}
   - component: {fileID: 1182910868288783868}
+  - component: {fileID: 7167015027317159756}
   m_Layer: 3
   m_Name: grid-piece
   m_TagString: Untagged
@@ -164,3 +165,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7167015027317159756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2553087511835258003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750c40fb72fb3bc4a9d1c962c85b3749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 1436279873149673397}
+  hover_color: {r: 0, g: 1, b: 1, a: 0.2509804}
