@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class kelp_attack : MonoBehaviour
 {
@@ -6,15 +7,19 @@ public class kelp_attack : MonoBehaviour
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] private int damage = 5;
 
     private Transform target;
     private float searchCooldown = 0f;
     private float searchCooldownTime = 0.5f; // Search for a target every 0.5 seconds
     private Animator animator; // Reference to the Animator component
+    private float idleTime;
+    private float attackTime;
 
     private void Start()
     {
         animator = GetComponent<Animator>(); // Get the Animator component
+        UpdateAnimClipTimes();
     }
 
     private void Update()
@@ -35,6 +40,66 @@ public class kelp_attack : MonoBehaviour
         StartCoroutine(Attack());
     }
 
+    private void UpdateAnimClipTimes()
+{
+    animator = GetComponent<Animator>();
+    if (animator == null)
+    {
+        Debug.Log("Error: Did not find Animator component!");
+        return;
+    }
+
+    AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+    foreach (AnimationClip clip in clips)
+    {
+        switch (clip.name)
+        {
+            case "kelp_attack":
+                attackTime = clip.length;
+                break;
+            case "kelp_idle":
+                idleTime = clip.length;
+                break;
+        }
+    }
+
+    Debug.Log("Attack Time: " + attackTime);
+    Debug.Log("Idle Time: " + idleTime);
+}
+
+
+  private IEnumerator Attack()
+{
+    if (target != null && CheckTargetIsInRange())
+    {
+        // Trigger the attack animation
+        animator.SetBool("IsAttacking", true);
+
+        
+        
+        
+        
+        // Wait for the attack animation to finish
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        
+        target.gameObject.GetComponent<Enemy_Stats>().TakeDamage(damage);
+
+        // Reset the attack animation parameter
+        animator.SetBool("IsAttacking", false);
+
+        
+        // Reset the target after attacking
+        target = null;
+    }
+
+    
+    yield break;
+}
+
+
+
+
+
     private void SearchForTarget()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, targetingRange, enemyMask);
@@ -42,38 +107,13 @@ public class kelp_attack : MonoBehaviour
         if (hits.Length > 0)
         {
             target = hits[0].transform;
-            Debug.Log("Target found: " + target.name);
+            // Debug.Log("Target found: " + target.name);
         }
         else
         {
-            Debug.Log("No target found");
+            // Debug.Log("No target found");
         }
     }
-
-
-    
-    private System.Collections.IEnumerator Attack()
-{
-    Debug.Log("Attacking");
-
-    // Trigger the attack animation
-    animator.SetBool("IsAttacking", true);
-
-    while (target != null && CheckTargetIsInRange())
-    {
-        // Wait for a short time based on attack speed
-        yield return new WaitForSeconds(1f / attackSpeed);
-    }
-
-    // Reset the attack animation parameter
-    animator.SetBool("IsAttacking", false);
-    Debug.Log("Done Attacking");
-
-    // Reset the target after attacking
-    target = null;
-}
-
-
 
     private void OnDrawGizmosSelected()
     {

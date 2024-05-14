@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7731828632111344628}
   - component: {fileID: 2904813418709778234}
   - component: {fileID: 8391037995768336040}
-  - component: {fileID: 3299165056145409423}
-  - component: {fileID: 7590885852979022714}
   - component: {fileID: 7462902287027203799}
+  - component: {fileID: -4177455684714840813}
+  - component: {fileID: 8923903613197366692}
+  - component: {fileID: 4479612420185409610}
   m_Layer: 6
   m_Name: toxfish_1_0
   m_TagString: Untagged
@@ -109,7 +110,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &3299165056145409423
+--- !u!114 &7462902287027203799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367574389041764012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0f79e12c8428f4882a9ae18b676938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+--- !u!114 &-4177455684714840813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367574389041764012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30484a2aa42282e4bbdedf2ad7139fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit_points: 2
+  damage: 2
+--- !u!70 &8923903613197366692
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +172,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.42, y: 2.13}
   m_Direction: 0
---- !u!50 &7590885852979022714
+--- !u!50 &4479612420185409610
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -158,29 +186,16 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &7462902287027203799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5367574389041764012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0f79e12c8428f4882a9ae18b676938, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
