@@ -48,8 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 768374723042387978}
-  bullet_speed: 4
+  bullet_speed: 5
   bullet_damage: 1
+  despawn_time: 3
 --- !u!61 &8174509659199910846
 BoxCollider2D:
   m_ObjectHideFlags: 0

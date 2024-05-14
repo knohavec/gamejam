@@ -205,7 +205,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotation_speed: 250
-  bps: 0
+  bps: 2
 --- !u!50 &5787881497327566638
 Rigidbody2D:
   serializedVersion: 4
