@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45cfd1a2864649e4d832015ae8925d73
+guid: 7b94c88f90e463945bf4a23e25e203c8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: toxfish_1_attack_0
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 263
+        width: 142
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c33fcd4ce828bac4c8a4c291eb02d99d
+      internalID: -1202869344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toxfish_1_attack_1
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 261
+        width: 93
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a7f23552c59ed04a8d581062ba0293c
+      internalID: -37470694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toxfish_1_attack_2
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 6
+        width: 142
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 568267a27ad479c4b9a3921dc79ac1d8
+      internalID: -670697683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +195,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      toxfish_1_attack_0: -1202869344
+      toxfish_1_attack_1: -37470694
+      toxfish_1_attack_2: -670697683
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

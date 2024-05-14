@@ -6,7 +6,10 @@ public class SandDollar : MonoBehaviour
     public static TMP_Text counterText; // Static reference to the UI ELEMENT FOR COUNTER
 
     [Header("Attributes")]
-    [SerializeField] private int changeAmount = 1;
+    [SerializeField] private int worth = 1;
+    [SerializeField] private float despawnDelay = 5f; // Delay before despawning if not clicked
+
+    private bool isClicked = false;
 
     void Start()
     {
@@ -18,10 +21,14 @@ public class SandDollar : MonoBehaviour
                 Debug.LogError("No TMP_Text component found in the scene.");
             }
         }
+
+        Invoke(nameof(DespawnOnDelay), despawnDelay); // Start the despawn delay
     }
 
     void OnMouseDown()
     {
+        if (isClicked) return; // Prevent double clicking
+        isClicked = true;
         UpdateCounter();
         Destroy(gameObject); // Destroy the sand dollar object
     }
@@ -34,10 +41,16 @@ public class SandDollar : MonoBehaviour
             return;
         }
 
-        
-
-        SandDollarSpawning.sand_dollar_total += changeAmount;
+        SandDollarSpawning.sand_dollar_total += worth;
         counterText.text = SandDollarSpawning.sand_dollar_total.ToString();
+    }
 
+    void DespawnOnDelay()
+    {
+        if (!isClicked)
+        {
+            Debug.Log("Despawning sand dollar due to timeout.");
+            Destroy(gameObject);
+        }
     }
 }

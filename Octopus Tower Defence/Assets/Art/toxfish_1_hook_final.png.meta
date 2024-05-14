@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 617c933df0c4aff48bba73aca08dd41f
+guid: f0d1d94197a42334e9ef31ce06ff48be
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,12 +123,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: toxfish_1_0
+      name: toxfish_1_hook_final_0
       rect:
         serializedVersion: 2
-        x: 61
+        x: 14
         y: 263
-        width: 142
+        width: 189
         height: 213
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -137,19 +137,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d457e3d159d994d4b9a2d2d4fcd8a7c0
-      internalID: -1141198300
+      spriteID: be9d1bed24c9e734ebdf2417f7c6361b
+      internalID: -1881791500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: toxfish_1_1
+      name: toxfish_1_hook_final_1
       rect:
         serializedVersion: 2
-        x: 316
+        x: 269
         y: 263
-        width: 143
+        width: 190
         height: 214
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -158,19 +158,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3ac7cbd3f703d940ae6566ef541be88
-      internalID: -2012514154
+      spriteID: 10ee00e5c4431d64a9ce16452f0b1a6e
+      internalID: 387310489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: toxfish_1_2
+      name: toxfish_1_hook_final_2
       rect:
         serializedVersion: 2
-        x: 61
+        x: 13
         y: 12
-        width: 142
+        width: 190
         height: 208
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -179,19 +179,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8efb8929b9c0a524ca27a6c2ea6e2c78
-      internalID: -880589967
+      spriteID: 954fa0a9c53be5f40a66ffc8f735e36f
+      internalID: -1928350818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: toxfish_1_3
+      name: toxfish_1_hook_final_3
       rect:
         serializedVersion: 2
-        x: 316
+        x: 269
         y: 8
-        width: 143
+        width: 190
         height: 213
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23ed43471a728754880cd9922a869f74
-      internalID: -1918450983
+      spriteID: c8b5bbd3e2372f44ab8eff68cb5c4df5
+      internalID: -167892020
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      toxfish_1_0: -1141198300
-      toxfish_1_1: -2012514154
-      toxfish_1_2: -880589967
-      toxfish_1_3: -1918450983
+      toxfish_1_hook_final_0: -1881791500
+      toxfish_1_hook_final_1: 387310489
+      toxfish_1_hook_final_2: -1928350818
+      toxfish_1_hook_final_3: -167892020
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
