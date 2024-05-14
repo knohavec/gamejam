@@ -30,13 +30,22 @@ public class Placement_Detection : MonoBehaviour
         sr.color = start_color;
     }
 
-    private void OnMouseDown()
+   private void OnMouseDown()
 {
     if(tower != null) return;
 
-    GameObject tower_to_build = BuildManager.main.GetSelectedTower();
-    Instantiate(tower_to_build, transform.position, Quaternion.identity);
+    Tower tower_to_build = BuildManager.main.GetSelectedTower();
+
+    if (tower_to_build.cost > SandDollarSpawning.Instance.SandDollarTotal){
+        Debug.Log("Too Expensive");
+        return;
+    }
+
+    SandDollarSpawning.SpendSandDollars(tower_to_build.cost);
+
+    Instantiate(tower_to_build.prefab, transform.position, Quaternion.identity);
 }
+
 
 
     // Update is called once per frame
