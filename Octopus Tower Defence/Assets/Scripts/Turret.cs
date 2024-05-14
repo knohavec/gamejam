@@ -7,20 +7,27 @@ public class Turret : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform turret_rotate_point;
+    [SerializeField] private GameObject bullet_prefab;
+    [SerializeField] private Transform firing_point;
 
-
-    [Header("Attribute")]
+    [Header("Attributes")]
     [SerializeField] private float targeting_range = 5f;
     [SerializeField] private LayerMask enemy_mask;
     [SerializeField] private float rotation_speed = 5f;
+    [SerializeField] private float bps = 1f; //bullets per second
+    
+       private Transform target;
 
+       private float time_until_fire;   
+
+       
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
         Gizmos.DrawSphere(transform.position, targeting_range);
     }
 
-    private Transform target;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +47,31 @@ public class Turret : MonoBehaviour
 
         if (!CheckTargetIsInRange()){
             target = null;
+        } else {
+            time_until_fire += Time.deltaTime;
+
+            if (time_until_fire >= 1f/bps){
+                Shoot();
+                time_until_fire = 0f;
+            }
+
         }
     }
+
+
+
+
+   private void Shoot()
+{
+    GameObject bulletobj = Instantiate(bullet_prefab, firing_point.position, Quaternion.identity);
+    seaweedbullet bulletScript = bulletobj.GetComponent<seaweedbullet>();
+    bulletScript.SetTarget(target);
+}
+
+
+
+
+
 
     private void FindTarget()
     {
