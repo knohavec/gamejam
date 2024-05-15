@@ -15,7 +15,7 @@ TagManager:
   - Bullet
   - Towers
   - Items
-  - 
+  - Mask
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tiles
+    uniqueID: 2453858741
     locked: 0
   - name: Turrets
     uniqueID: 3513373231
