@@ -8,11 +8,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        FindNearestTile();
         // Move the enemy towards the target position
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
         // Flip the sprite on the y-axis if the target is to the left
         FlipSprite(targetPosition);
+        
     }
 
     // Flip the sprite based on the target position
@@ -51,6 +53,6 @@ private void FlipSprite(Vector2 target)
 
     void Start()
     {
-        FindNearestTile(); // Find the nearest tile when the enemy is spawned
+         // Find the nearest tile when the enemy is spawned
     }
 }
