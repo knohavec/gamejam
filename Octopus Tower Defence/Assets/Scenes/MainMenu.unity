@@ -123,7 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &194039641
+=======
+--- !u!1 &147190711
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,15 +135,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 194039643}
   - component: {fileID: 194039642}
   m_Layer: 0
   m_Name: Background Clip
   m_TagString: Untagged
+=======
+  - component: {fileID: 147190714}
+  - component: {fileID: 147190713}
+  - component: {fileID: 147190712}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+>>>>>>> Stashed changes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!212 &194039642
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -439,20 +453,33 @@ MonoBehaviour:
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
 --- !u!81 &1227255363
+=======
+--- !u!81 &147190712
+>>>>>>> Stashed changes
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1227255361}
   m_Enabled: 1
 --- !u!20 &1227255364
+=======
+  m_GameObject: {fileID: 147190711}
+  m_Enabled: 1
+--- !u!20 &147190713
+>>>>>>> Stashed changes
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1227255361}
+=======
+  m_GameObject: {fileID: 147190711}
+>>>>>>> Stashed changes
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -479,10 +506,17 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
+<<<<<<< Updated upstream
   field of view: 28.8442
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
+=======
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: -1
+>>>>>>> Stashed changes
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -497,12 +531,17 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+<<<<<<< Updated upstream
 --- !u!4 &1227255365
+=======
+--- !u!4 &147190714
+>>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1227255361}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -575,6 +614,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+=======
+  m_GameObject: {fileID: 147190711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -584,7 +629,11 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+<<<<<<< Updated upstream
   - {fileID: 1227255365}
   - {fileID: 389762899}
   - {fileID: 194039643}
   - {fileID: 2111549118}
+=======
+  - {fileID: 147190714}
+>>>>>>> Stashed changes
