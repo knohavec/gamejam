@@ -540,7 +540,6 @@ GameObject:
   - component: {fileID: 218717526}
   - component: {fileID: 218717525}
   - component: {fileID: 218717524}
-  - component: {fileID: 218717527}
   m_Layer: 5
   m_Name: Menu Toggle Button
   m_TagString: Untagged
@@ -555,17 +554,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218717522}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1190616797}
-  m_Father: {fileID: 1015137630}
+  m_Father: {fileID: 224232906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -756, y: 433}
+  m_AnchoredPosition: {x: 391, y: 523}
   m_SizeDelta: {x: 348.58, y: 42.6286}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &218717524
@@ -611,19 +610,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 218717525}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 218717527}
-        m_TargetAssemblyTypeName: TowerShopButtonScript, Assembly-CSharp
-        m_MethodName: ToggleSectionVisibility
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &218717525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,19 +649,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218717522}
   m_CullTransparentMesh: 1
---- !u!114 &218717527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218717522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73e66b492107a35418ce350a5f54f41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sectionToToggle: {fileID: 224232905}
 --- !u!1 &224232905
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &224232906
 RectTransform:
   m_ObjectHideFlags: 0
@@ -700,19 +674,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224232905}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 120692141}
+  - {fileID: 218717523}
   - {fileID: 1802341649}
   - {fileID: 495453625}
   m_Father: {fileID: 1015137630}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -761.0469, y: -83}
+  m_AnchoredPosition: {x: -761.0469, y: -26.6326}
   m_SizeDelta: {x: 359.5203, y: 952.3969}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &224232907
@@ -1250,7 +1225,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 218717523}
   - {fileID: 129899022}
   - {fileID: 845155675}
   - {fileID: 224232906}
