@@ -783,9 +783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4fd95fe70b46654aa5b3d4a0628ee6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
+  tilemap: {fileID: 638132195}
   gridPiecePrefab: {fileID: 2992906538528824484, guid: 2910ad2d01648d24399d88ac3c4d9402, type: 3}
-  tileManager: {fileID: 0}
 --- !u!4 &313378722
 Transform:
   m_ObjectHideFlags: 0
@@ -809,7 +808,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313378720}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c25c8d8db80cd164cb91c0e6afc070db, type: 3}
   m_Name: 
