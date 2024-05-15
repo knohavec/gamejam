@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1722186605337010294}
   m_Layer: 6
   m_Name: toxfish_1_walk_0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,5 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30484a2aa42282e4bbdedf2ad7139fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit_points: 2
+  hitPoints: 2
   damage: 2

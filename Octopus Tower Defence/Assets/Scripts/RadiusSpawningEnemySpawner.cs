@@ -1,75 +1,79 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
-public class RadiusSpawningEnemySpawner : MonoBehaviour
+public class SquareSpawningEnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public List<GameObject> enemyPrefabs;
     public Transform baseTransform;
-    public float enemiesPerSecond = 1f;
-    public int enemiesPerWave = 5;
-    public float timeBetweenWaves = 5f;
-    public float spawnRadius = 5f;
-    public float spawnDelay = 0.5f;
 
-    private LineRenderer lineRenderer;
-    private float timer;
+    [Header("Spawn Settings")]
+    public float timeBetweenWaves = 10f; // Changed default value to 10
+    public float outerSpawnRange = 5f;
+    public float innerNoSpawnRange = 2f;
+
+    public float difficultyScaling = 0.75f;
+
+    private int currentWave = 1;
+    private bool isSpawning = false;
 
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.useWorldSpace = true;
-
-        UpdateCirclePosition();
+        StartCoroutine(StartWave());
     }
 
-    void Update()
+    IEnumerator SpawnEnemies()
     {
-        timer += Time.deltaTime;
-        if (timer >= 1f / enemiesPerSecond)
+        isSpawning = true;
+        int enemiesToSpawn = EnemiesPerWave();
+        Debug.Log("Wave " + currentWave + ": Spawning " + enemiesToSpawn + " enemies."); // Debug message
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
-            timer = 0f;
+            Vector3 spawnPosition = GetRandomSpawnPosition();
+            Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
+            yield return new WaitForSeconds(0.5f); // Adjust spawn delay as needed
+        }
+        isSpawning = false;
+    }
+
+    IEnumerator StartWave()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(timeBetweenWaves);
+            currentWave++;
             StartCoroutine(SpawnEnemies());
         }
     }
 
-    void UpdateCirclePosition()
-{
-    int numPoints = 100;
-    lineRenderer.positionCount = numPoints;
-
-    Vector3 basePosition = baseTransform.position;
-
-    for (int i = 0; i < numPoints; i++)
+    private int EnemiesPerWave()
     {
-        float angle = i * 2 * Mathf.PI / numPoints;
-        Vector3 point = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * spawnRadius;
-        lineRenderer.SetPosition(i, point + basePosition);
+        int enemies = Mathf.RoundToInt(currentWave * difficultyScaling);
+        return Mathf.Max(enemies, 1);
     }
 
-    lineRenderer.startColor = Color.clear;
-    lineRenderer.endColor = Color.clear;
-}
-
-
-
-    IEnumerator SpawnEnemies()
+    private Vector3 GetRandomSpawnPosition()
     {
-        for (int i = 0; i < enemiesPerWave; i++)
+        Vector3 basePosition = baseTransform.position;
+        Vector2 randomOffset = new Vector2(Random.Range(-outerSpawnRange, outerSpawnRange), Random.Range(-outerSpawnRange, outerSpawnRange));
+        Vector3 spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, 0);
+
+        // Check if the spawn position is within the inner no-spawn range, if so, reposition
+        while (Mathf.Abs(randomOffset.x) < innerNoSpawnRange && Mathf.Abs(randomOffset.y) < innerNoSpawnRange)
         {
-            float randomAngle = Random.Range(0f, 360f);
-            Vector3 spawnPosition = baseTransform.position + Quaternion.Euler(0f, 0f, randomAngle) * (Vector3.right * spawnRadius);
+            randomOffset = new Vector2(Random.Range(-outerSpawnRange, outerSpawnRange), Random.Range(-outerSpawnRange, outerSpawnRange));
+            spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, 0);
+        }
 
-            if (Vector3.Distance(spawnPosition, baseTransform.position) < 2f)
-            {
-                continue;
-            }
+        return spawnPosition;
+    }
 
-            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-            Vector3 moveDirection = (baseTransform.position - enemy.transform.position).normalized;
-            enemy.GetComponent<Movement>().SetMoveDirection(moveDirection);
-
-            yield return new WaitForSeconds(spawnDelay);
+    public void EnemyDestroyed()
+    {
+        if (isSpawning) return;
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            StartCoroutine(StartWave());
         }
     }
 }
