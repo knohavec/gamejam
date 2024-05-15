@@ -7,15 +7,16 @@ public class Movement : MonoBehaviour
     public float speed = 5f; // Speed at which the enemy moves
 
     void Update()
-    {
-        FindNearestTile();
-        // Move the enemy towards the target position
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+{
+    FindNearestTile();
+    // Move the enemy towards the target position
+    Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+    GetComponent<Rigidbody2D>().velocity = direction * speed;
 
-        // Flip the sprite on the y-axis if the target is to the left
-        FlipSprite(targetPosition);
-        
-    }
+    // Flip the sprite based on the target position
+    FlipSprite(targetPosition);
+}
+
 
     // Flip the sprite based on the target position
     // Flip the sprite based on the target position

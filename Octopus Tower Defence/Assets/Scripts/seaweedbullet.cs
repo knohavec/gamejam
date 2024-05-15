@@ -38,6 +38,7 @@ public class seaweedbullet : MonoBehaviour
 
         Vector2 direction = (target.position - transform.position).normalized;
         rb.velocity = direction * bullet_speed;
+        transform.up = direction; // Rotate the bullet to face the direction of movement
     }
 
     public void SetTarget(Transform _target)
@@ -46,14 +47,14 @@ public class seaweedbullet : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other)
-{
-    Enemy_Stats enemyStats = other.gameObject.GetComponent<Enemy_Stats>();
-    if (enemyStats != null)
     {
-        enemyStats.TakeDamage(bullet_damage);
-    }
+        Enemy_Stats enemyStats = other.gameObject.GetComponent<Enemy_Stats>();
+        if (enemyStats != null)
+        {
+            enemyStats.TakeDamage(bullet_damage);
+        }
 
-    Destroy(gameObject);
-}
+        Destroy(gameObject);
+    }
 
 }
