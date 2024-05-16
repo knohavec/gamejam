@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f747e8af38fbe4d8819f37be6fd5aa, type: 3}
   m_Name: HighlightTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultSprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
+  m_DefaultGameObject: {fileID: 3256865499345245403, guid: 6c1c193e098a13540b5d6d68aa367a79, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
   m_FlatTop: 1
