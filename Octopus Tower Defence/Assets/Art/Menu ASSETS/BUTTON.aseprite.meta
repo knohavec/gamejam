@@ -123,7 +123,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: BUTTON
     originalName: 
-    pivot: {x: 0.5, y: -0.6428572}
+    pivot: {x: 0.4375, y: -0.53333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -131,7 +131,7 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 32
-      height: 14
+      height: 15
     spriteID: 48f3e0941d5877047b3bfaf8fb1144de
     spriteBone: []
     spriteOutline: []
@@ -154,10 +154,10 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 9
+        x: 8
+        y: 8
         width: 32
-        height: 14
+        height: 15
       spriteId: 48f3e0941d5877047b3bfaf8fb1144de
     linkedCells: []
     parentIndex: -1
@@ -165,4 +165,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 44, y: 32}
