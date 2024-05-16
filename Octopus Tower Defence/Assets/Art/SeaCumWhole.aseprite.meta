@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5c8517644a41254ebff9e57fdbcb3be
+guid: aad362d118c909341bfabf6fe2517f71
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Shop Panel
+  - name: SeaCumWhole
     originalName: 
-    pivot: {x: 0.72697365, y: 0.2546584}
+    pivot: {x: 0.32089552, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 152
-      height: 161
-    spriteID: b2a34f3c67124824fa89062a74e7df63
+      width: 134
+      height: 165
+    spriteID: 2f0f147311f167545839f9760019cd73
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 68137192
-    name: Shop Panel
+    guid: -1083973379
+    name: SeaCumWhole
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Shop Panel
+    - name: SeaCumWhole
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: -68
-        y: -41
-        width: 152
-        height: 161
-      spriteId: b2a34f3c67124824fa89062a74e7df63
+        x: 85
+        y: 0
+        width: 134
+        height: 165
+      spriteId: 2f0f147311f167545839f9760019cd73
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 85, y: 121}
+  canvasSize: {x: 256, y: 256}
