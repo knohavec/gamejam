@@ -6,12 +6,12 @@ public class kelp_attack : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private float targetingRange = 5f;
     [SerializeField] private LayerMask enemyMask;
-    [SerializeField] private float attackSpeed = 1f;
+    // [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private int damage = 5;
 
     private Transform target;
-    private float searchCooldown = 0f;
-    private float searchCooldownTime = 0.5f; // Search for a target every 0.5 seconds
+    // private float searchCooldown = 0f;
+    // private float searchCooldownTime = 0.5f; // Search for a target every 0.5 seconds
     private Animator animator; // Reference to the Animator component
     private float idleTime;
     private float attackTime;
@@ -63,8 +63,8 @@ public class kelp_attack : MonoBehaviour
         }
     }
 
-    Debug.Log("Attack Time: " + attackTime);
-    Debug.Log("Idle Time: " + idleTime);
+    // Debug.Log("Attack Time: " + attackTime);
+    // Debug.Log("Idle Time: " + idleTime);
 }
 
 

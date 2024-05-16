@@ -32,11 +32,23 @@ public class Placement_Detection : MonoBehaviour
 
    private void OnMouseDown()
 {
-    if(tower != null) return;
+    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+
+    foreach (Collider2D collider in colliders)
+    {
+        if (collider.CompareTag("Tower"))
+        {
+            Debug.Log("Tower already present!");
+            return;
+        }
+    }
+
+    if (tower != null) return;
 
     Tower tower_to_build = BuildManager.main.GetSelectedTower();
 
-    if (tower_to_build.towercost > SandDollarSpawning.Instance.SandDollarTotal){
+    if (tower_to_build.towercost > SandDollarSpawning.Instance.SandDollarTotal)
+    {
         Debug.Log("Too Expensive");
         return;
     }
@@ -45,6 +57,7 @@ public class Placement_Detection : MonoBehaviour
 
     Instantiate(tower_to_build.towerprefab, transform.position, Quaternion.identity);
 }
+
 
 
 
