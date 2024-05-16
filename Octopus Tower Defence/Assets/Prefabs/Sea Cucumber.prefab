@@ -219,6 +219,8 @@ MonoBehaviour:
   towername: Sea Cucumber
   towercost: 10
   towerprefab: {fileID: 729118177691507758}
+  towerhealth: 0
+  isDestroyed: 0
 --- !u!1 &5377627653931084493
 GameObject:
   m_ObjectHideFlags: 0

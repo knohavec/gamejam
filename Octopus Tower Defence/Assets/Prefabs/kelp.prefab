@@ -205,3 +205,5 @@ MonoBehaviour:
   towername: Kelp
   towercost: 5
   towerprefab: {fileID: 6107903137028798062}
+  towerhealth: 0
+  isDestroyed: 0
