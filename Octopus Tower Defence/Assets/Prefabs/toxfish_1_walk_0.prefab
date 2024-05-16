@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6407850386188600782}
   - component: {fileID: 1706838674682792015}
   - component: {fileID: 8356187123229631603}
-  - component: {fileID: 1722186605337010294}
   - component: {fileID: 1481133252284299676}
   - component: {fileID: 1970832110256955442}
+  - component: {fileID: 2740267422075393546}
+  - component: {fileID: 3522546797855332493}
   m_Layer: 6
   m_Name: toxfish_1_walk_0
   m_TagString: Enemy
@@ -122,21 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0f79e12c8428f4882a9ae18b676938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0}
   speed: 5
---- !u!114 &1722186605337010294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7118282856799405829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30484a2aa42282e4bbdedf2ad7139fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPoints: 2
-  damage: 2
 --- !u!70 &1481133252284299676
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -182,7 +170,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 7118282856799405829}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -198,4 +186,33 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &2740267422075393546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118282856799405829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30484a2aa42282e4bbdedf2ad7139fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 2
+  Damage: 2
+  AttackSpeed: 1
+  AttackRange: 1
+--- !u!114 &3522546797855332493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118282856799405829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f361a724ea0c34ab21a471bf1e11db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1706838674682792015}
