@@ -32,18 +32,18 @@ public class Placement_Detection : MonoBehaviour
 
    private void OnMouseDown()
 {
-    if(tower == null) return;
+    if(tower != null) return;
 
     Tower tower_to_build = BuildManager.main.GetSelectedTower();
 
-    if (tower_to_build.cost > SandDollarSpawning.Instance.SandDollarTotal){
+    if (tower_to_build.towercost > SandDollarSpawning.Instance.SandDollarTotal){
         Debug.Log("Too Expensive");
         return;
     }
 
-    SandDollarSpawning.SpendSandDollars(tower_to_build.cost);
+    SandDollarSpawning.SpendSandDollars(tower_to_build.towercost);
 
-    Instantiate(tower_to_build.prefab, transform.position, Quaternion.identity);
+    Instantiate(tower_to_build.towerprefab, transform.position, Quaternion.identity);
 }
 
 

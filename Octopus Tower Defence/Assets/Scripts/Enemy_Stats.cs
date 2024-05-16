@@ -4,8 +4,12 @@ using UnityEngine.Events;
 public class Enemy_Stats : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private int hitPoints = 2;
-    [SerializeField] private int damage = 2;
+    [SerializeField] public int hitPoints = 2;
+    [SerializeField] public int Damage = 2;
+    
+    [SerializeField] public float AttackSpeed = 1f;
+    [SerializeField] public float AttackRange = 1f;
+
 
     private bool isDestroyed = false;
 
