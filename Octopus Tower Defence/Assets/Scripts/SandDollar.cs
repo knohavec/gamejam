@@ -49,7 +49,7 @@ public class SandDollar : MonoBehaviour
     {
         if (!isClicked)
         {
-            // Debug.Log("Despawning sand dollar due to timeout.");
+            Debug.Log("Despawning sand dollar due to timeout.");
             Destroy(gameObject);
         }
     }

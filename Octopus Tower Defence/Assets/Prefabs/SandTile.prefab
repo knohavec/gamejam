@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2857701077686958360}
-  - component: {fileID: 6779696439212186468}
   m_Layer: 3
   m_Name: SandTile
   m_TagString: Tile
@@ -35,24 +34,6 @@ Transform:
   - {fileID: 1768258211157767971}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6779696439212186468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2992906538528824484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a0df224a1229c409f0b8bc2d849b64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilename: 
-  tilecost: 0
-  tilehealth: 25
-  prefab: {fileID: 2992906538528824484}
-  tilemap: {fileID: 0}
-  isDestroyed: 0
 --- !u!1 &4477364066570822871
 GameObject:
   m_ObjectHideFlags: 0

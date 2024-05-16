@@ -12,7 +12,7 @@ public class TowerShopButtonScript : MonoBehaviour
     {
         if (sectionToToggle != null)
         {
-            // Debug.Log("TOGGLE SHOP");
+            Debug.Log("TOGGLE SHOP");
             sectionToToggle.SetActive(!sectionToToggle.activeSelf);
         }
     }

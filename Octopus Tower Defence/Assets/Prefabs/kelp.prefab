@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 7228782257877397361}
   - component: {fileID: 6743954679804692650}
   - component: {fileID: 7941597123454764951}
-  - component: {fileID: 449386643551386474}
   m_Layer: 8
   m_Name: kelp
-  m_TagString: Tower
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,18 +189,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &449386643551386474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6107903137028798062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3907efefa945c9c4ca8b3d8d03f6ba7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towername: Kelp
-  towercost: 5
-  towerprefab: {fileID: 6107903137028798062}
