@@ -3,45 +3,56 @@ using UnityEngine.Tilemaps;
 
 public class GridHighlighter : MonoBehaviour
 {
-    public Tilemap highlightTilemap; // Assign the highlight Tilemap in the inspector
-    public Tile highlightTile;
+    public GameObject highlightTilePrefab;
+    private GameObject currentHighlightTile;
     private Vector3Int lastHighlightedCell;
+
+    [SerializeField]
+    private Vector2Int offset = Vector2Int.zero;
+
+    public Tilemap tilemap; // Reference to the Tilemap component, assignable in the Inspector
 
     private void Start()
     {
+        if (tilemap == null)
+        {
+            Debug.LogError("Tilemap not assigned in the inspector!");
+            enabled = false; // Disable the script if the tilemap is not assigned
+            return;
+        }
+
         lastHighlightedCell = new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue); // Initialize to an invalid position
     }
 
     private void Update()
-    {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int cellPos = highlightTilemap.WorldToCell(worldPos);
+{
+    Vector3 mousePos = Input.mousePosition;
+    mousePos.z = 0; // Set z-coordinate to 0
+    Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        // Check if the cell under the mouse has changed
-        if (cellPos != lastHighlightedCell)
+    // Convert the world position to hex coordinates
+    Vector3Int cellPos = tilemap.WorldToCell(worldPos);
+
+    // Apply the offset
+    cellPos.x += offset.x;
+    cellPos.y += offset.y;
+
+    // Check if the mouse is over a new cell
+    if (cellPos != lastHighlightedCell)
+    {
+        // Remove the current highlight if it exists
+        if (currentHighlightTile != null)
         {
-            ClearHighlightTile(lastHighlightedCell); // Clear the previous highlight
-            HighlightTile(cellPos); // Highlight the new cell
-            lastHighlightedCell = cellPos; // Update the last highlighted cell
+            Destroy(currentHighlightTile);
         }
-    }
 
-    private void HighlightTile(Vector3Int cellPos)
-    {
-        if (IsCellEmpty(cellPos))
-        {
-            highlightTilemap.SetTile(cellPos, highlightTile);
-        }
-    }
+        // Create a new highlight at the current cell position
+        Vector3 cellWorldPos = tilemap.GetCellCenterWorld(cellPos);
+        cellWorldPos.z = 0; // Set z-coordinate to 0
+        currentHighlightTile = Instantiate(highlightTilePrefab, cellWorldPos, Quaternion.identity);
 
-    private void ClearHighlightTile(Vector3Int cellPos)
-    {
-        highlightTilemap.SetTile(cellPos, null);
+        // Update the last highlighted cell
+        lastHighlightedCell = cellPos;
     }
-
-    private bool IsCellEmpty(Vector3Int cellPos)
-    {
-        TileBase tile = highlightTilemap.GetTile(cellPos);
-        return tile == null;
-    }
+}
 }
