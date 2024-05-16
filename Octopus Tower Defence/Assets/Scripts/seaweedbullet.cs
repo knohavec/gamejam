@@ -14,11 +14,9 @@ public class seaweedbullet : MonoBehaviour
 
     private Transform target;
     private float despawnTimer;
-    private Vector2 initialPosition;
 
     private void Start()
     {
-        initialPosition = transform.position;
         despawnTimer = despawn_time;
     }
 
@@ -28,17 +26,18 @@ public class seaweedbullet : MonoBehaviour
         {
             // Despawn if target is lost or despawn timer expires
             despawnTimer -= Time.deltaTime;
-            if (despawnTimer <= 0 || Vector2.Distance(transform.position, initialPosition) > 10f)
+            if (despawnTimer <= 0)
             {
                 Destroy(gameObject);
-                Debug.Log("Bullet despawed UWU");
+                return;
             }
-            return;
         }
-
-        Vector2 direction = (target.position - transform.position).normalized;
-        rb.velocity = direction * bullet_speed;
-        transform.up = direction; // Rotate the bullet to face the direction of movement
+        else
+        {
+            Vector2 direction = (target.position - transform.position).normalized;
+            rb.MovePosition(rb.position + direction * bullet_speed * Time.fixedDeltaTime);
+            transform.up = direction; // Rotate the bullet to face the direction of movement
+        }
     }
 
     public void SetTarget(Transform _target)

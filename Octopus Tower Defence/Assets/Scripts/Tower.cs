@@ -4,16 +4,31 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class Tower 
+public class Tower : MonoBehaviour
 {
-    public string name;
-    public int cost;
-    public GameObject prefab;
+    public string towername;
+    public int towercost;
+    public GameObject towerprefab;
+ 
+    public int towerhealth;
+
+    public bool isDestroyed = false;
 
     public Tower (string _name, int _cost, GameObject _prefab){
-        name = _name;
-        cost = _cost;
-        prefab = _prefab;
+        towername = _name;
+        towercost = _cost;
+        towerprefab = _prefab;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        towerhealth -= dmg;
+
+        if (towerhealth <= 0)
+        {
+            Destroy(gameObject);
+            isDestroyed = true;
+        }
     }
 
     // You can add other methods or properties as needed
