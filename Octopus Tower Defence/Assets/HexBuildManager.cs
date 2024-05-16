@@ -37,24 +37,7 @@ public class HexBuildManager : MonoBehaviour
 
     private bool IsInBounds(Vector3Int cellPos)
     {
-        // Implement bounds checking for a flat top hex grid
-        int radius = 5; // Adjust this value to define the playable area radius
-        int yMin = -radius;
-        int yMax = radius;
-        int xMin = -radius;
-        int xMax = radius;
-
-        bool isOddColumn = Mathf.Abs(cellPos.y) % 2 == 1;
-        if (isOddColumn)
-        {
-            xMin--;
-            xMax--;
-        }
-
-        bool inBounds = cellPos.y >= yMin && cellPos.y <= yMax &&
-                        cellPos.x >= xMin && cellPos.x <= xMax;
-
-        return inBounds;
+        return true;
     }
 
     public void PlaceTile(Vector3Int cellPos)
