@@ -32,7 +32,7 @@ public class Placement_Detection : MonoBehaviour
 
    private void OnMouseDown()
 {
-    if(tower != null) return;
+    if(tower == null) return;
 
     Tower tower_to_build = BuildManager.main.GetSelectedTower();
 
