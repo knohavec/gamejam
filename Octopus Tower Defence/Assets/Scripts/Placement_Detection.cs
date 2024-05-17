@@ -10,10 +10,11 @@ public class Placement_Detection : MonoBehaviour
 
     [SerializeField] private Color hover_color;
     [SerializeField] private float yOffset;
+    [SerializeField] private float zOffset;
 
     private GameObject tower;
     private Color start_color;
-
+    private bool hasTower = false; // Added boolean variable to track tower presence
 
     // Start is called before the first frame update
     private void Start()
@@ -22,52 +23,42 @@ public class Placement_Detection : MonoBehaviour
     }
 
     private void OnMouseEnter()
-    
     {
-        // Debug.Log("Mouse Detected");
         sr.color = hover_color;
     }
 
-     private void OnMouseExit()
-
+    private void OnMouseExit()
     {
         sr.color = start_color;
     }
 
-   private void OnMouseDown()
-{
-    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f);
-
-    foreach (Collider2D collider in colliders)
+    private void OnMouseDown()
     {
-        if (collider.CompareTag("Tower"))
+        if (hasTower) // Check if a tower is already present
         {
             Debug.Log("Tower already present!");
             return;
         }
+
+        Tower tower_to_build = BuildManager.main.GetSelectedTower();
+        BuildManager.main.ClearSelectedTower();
+
+        if (tower_to_build.towercost > SandDollarSpawning.Instance.SandDollarTotal)
+        {
+            Debug.Log("Too Expensive");
+            return;
+        }
+
+        SandDollarSpawning.SpendSandDollars(tower_to_build.towercost);
+
+        Instantiate(tower_to_build.towerprefab, new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z + zOffset), Quaternion.identity);
+
+        hasTower = true; // Set to true after placing tower
     }
-
-    if (tower != null) return;
-
-    Tower tower_to_build = BuildManager.main.GetSelectedTower();
-
-    if (tower_to_build.towercost > SandDollarSpawning.Instance.SandDollarTotal)
-    {
-        Debug.Log("Too Expensive");
-        return;
-    }
-
-    SandDollarSpawning.SpendSandDollars(tower_to_build.towercost);
-
-    Instantiate(tower_to_build.towerprefab, new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z), Quaternion.identity);
-}
-
-
-
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

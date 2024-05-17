@@ -9,7 +9,7 @@ public class BuildManager : MonoBehaviour
     
     [Header("References")]
     [SerializeField] private Tower[] towers;
-    [SerializeField] private int selectedTower = 0;
+    [SerializeField] private int selectedTower = -1;
     
     
 
@@ -18,6 +18,7 @@ public class BuildManager : MonoBehaviour
     private void Awake()
     {
         main = this;
+        
     }
 
     public Tower GetSelectedTower()
@@ -31,6 +32,11 @@ public class BuildManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
+
+    public void ClearSelectedTower(){
+        selectedTower = -1;
+    }
+    
     void Start()
     {
         

@@ -22,6 +22,7 @@ public class kelp_attack : MonoBehaviour
         }
 
         UpdateAnimClipTimes();
+        GetEnemiesInRange();
     }
 
     private void Update()

@@ -31,6 +31,7 @@ public class HexBuildManager : MonoBehaviour
             if (IsInBounds(cellPos))
             {
                 PlaceTile(cellPos);
+                ClearSelectedTile();
             }
         }
     }

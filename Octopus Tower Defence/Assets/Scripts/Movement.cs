@@ -65,7 +65,8 @@ public class Movement : MonoBehaviour
   if (isLeftOfScreen)
 {
   transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-} else
+} 
+else
 {
   // Flip on X and Y axis
   transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), -Mathf.Abs(transform.localScale.y), transform.localScale.z);

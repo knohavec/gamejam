@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4beaf6f7aae190c4eb1f46af1bc4af6c
+guid: e424ad4a575a9974b8f086984faa0229
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: carnivorous_clam_idle_0
+      name: carnivorous_clam_chewing_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 512
-        width: 190
-        height: 254
+        x: 19
+        y: 513
+        width: 201
+        height: 172
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78d5268da7f838646b603a16d1fbc8cf
-      internalID: 357434690
+      spriteID: 12fc23b1acb2ff4479fa164d8d99d823
+      internalID: -427711644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: carnivorous_clam_idle_1
+      name: carnivorous_clam_chewing_1
       rect:
         serializedVersion: 2
-        x: 274
+        x: 276
         y: 512
-        width: 209
-        height: 207
+        width: 196
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc7b13b6a411f8e49b92b44decf8cf67
-      internalID: 539316178
+      spriteID: 1cf4f0669c8268644936b7f80c05d154
+      internalID: -1062992288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: carnivorous_clam_idle_2
+      name: carnivorous_clam_chewing_2
       rect:
         serializedVersion: 2
         x: 531
         y: 512
-        width: 211
-        height: 179
+        width: 198
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2a19cd8990d6dc46b58b1cfce8a6ee7
-      internalID: -1792027048
+      spriteID: 634d6ca0a2a9df146af9a2367820dd76
+      internalID: 1356370749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: carnivorous_clam_idle_3
+      name: carnivorous_clam_chewing_3
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 256
-        width: 209
-        height: 207
+        width: 198
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea2818916da1f044f97900625aefc5ed
-      internalID: -1433742794
+      spriteID: 951f5f27cda959f44a0818ee28d807ff
+      internalID: 309011887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: carnivorous_clam_idle_4
+      name: carnivorous_clam_chewing_4
       rect:
         serializedVersion: 2
-        x: 285
+        x: 276
         y: 256
-        width: 190
-        height: 254
+        width: 196
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78ca3d94b589b20458beea7c53beebe9
-      internalID: -949752972
+      spriteID: 63e9d14578bbd30479010dcafed0a242
+      internalID: -452633435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: carnivorous_clam_idle_5
+      name: carnivorous_clam_chewing_5
       rect:
         serializedVersion: 2
-        x: 530
+        x: 531
         y: 256
-        width: 199
-        height: 210
+        width: 198
+        height: 156
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d942933109d21fe469c99ab36405e6a6
-      internalID: -160052959
+      spriteID: 9d35f7b037095d04f819c0ab2d29652b
+      internalID: 341985391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: carnivorous_clam_idle_6
+      name: carnivorous_clam_chewing_6
       rect:
         serializedVersion: 2
-        x: 17
+        x: 20
         y: 0
-        width: 191
-        height: 175
+        width: 196
+        height: 160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,29 +263,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aecab915d19422d4c809fa83d26db60e
-      internalID: 933324638
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: carnivorous_clam_idle_7
-      rect:
-        serializedVersion: 2
-        x: 274
-        y: 0
-        width: 201
-        height: 198
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7fdc0c913f0465f41a24057c66b9c258
-      internalID: 1900085507
+      spriteID: f609e2a2f83de054d8fcb233389aa6b6
+      internalID: -497636226
       vertices: []
       indices: 
       edges: []
@@ -301,14 +280,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      carnivorous_clam_idle_0: 357434690
-      carnivorous_clam_idle_1: 539316178
-      carnivorous_clam_idle_2: -1792027048
-      carnivorous_clam_idle_3: -1433742794
-      carnivorous_clam_idle_4: -949752972
-      carnivorous_clam_idle_5: -160052959
-      carnivorous_clam_idle_6: 933324638
-      carnivorous_clam_idle_7: 1900085507
+      carnivorous_clam_chewing_0: -427711644
+      carnivorous_clam_chewing_1: -1062992288
+      carnivorous_clam_chewing_2: 1356370749
+      carnivorous_clam_chewing_3: 309011887
+      carnivorous_clam_chewing_4: -452633435
+      carnivorous_clam_chewing_5: 341985391
+      carnivorous_clam_chewing_6: -497636226
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
