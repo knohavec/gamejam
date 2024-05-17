@@ -6,7 +6,7 @@ public class SandDollar : MonoBehaviour
     public static TMP_Text counterText; // Static reference to the UI ELEMENT FOR COUNTER
 
     [Header("Attributes")]
-    [SerializeField] private int worth = 1;
+    [SerializeField] public int worth = 1;
     [SerializeField] private float despawnDelay = 5f; // Delay before despawning if not clicked
 
     private bool isClicked = false;

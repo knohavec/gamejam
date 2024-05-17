@@ -14,10 +14,17 @@ public class Tower : MonoBehaviour
 
     public bool isDestroyed = false;
 
-    public Tower (string _name, int _cost, GameObject _prefab){
+    public float tower_attack_range;
+
+    public int towerdamage;
+
+    public Tower (string _name, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange){
         towername = _name;
         towercost = _cost;
         towerprefab = _prefab;
+        tower_attack_range = _attackrange;
+        towerhealth = _health;
+        towerdamage = _damage;
     }
 
     public void TakeDamage(int dmg)
