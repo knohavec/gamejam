@@ -31,7 +31,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Transparent
   - 
   - 
   - 
@@ -58,4 +58,10 @@ TagManager:
     locked: 0
   - name: Item
     uniqueID: 1053623413
+    locked: 0
+  - name: OverLay
+    uniqueID: 1450606447
+    locked: 0
+  - name: Transparent
+    uniqueID: 3878557601
     locked: 0

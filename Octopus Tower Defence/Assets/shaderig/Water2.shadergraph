@@ -1024,9 +1024,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.012815925292670727,
-        "g": 0.32137244939804079,
-        "b": 0.9056603908538818,
+        "r": 0.0117647098377347,
+        "g": 0.7126153707504273,
+        "b": 0.9058823585510254,
         "a": 0.0
     },
     "isMainColor": false,
@@ -1718,7 +1718,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "CellDensity",
     "m_StageCapability": 3,
-    "m_Value": 10.0,
+    "m_Value": 50.0,
     "m_DefaultValue": 5.0,
     "m_Labels": []
 }
