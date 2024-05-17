@@ -19,8 +19,9 @@ public class Tower : MonoBehaviour
     public int towerdamage;
 
     public float tower_attack_speed;
+    public int tower_research_cost;
 
-    public Tower (string _name, float _attackspeed, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange){
+    public Tower (string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange){
         towername = _name;
         towercost = _cost;
         towerprefab = _prefab;
@@ -28,6 +29,7 @@ public class Tower : MonoBehaviour
         towerhealth = _health;
         towerdamage = _damage;
         tower_attack_speed = _attackspeed;
+        tower_research_cost = _research_cost;
     }
 
     public void TakeDamage(int dmg)

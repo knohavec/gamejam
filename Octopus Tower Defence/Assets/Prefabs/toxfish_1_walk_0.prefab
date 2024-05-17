@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1970832110256955442}
   - component: {fileID: 2740267422075393546}
   - component: {fileID: 3522546797855332493}
+  - component: {fileID: -7108975494750857146}
   m_Layer: 6
   m_Name: toxfish_1_walk_0
   m_TagString: Enemy
@@ -216,3 +217,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1706838674682792015}
+--- !u!114 &-7108975494750857146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118282856799405829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834794eb9d1f6244087dbab9a78300a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMeatPrefab: {fileID: 5439127548350827364, guid: 61582fc76830e9b4bac294cbbfd27aba, type: 3}
