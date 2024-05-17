@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
-  speed: 5
+  speed: 1.5
 --- !u!114 &731887194499055605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,9 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 7
-  Damage: 10
-  AttackSpeed: 0.3
-  AttackRange: 3
+  Damage: 5
+  AttackSpeed: 0.5
+  AttackRange: 4
 --- !u!114 &2948269125130990007
 MonoBehaviour:
   m_ObjectHideFlags: 0
