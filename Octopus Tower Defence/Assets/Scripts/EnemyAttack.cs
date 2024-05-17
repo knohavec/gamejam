@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class EnemyAttack : MonoBehaviour
     private float attackTimer;
     private bool canAttack = true;
 
+    private float attackSpeed;
+
     private void Start()
     {
         enemyStats = GetComponent<Enemy_Stats>();
         movement = GetComponent<Movement>();
         attackCooldown = 1f / enemyStats.AttackSpeed; // Calculate the initial attack cooldown
         attackTimer = attackCooldown; // Start with the attack cooldown
+        attackSpeed = enemyStats.AttackSpeed;
     }
 
     private void Update()
@@ -26,7 +30,7 @@ public class EnemyAttack : MonoBehaviour
         movement.targetPosition = target.transform.position;
         if (IsInRange() && canAttack)
         {
-            Attack();
+            StartCoroutine(Attack());
             canAttack = false;
             attackTimer = attackCooldown; // Reset the attack timer
         }
@@ -82,15 +86,20 @@ public class EnemyAttack : MonoBehaviour
     return inRange;
 }
 
-    private void Attack()
+    private IEnumerator Attack()
 {
     // Debug.Log("Attacking");
+
+     // Get the target object (tower or tile)
+    GameObject targetObject = movement.FindTarget();
 
     // Set the attack trigger
     animator.SetTrigger("Attack");
 
-    // Get the target object (tower or tile)
-    GameObject targetObject = movement.FindTarget();
+    yield return new WaitForSeconds(attackSpeed);
+
+
+   
 
     if (targetObject != null && targetObject.activeSelf)
     {
@@ -124,7 +133,7 @@ public class EnemyAttack : MonoBehaviour
             else
             {
                 // Debug.Log("No valid target found");
-                return;
+                yield break;
             }
         }
 
