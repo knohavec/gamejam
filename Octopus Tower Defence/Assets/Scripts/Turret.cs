@@ -9,13 +9,17 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform turret_rotate_point;
     [SerializeField] private GameObject bullet_prefab;
     [SerializeField] private Transform firing_point;
+    [SerializeField] private Tower tower; // Reference to the Tower instance
 
     [Header("Attributes")]
-    [SerializeField] private float targeting_range = 5f;
+
     [SerializeField] private LayerMask enemy_mask;
     [SerializeField] private float rotation_speed = 5f;
     [SerializeField] private float bps = 1f; //bullets per second
     
+    
+
+       private float targeting_range;
        private Transform target;
 
        private float time_until_fire;   
@@ -23,8 +27,22 @@ public class Turret : MonoBehaviour
        
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
-        Gizmos.DrawSphere(transform.position, targeting_range);
+        if (transform == null)
+    {
+        Debug.LogError("Transform is null!");
+        return;
+    }
+
+    // Assuming targetingRange is a field in your class
+    if (targeting_range <= 0)
+    {
+        Debug.LogError("Invalid targeting range!");
+        return;
+    }
+
+    // Draw the attack range in the scene view for debugging
+    Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
+    Gizmos.DrawSphere(transform.position, targeting_range);
     }
 
  
@@ -32,7 +50,14 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (tower != null)
+        {
+            targeting_range = tower.tower_attack_range;
+        }
+        else
+        {
+            Debug.LogError("Tower reference is not set in Turret");
+        }
     }
 
     // Update is called once per frame

@@ -136,7 +136,7 @@ MonoBehaviour:
   turret_rotate_point: {fileID: 4541489603187015967}
   bullet_prefab: {fileID: 2365814205605098040, guid: 549713b9a27e77c4dbae6f3ebd442851, type: 3}
   firing_point: {fileID: 8094599351226700826}
-  targeting_range: 10
+  tower: {fileID: 7684039098689182727}
   enemy_mask:
     serializedVersion: 2
     m_Bits: 64
@@ -221,6 +221,8 @@ MonoBehaviour:
   towerprefab: {fileID: 729118177691507758}
   towerhealth: 0
   isDestroyed: 0
+  tower_attack_range: 5
+  towerdamage: 0
 --- !u!1 &5377627653931084493
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +297,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -781594065
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -88181497, guid: 1fb60c2d20f508e4fbc120c68f36aa62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
