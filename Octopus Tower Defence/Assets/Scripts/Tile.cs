@@ -4,6 +4,7 @@ using System.Collections; // Add this using directive
 
 public class Tile : MonoBehaviour
 {
+    
     public string tilename;
     public int tilecost;
     public int tilehealth;
@@ -39,6 +40,7 @@ public class Tile : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        Debug.Log("Tile Hit");
         tilehealth -= dmg;
 
         if (tilehealth <= 0)

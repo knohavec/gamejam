@@ -54,7 +54,7 @@ MonoBehaviour:
   prefab: {fileID: 2992906538528824484}
   tilemap: {fileID: 0}
   isDestroyed: 0
-  damageColor: {r: 1, g: 0, b: 0, a: 0.5}
+  damageColor: {r: 1, g: 0.3785736, b: 0, a: 1}
   flashDuration: 0.1
 --- !u!212 &5030849127804406024
 SpriteRenderer:
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1841108555
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3628383d836718a44ae41f7f0ad4d28d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 5030849127804406024}
-  hover_color: {r: 1, g: 0, b: 0.86603355, a: 0.3529412}
+  hover_color: {r: 0, g: 1, b: 0.122285604, a: 0.3529412}
+  yOffset: 0.6
 --- !u!60 &4407267834734174117
 PolygonCollider2D:
   m_ObjectHideFlags: 0
