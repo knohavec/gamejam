@@ -5,6 +5,8 @@ using UnityEngine;
 public class SeaSpongePull : MonoBehaviour
 {
     [SerializeField] private float pullSpeed = 2f; // Speed at which sand dollars are pulled towards the sea sponge
+
+    [SerializeField] private Animator animator;
     public Tower tower; // Reference to the Tower instance
     private float targetingRange;
 
@@ -65,17 +67,33 @@ public class SeaSpongePull : MonoBehaviour
 }
 
     private void OnTriggerEnter2D(Collider2D other)
+{
+    SandDollar sandDollar = other.GetComponent<SandDollar>();
+    if (sandDollar != null)
     {
-        SandDollar sandDollar = other.GetComponent<SandDollar>();
-        if (sandDollar != null)
+        // Update the sand dollar counter and destroy the sand dollar
+        SandDollarSpawning.sand_dollar_total += sandDollar.worth;
+        if (SandDollar.counterText != null)
         {
-            // Update the sand dollar counter and destroy the sand dollar
-            SandDollarSpawning.sand_dollar_total += sandDollar.worth;
-            if (SandDollar.counterText != null)
-            {
-                SandDollar.counterText.text = SandDollarSpawning.sand_dollar_total.ToString();
-            }
-            Destroy(sandDollar.gameObject);
+            SandDollar.counterText.text = SandDollarSpawning.sand_dollar_total.ToString();
         }
+
+        // Set the animator parameter
+        animator.SetBool("IsSucking", true);
+
+        Destroy(sandDollar.gameObject);
+        
+        // Reset the animator parameter after a delay (if needed)
+        StartCoroutine(ResetSuckingAnimation());
     }
+}
+
+private IEnumerator ResetSuckingAnimation()
+{
+    yield return new WaitForSeconds(0.5f); // Adjust the delay as needed
+    animator.SetBool("IsSucking", false);
+}
+
+
+
 }
