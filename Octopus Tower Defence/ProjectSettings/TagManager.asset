@@ -8,6 +8,7 @@ TagManager:
   - Tile
   - Bullet
   - Tower
+  - SandDollar
   layers:
   - Default
   - TransparentFX
