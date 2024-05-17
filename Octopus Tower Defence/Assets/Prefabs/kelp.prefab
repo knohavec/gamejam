@@ -204,3 +204,4 @@ MonoBehaviour:
   tower_attack_range: 1.5
   towerdamage: 5
   tower_attack_speed: 0.5
+  tower_research_cost: 5
