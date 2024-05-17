@@ -21,11 +21,14 @@ public class Placement_Detection : MonoBehaviour
     }
 
     private void OnMouseEnter()
+    
     {
+        Debug.Log("Mouse Detected");
         sr.color = hover_color;
     }
 
      private void OnMouseExit()
+
     {
         sr.color = start_color;
     }

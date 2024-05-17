@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f747e8af38fbe4d8819f37be6fd5aa, type: 3}
   m_Name: Rules4Tiles
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultSprite: {fileID: 21300000, guid: 3628383d836718a44ae41f7f0ad4d28d, type: 3}
+  m_DefaultGameObject: {fileID: 2992906538528824484, guid: 569cb823ec3f7994bafd318cced0b1fa, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
   m_FlatTop: 0
