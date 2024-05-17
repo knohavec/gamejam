@@ -214,4 +214,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullSpeed: 2
+  animator: {fileID: 6164323673279523575}
   tower: {fileID: -4159597593566756427}

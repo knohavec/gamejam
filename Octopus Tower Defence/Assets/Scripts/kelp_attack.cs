@@ -10,35 +10,48 @@ public class kelp_attack : MonoBehaviour
     private float idleTime;
     private float attackTime;
 
-    private void Start()
+    private void Awake()
     {
         tower = GetComponent<Tower>(); // Get the Tower component
         animator = GetComponent<Animator>(); // Get the Animator component
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator component is missing.");
+            return;
+        }
+
         UpdateAnimClipTimes();
     }
 
     private void Update()
     {
+        if (tower == null || animator == null)
+        {
+            Debug.Log("Tower or Animator component is missing.");
+            return;
+        }
+
         if (tower.isDestroyed) return; // Do not attack if the tower is destroyed
 
         List<Transform> targets = GetEnemiesInRange();
 
         if (targets.Count > 0)
         {
-            // If there are enemies in range, trigger the attack animation and attack
-            StartCoroutine(Attack(targets));
+            if (!animator.GetBool("IsAttacking"))
+            {
+                StartCoroutine(Attack(targets));
+            }
+        }
+        else
+        {
+            // If there are no enemies in range, set the animator to idle
+            animator.SetBool("IsAttacking", false);
         }
     }
 
     private void UpdateAnimClipTimes()
     {
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            Debug.Log("Error: Did not find Animator component!");
-            return;
-        }
-
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)
         {
@@ -56,7 +69,7 @@ public class kelp_attack : MonoBehaviour
 
     private List<Transform> GetEnemiesInRange()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, tower.tower_attack_range, LayerMask.GetMask("Enemies"));
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, tower.tower_attack_range, LayerMask.GetMask("Enemy"));
         List<Transform> targets = new List<Transform>();
 
         foreach (var hit in hits)
@@ -69,19 +82,26 @@ public class kelp_attack : MonoBehaviour
 
     private IEnumerator Attack(List<Transform> targets)
     {
+        Debug.Log("Starting Attack");
         // Trigger the attack animation
         animator.SetBool("IsAttacking", true);
 
         // Wait for the attack animation to finish
-        yield return new WaitForSeconds(attackTime);
+        yield return new WaitForSeconds(tower.tower_attack_speed);
 
+        // Damage all enemies found
         foreach (var target in targets)
         {
-            target.GetComponent<Enemy_Stats>().TakeDamage(tower.towerdamage);
+            Enemy_Stats enemyStats = target.GetComponent<Enemy_Stats>();
+            if (enemyStats != null)
+            {
+                enemyStats.TakeDamage(tower.towerdamage);
+            }
         }
 
         // Reset the attack animation parameter
         animator.SetBool("IsAttacking", false);
+        Debug.Log("Attack Finished");
     }
 
     private void OnDrawGizmosSelected()
