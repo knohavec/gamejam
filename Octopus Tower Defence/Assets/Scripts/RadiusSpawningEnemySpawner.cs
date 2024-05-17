@@ -30,6 +30,7 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Vector3 spawnPosition = GetRandomSpawnPosition();
+            spawnPosition.z -= 1f;
             Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(0.5f); // Adjust spawn delay as needed
         }

@@ -5,11 +5,12 @@ public class PollutiumManager : MonoBehaviour
 {
     public static PollutiumManager instance;
 
-    public int pollutiumAmount = 100; // Example starting amount of Pollutium
+    public int pollutiumAmount = 0; // Example starting amount of Pollutium
     public TextMeshProUGUI pollutiumText; // Reference to the TextMeshPro text displaying Pollutium amount
 
     private void Awake()
     {
+        UpdatePollutiumUI();
         if (instance == null)
         {
             instance = this;

@@ -123,6 +123,7 @@ MonoBehaviour:
   sr: {fileID: 5030849127804406024}
   hover_color: {r: 0, g: 1, b: 0.122285604, a: 0.3529412}
   yOffset: 0.6
+  zOffset: -1
 --- !u!60 &4407267834734174117
 PolygonCollider2D:
   m_ObjectHideFlags: 0
