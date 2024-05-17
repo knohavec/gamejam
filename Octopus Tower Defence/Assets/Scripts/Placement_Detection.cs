@@ -9,6 +9,7 @@ public class Placement_Detection : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
 
     [SerializeField] private Color hover_color;
+    [SerializeField] private float yOffset;
 
     private GameObject tower;
     private Color start_color;
@@ -23,7 +24,7 @@ public class Placement_Detection : MonoBehaviour
     private void OnMouseEnter()
     
     {
-        Debug.Log("Mouse Detected");
+        // Debug.Log("Mouse Detected");
         sr.color = hover_color;
     }
 
@@ -58,7 +59,7 @@ public class Placement_Detection : MonoBehaviour
 
     SandDollarSpawning.SpendSandDollars(tower_to_build.towercost);
 
-    Instantiate(tower_to_build.towerprefab, transform.position, Quaternion.identity);
+    Instantiate(tower_to_build.towerprefab, new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z), Quaternion.identity);
 }
 
 
