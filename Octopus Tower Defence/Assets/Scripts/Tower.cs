@@ -14,14 +14,13 @@ public class Tower : MonoBehaviour
     public int towerdamage;
     public float tower_attack_speed;
     public int tower_research_cost;
-    public Color damageColor = Color.red;
+    public Color damageColor = new Color(1f, 0f, 0f, 0.5f); // Semi-transparent red color to flash when taking damage
     public float flashDuration = 0.1f;
     public CurrencyType currencyType;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine damageFlashCoroutine;
-    private bool isBeingAttacked = false;
 
     public enum CurrencyType
     {
@@ -53,27 +52,27 @@ public class Tower : MonoBehaviour
 
     public void TakeDamage(int dmg, float attackSpeed)
     {
-        towerhealth -= dmg;
-        isBeingAttacked = true;
-        if (spriteRenderer != null)
+        if (!isDestroyed)
         {
-            if (damageFlashCoroutine == null)
+            towerhealth -= dmg;
+            if (towerhealth <= 0)
             {
-                damageFlashCoroutine = StartCoroutine(DamageFlash(attackSpeed));
+                isDestroyed = true;
+                StopAttack();
+                Destroy(gameObject);
             }
-        }
-
-        if (towerhealth <= 0)
-        {
-            StopAttack();
-            Destroy(gameObject);
-            isDestroyed = true;
+            else
+            {
+                if (damageFlashCoroutine == null)
+                {
+                    damageFlashCoroutine = StartCoroutine(DamageFlash(attackSpeed));
+                }
+            }
         }
     }
 
     public void StopAttack()
     {
-        isBeingAttacked = false;
         if (damageFlashCoroutine != null)
         {
             StopCoroutine(damageFlashCoroutine);
@@ -84,13 +83,12 @@ public class Tower : MonoBehaviour
 
     private IEnumerator DamageFlash(float attackSpeed)
     {
-        while (isBeingAttacked)
+        while (!isDestroyed)
         {
             spriteRenderer.color = damageColor;
             yield return new WaitForSeconds(flashDuration);
             spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(attackSpeed - flashDuration);
         }
-        damageFlashCoroutine = null;
     }
 }

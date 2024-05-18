@@ -6,6 +6,8 @@ public class Tile : MonoBehaviour
 {
     public int tilehealth;
     public bool isDestroyed = false;
+
+    public bool hasTower = false;
     public Color damageColor = new Color(1f, 0f, 0f, 0.5f); // Semi-transparent red color to flash when taking damage
     public float flashDuration = 0.1f; // Duration of the flash
 
@@ -39,6 +41,12 @@ public class Tile : MonoBehaviour
     {
         return cost;
     }
+
+    public void SetTowerPresence(bool presence)
+{
+    hasTower = presence;
+}
+
 
     public void TakeDamage(int dmg, float attackSpeed)
     {

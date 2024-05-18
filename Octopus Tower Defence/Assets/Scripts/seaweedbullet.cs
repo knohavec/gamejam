@@ -9,7 +9,7 @@ public class seaweedbullet : MonoBehaviour
 
     [Header("Bullet Stats")]
     [SerializeField] private float bullet_speed = 4f;
-    [SerializeField] private int bullet_damage = 1;
+    [SerializeField] private float bullet_damage = 1f;
     [SerializeField] private float despawn_time = 3f; // Time before despawning in seconds
 
     private Transform target;
@@ -55,5 +55,4 @@ public class seaweedbullet : MonoBehaviour
 
         Destroy(gameObject);
     }
-
 }

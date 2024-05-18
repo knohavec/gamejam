@@ -5,8 +5,12 @@ using UnityEngine;
 public class CC_Chew_Attack : MonoBehaviour
 {
     [SerializeField] private float pullSpeed = 2f; // Speed at which food is pulled towards the sea sponge
-
+    [SerializeField] private float pollutiumSpeed = 3f; // Speed at which pollutium moves towards the UI
     [SerializeField] private Animator animator;
+
+    [SerializeField] private GameObject pollutiumPrefab; // Pollutium prefab
+    [SerializeField] private RectTransform pollutiumTargetUI; // Pollutium target UI RectTransform
+    [SerializeField] private Vector3 targetOffset = Vector3.zero; // Offset for the target position
 
     public float attackSpeed;
     public float conversion_rate;
@@ -58,51 +62,77 @@ public class CC_Chew_Attack : MonoBehaviour
                     // Convert food (represented by GameObject) to pollutium and destroy it upon contact
                     ConvertFood(food);
 
-                     StartCoroutine(ChewingAnimation());
+                    StartCoroutine(ChewingAnimation());
                 }
             }
         }
     }
 
     private void ConvertFood(GameObject food)
-{
-    // Access Meat script (assuming it has a pollution_value variable)
-    float meatValue = food.GetComponent<Meat>().pollution_value;
-
-    // Track total meat collected
-    totalMeat += meatValue;
-
-    // Convert meat to pollution when totalMeat reaches the conversion rate
-    if (totalMeat >= conversion_rate)
     {
-        int pollutionPoints = Mathf.FloorToInt(totalMeat / conversion_rate); // Convert totalMeat to whole pollution points
-        PollutiumManager.instance.AddPollutium(pollutionPoints);
+        // Access Meat script (assuming it has a pollution_value variable)
+        float meatValue = food.GetComponent<Meat>().pollution_value;
 
-        // Reset totalMeat after conversion
-        totalMeat -= (pollutionPoints * conversion_rate);
+        // Track total meat collected
+        totalMeat += meatValue;
+
+        // Convert meat to pollution when totalMeat reaches the conversion rate
+        if (totalMeat >= conversion_rate)
+        {
+            int pollutionPoints = Mathf.FloorToInt(totalMeat / conversion_rate); // Convert totalMeat to whole pollution points
+
+            // Instantiate Pollutium prefab and start coroutine to move it
+            for (int i = 0; i < pollutionPoints; i++)
+            {
+                GameObject pollutium = Instantiate(pollutiumPrefab, transform.position, Quaternion.identity);
+                StartCoroutine(MovePollutium(pollutium));
+            }
+
+            // Reset totalMeat after conversion
+            totalMeat -= (pollutionPoints * conversion_rate);
+        }
+
+        Destroy(food);
     }
 
-    Destroy(food);
-}
+    private IEnumerator MovePollutium(GameObject pollutium)
+    {
+        Vector3 targetPosition = GetWorldPositionFromUI(pollutiumTargetUI) + targetOffset;
 
+        while (Vector3.Distance(pollutium.transform.position, targetPosition) > 0.01f)
+        {
+            Vector3 direction = (targetPosition - pollutium.transform.position).normalized;
+            pollutium.transform.position += direction * pollutiumSpeed * Time.deltaTime;
+            yield return null;
+        }
 
-   private IEnumerator ChewingAnimation()
-{
-    // Set the animator parameter
-    animator.SetBool("IsChewing", true);
+        // Once the Pollutium reaches the target, update the Pollutium count and destroy it
+        PollutiumManager.instance.AddPollutium(1);
+        Destroy(pollutium);
+    }
 
-    // Wait for a frame to ensure the animator state is updated
-    yield return null;
+    private Vector3 GetWorldPositionFromUI(RectTransform uiElement)
+    {
+        Vector3 worldPosition;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiElement, uiElement.position, Camera.main, out worldPosition);
+        return worldPosition;
+    }
 
-    // Get the length of the current animation clip
-    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); // Assuming it's on layer 0
-    float animationLength = stateInfo.length;
+    private IEnumerator ChewingAnimation()
+    {
+        // Set the animator parameter
+        animator.SetBool("IsChewing", true);
 
-    // Wait for the combined duration of attackSpeed and animationLength
-    yield return new WaitForSeconds(attackSpeed + animationLength);
+        // Wait for a frame to ensure the animator state is updated
+        yield return null;
 
-    animator.SetBool("IsChewing", false);
-}
+        // Get the length of the current animation clip
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); // Assuming it's on layer 0
+        float animationLength = stateInfo.length;
 
+        // Wait for the combined duration of attackSpeed and animationLength
+        yield return new WaitForSeconds(attackSpeed + animationLength);
 
+        animator.SetBool("IsChewing", false);
+    }
 }
