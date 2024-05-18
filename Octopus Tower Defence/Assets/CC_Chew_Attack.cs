@@ -66,27 +66,25 @@ public class CC_Chew_Attack : MonoBehaviour
 
     private void ConvertFood(GameObject food)
 {
-  // Destroy the meat prefab
- 
+    // Access Meat script (assuming it has a pollution_value variable)
+    float meatValue = food.GetComponent<Meat>().pollution_value;
 
-  // Access Meat script (assuming it has a pollution_value variable)
-  float meatValue = food.GetComponent<Meat>().pollution_value;
+    // Track total meat collected
+    totalMeat += meatValue;
 
-  // Track total meat collected
-  totalMeat += meatValue;
+    // Convert meat to pollution when totalMeat reaches the conversion rate
+    if (totalMeat >= conversion_rate)
+    {
+        int pollutionPoints = Mathf.FloorToInt(totalMeat / conversion_rate); // Convert totalMeat to whole pollution points
+        PollutiumManager.instance.AddPollutium(pollutionPoints);
 
-  // Convert meat to pollution when totalMeat reaches the conversion rate
-  if (totalMeat >= conversion_rate)
-  {
-    int pollutionPoints = Mathf.FloorToInt(totalMeat / conversion_rate); // Convert totalMeat to whole pollution points
-    PollutiumManager.instance.AddPollutium(pollutionPoints);
+        // Reset totalMeat after conversion
+        totalMeat -= (pollutionPoints * conversion_rate);
+    }
 
-    // Reset totalMeat after conversion
-    totalMeat -= (pollutionPoints * conversion_rate);
-  }
-
-  Destroy(food);
+    Destroy(food);
 }
+
 
    private IEnumerator ChewingAnimation()
 {

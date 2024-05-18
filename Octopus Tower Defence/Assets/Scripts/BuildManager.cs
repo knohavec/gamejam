@@ -1,50 +1,99 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager main;
-    
+
     [Header("References")]
     [SerializeField] private Tower[] towers;
     [SerializeField] private int selectedTower = -1;
-    
-    
-
-   
 
     private void Awake()
     {
-        main = this;
-        
+        if (main == null)
+        {
+            main = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public Tower GetSelectedTower()
     {
-        return towers[selectedTower];
+        if (selectedTower >= 0 && selectedTower < towers.Length)
+        {
+            return towers[selectedTower];
+        }
+        return null;
     }
 
     public void SelectTower(int _selectedTower)
     {
-        selectedTower = _selectedTower;
+        Tower tower = towers[_selectedTower];
+        bool canSelect = false;
+
+        switch (tower.currencyType)
+        {
+            case Tower.CurrencyType.SandDollars:
+                canSelect = SandDollarManager.instance.HasEnoughSandDollars(tower.tower_research_cost);
+                break;
+            case Tower.CurrencyType.Pollutium:
+                canSelect = PollutiumManager.instance.HasEnoughPollutium(tower.tower_research_cost);
+                break;
+        }
+
+        if (canSelect)
+        {
+            selectedTower = _selectedTower;
+        }
+        else
+        {
+            Debug.LogWarning("Not enough currency to select this tower.");
+        }
     }
 
-    // Start is called before the first frame update
-
-    public void ClearSelectedTower(){
+    public void ClearSelectedTower()
+    {
         selectedTower = -1;
     }
-    
-    void Start()
+
+    public bool TryPlaceTower(Vector3 position)
     {
-        
+        Tower towerToBuild = GetSelectedTower();
+        if (towerToBuild != null)
+        {
+            bool hasCurrency = false;
+            switch (towerToBuild.currencyType)
+            {
+                case Tower.CurrencyType.SandDollars:
+                    hasCurrency = SandDollarManager.instance.SpendSandDollars(towerToBuild.towercost);
+                    break;
+                case Tower.CurrencyType.Pollutium:
+                    hasCurrency = PollutiumManager.instance.SpendPollutium(towerToBuild.towercost);
+                    break;
+            }
+
+            if (hasCurrency)
+            {
+                Instantiate(towerToBuild.towerprefab, position, Quaternion.identity);
+                return true;
+            }
+            else
+            {
+                Debug.LogWarning("Not enough currency to place this tower.");
+            }
+        }
+        return false;
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+    }
+
     void Update()
     {
-        
     }
 }

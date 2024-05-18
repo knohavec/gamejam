@@ -14,12 +14,6 @@ public class SandDollarSpawning : MonoBehaviour
     [SerializeField] private float spawn_range = 10.0f; // Half the side length of the square spawn area
     private float timeSinceLastSpawn = 0.0f;
 
-    public static int sand_dollar_total = 0;
-    public int SandDollarTotal => sand_dollar_total;
-
-    public delegate void SandDollarTotalChanged(int newTotal);
-    public static event SandDollarTotalChanged OnSandDollarTotalChanged;
-
     private void Awake()
     {
         if (Instance == null)
@@ -63,18 +57,4 @@ public class SandDollarSpawning : MonoBehaviour
         timeSinceLastSpawn += Time.deltaTime;
         SpawnSandDollars();
     }
-
-    public static void SpendSandDollars(int cost)
-{
-    if (cost < 0)
-    {
-        Debug.LogError("Cost cannot be negative.");
-        return;
-    }
-
-    sand_dollar_total = Mathf.Max(0, sand_dollar_total - cost);
-    OnSandDollarTotalChanged?.Invoke(sand_dollar_total);
-    SandDollar.counterText.text = SandDollarSpawning.sand_dollar_total.ToString();
-}
-
 }

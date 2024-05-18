@@ -1,10 +1,7 @@
 using UnityEngine;
-using TMPro;
 
 public class SandDollar : MonoBehaviour
 {
-    public static TMP_Text counterText; // Static reference to the UI ELEMENT FOR COUNTER
-
     [Header("Attributes")]
     [SerializeField] public int worth = 1;
     [SerializeField] private float despawnDelay = 5f; // Delay before despawning if not clicked
@@ -13,15 +10,6 @@ public class SandDollar : MonoBehaviour
 
     void Start()
     {
-        if (counterText == null)
-        {
-            counterText = GameObject.Find("SandDollar_Counter").GetComponent<TMP_Text>();
-            if (counterText == null)
-            {
-                Debug.LogError("No TMP_Text component found in the scene.");
-            }
-        }
-
         Invoke(nameof(DespawnOnDelay), despawnDelay); // Start the despawn delay
     }
 
@@ -35,21 +23,13 @@ public class SandDollar : MonoBehaviour
 
     void UpdateCounter()
     {
-        if (counterText == null)
-        {
-            Debug.LogError("CounterText reference not set!");
-            return;
-        }
-
-        SandDollarSpawning.sand_dollar_total += worth;
-        counterText.text = SandDollarSpawning.sand_dollar_total.ToString();
+        SandDollarManager.instance.AddSandDollars(worth);
     }
 
     void DespawnOnDelay()
     {
         if (!isClicked)
         {
-            // Debug.Log("Despawning sand dollar due to timeout.");
             Destroy(gameObject);
         }
     }

@@ -1,5 +1,8 @@
 using UnityEngine;
+using System;
+using System.Collections;
 using TMPro;
+
 
 public class PollutiumManager : MonoBehaviour
 {
@@ -42,4 +45,26 @@ public class PollutiumManager : MonoBehaviour
         pollutiumAmount -= amount;
         UpdatePollutiumUI();
     }
+
+    public bool HasEnoughPollutium(int amount)
+    {
+        return pollutiumAmount >= amount;
+    }
+
+    public bool SpendPollutium(int amount)
+{
+    if (HasEnoughPollutium(amount))
+    {
+        Debug.Log("Spending " + amount + " Pollutium");
+        pollutiumAmount -= amount;
+        UpdatePollutiumUI();
+        return true;
+    }
+    else
+    {
+        Debug.LogWarning("Not enough Pollutium to spend.");
+        return false;
+    }
+}
+
 }
