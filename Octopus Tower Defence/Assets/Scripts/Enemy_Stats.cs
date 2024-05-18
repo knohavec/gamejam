@@ -11,7 +11,7 @@ public class Enemy_Stats : MonoBehaviour
     [SerializeField] public float AttackRange = 1f;
 
 
-    private bool isDestroyed = false;
+    public bool isDestroyed = false;
 
     public void TakeDamage(int dmg)
     {
@@ -21,6 +21,14 @@ public class Enemy_Stats : MonoBehaviour
         {
             FindObjectOfType<SquareSpawningEnemySpawner>().EnemyDestroyed();
             isDestroyed = true;
+
+            // Notify the EnemyAttack script
+            EnemyAttack enemyAttack = GetComponent<EnemyAttack>();
+            if (enemyAttack != null)
+            {
+                enemyAttack.EnemyDestroyed();
+            }
+
             Destroy(gameObject);
         }
     }

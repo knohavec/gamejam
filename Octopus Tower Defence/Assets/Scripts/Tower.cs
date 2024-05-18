@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -9,17 +8,28 @@ public class Tower : MonoBehaviour
     public string towername;
     public int towercost;
     public GameObject towerprefab;
- 
     public int towerhealth;
-
     public bool isDestroyed = false;
-
     public float tower_attack_range;
-
     public int towerdamage;
-
     public float tower_attack_speed;
     public int tower_research_cost;
+    public Color damageColor = Color.red; // Selectable damage color
+    public float flashDuration = 0.1f; // Duration of the flash effect
+
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    private Coroutine damageFlashCoroutine;
+    private bool isBeingAttacked = false;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+    }
 
     public Tower (string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange){
         towername = _name;
@@ -32,16 +42,49 @@ public class Tower : MonoBehaviour
         tower_research_cost = _research_cost;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, float attackSpeed)
+{
+    towerhealth -= dmg;
+    isBeingAttacked = true;
+    if (spriteRenderer != null)
     {
-        towerhealth -= dmg;
-
-        if (towerhealth <= 0)
+        if (damageFlashCoroutine == null)
         {
-            Destroy(gameObject);
-            isDestroyed = true;
+            damageFlashCoroutine = StartCoroutine(DamageFlash(attackSpeed));
         }
     }
 
-    // You can add other methods or properties as needed
+    if (towerhealth <= 0)
+    {
+        // Stop the attack and the damage flash coroutine
+        StopAttack();
+        Destroy(gameObject);
+        isDestroyed = true;
+    }
+}
+
+
+    public void StopAttack()
+{
+    isBeingAttacked = false;
+    if (damageFlashCoroutine != null)
+    {
+        StopCoroutine(damageFlashCoroutine);
+        spriteRenderer.color = originalColor;
+        damageFlashCoroutine = null;
+    }
+}
+
+
+    private IEnumerator DamageFlash(float attackSpeed)
+    {
+        while (isBeingAttacked)
+        {
+            spriteRenderer.color = damageColor;
+            yield return new WaitForSeconds(flashDuration);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(attackSpeed - flashDuration);
+        }
+        damageFlashCoroutine = null;
+    }
 }

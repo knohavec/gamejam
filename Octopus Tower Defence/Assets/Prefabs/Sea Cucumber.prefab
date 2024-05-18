@@ -225,6 +225,8 @@ MonoBehaviour:
   towerdamage: 0
   tower_attack_speed: 0
   tower_research_cost: 10
+  damageColor: {r: 1, g: 0, b: 0, a: 0.49803922}
+  flashDuration: 0.5
 --- !u!1 &5377627653931084493
 GameObject:
   m_ObjectHideFlags: 0
