@@ -204,6 +204,7 @@ MonoBehaviour:
   Damage: 2
   AttackSpeed: 1
   AttackRange: 3
+  isDestroyed: 0
 --- !u!114 &3522546797855332493
 MonoBehaviour:
   m_ObjectHideFlags: 0
