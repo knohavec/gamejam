@@ -49,7 +49,7 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                Debug.Log("No valid target found.");
+                movement.targetPosition = Vector2.zero; // Move towards (0, 0) if no target is found
             }
         }
         else
@@ -101,55 +101,43 @@ public class EnemyAttack : MonoBehaviour
         // Wait for the attack animation to play
         yield return new WaitForSeconds(attackCooldown);
 
-        // Get the target object (tower or tile)
-        GameObject targetObject = target;
-
-        if (targetObject != null && targetObject.activeSelf)
+        if (target != null && target.activeSelf)
         {
-            // Check if the target object is destroyed
-            bool targetIsDestroyed = false;
-            if (targetObject.CompareTag("Tower"))
+            if (target.CompareTag("Tower"))
             {
-                Tower towerComponent = targetObject.GetComponent<Tower>();
-                if (towerComponent != null && towerComponent.isDestroyed)
-                {
-                    targetIsDestroyed = true;
-                }
-            }
-            else if (targetObject.CompareTag("Tile"))
-            {
-                Tile tileComponent = targetObject.GetComponent<Tile>();
-                if (tileComponent != null && tileComponent.isDestroyed)
-                {
-                    targetIsDestroyed = true;
-                }
-            }
-
-            // If the target is destroyed, find a new target
-            if (targetIsDestroyed)
-            {
-                StopAttacking(targetObject);
-                targetObject = movement.FindTarget();
-                if (targetObject == null || !targetObject.activeSelf)
-                {
-                    yield break;
-                }
-            }
-
-            if (targetObject.CompareTag("Tower"))
-            {
-                Tower towerComponent = targetObject.GetComponent<Tower>();
+                Tower towerComponent = target.GetComponent<Tower>();
                 if (towerComponent != null)
                 {
                     towerComponent.TakeDamage(enemyStats.Damage, attackCooldown);
                 }
             }
-            else if (targetObject.CompareTag("Tile"))
+            else if (target.CompareTag("Tile"))
             {
-                Tile tileComponent = targetObject.GetComponent<Tile>();
+                Tile tileComponent = target.GetComponent<Tile>();
                 if (tileComponent != null && !tileComponent.isDestroyed)
                 {
-                    tileComponent.TakeDamage(enemyStats.Damage, attackCooldown);
+                    if (tileComponent.hasTower)
+                    {
+                        // Attack the tower on the tile
+                        Collider2D[] colliders = Physics2D.OverlapPointAll(tileComponent.transform.position);
+                        foreach (var collider in colliders)
+                        {
+                            if (collider.CompareTag("Tower"))
+                            {
+                                Tower tower = collider.GetComponent<Tower>();
+                                if (tower != null)
+                                {
+                                    tower.TakeDamage(enemyStats.Damage, attackCooldown);
+                                    yield break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Attack the tile itself
+                        tileComponent.TakeDamage(enemyStats.Damage, attackCooldown);
+                    }
                 }
             }
         }

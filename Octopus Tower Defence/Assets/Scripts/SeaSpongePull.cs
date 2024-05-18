@@ -5,6 +5,7 @@ using UnityEngine;
 public class SeaSpongePull : MonoBehaviour
 {
     [SerializeField] private float pullSpeed = 2f; // Speed at which sand dollars are pulled towards the sea sponge
+    [SerializeField] private int increment_amount = 1;
     [SerializeField] private Animator animator;
     public Tower tower; // Reference to the Tower instance
     private float targetingRange;
@@ -64,7 +65,7 @@ public class SeaSpongePull : MonoBehaviour
         if (sandDollar != null)
         {
             // Update the sand dollar counter and destroy the sand dollar
-            SandDollarManager.instance.AddSandDollars(sandDollar.worth);
+            SandDollarManager.instance.AddSandDollars(increment_amount);
 
             // Set the animator parameter
             animator.SetBool("IsSucking", true);

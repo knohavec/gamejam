@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BuildManager : MonoBehaviour
 {
@@ -76,6 +77,18 @@ public class BuildManager : MonoBehaviour
             if (hasCurrency)
             {
                 Instantiate(towerToBuild.towerprefab, position, Quaternion.identity);
+
+                // Find the Tile GameObject at the position and set hasTower to true
+                Collider2D hitCollider = Physics2D.OverlapPoint(position);
+                if (hitCollider != null)
+                {
+                    Tile tile = hitCollider.GetComponent<Tile>();
+                    if (tile != null)
+                    {
+                        tile.SetTowerPresence(true);
+                    }
+                }
+
                 return true;
             }
             else

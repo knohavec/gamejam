@@ -4,8 +4,15 @@ public class Movement : MonoBehaviour
 {
     public Vector2 targetPosition;
     public float speed = 5f;
+    private Enemy_Stats enemyStats;
 
-    void Update()
+    private void Start()
+    {
+        enemyStats = GetComponent<Enemy_Stats>();
+        targetPosition = Vector2.positiveInfinity;
+    }
+
+    private void Update()
     {
         UpdateTargetPosition();
 
@@ -21,10 +28,23 @@ public class Movement : MonoBehaviour
     {
         if (targetPosition == Vector2.positiveInfinity || !TileExists(targetPosition))
         {
-            Vector3? nearestTilePosition = FindNearestTile()?.transform.position;
-            if (nearestTilePosition != null)
+            GameObject nearestTile = FindNearestTile();
+            if (nearestTile == null)
             {
-                targetPosition = (Vector2)nearestTilePosition;
+                GameObject nearestTower = FindNearestTower();
+                if (nearestTower != null)
+                {
+                    targetPosition = nearestTower.transform.position;
+                }
+                else
+                {
+                    // If no target is found, move towards (0, 0)
+                    targetPosition = Vector2.zero;
+                }
+            }
+            else
+            {
+                targetPosition = nearestTile.transform.position;
             }
         }
 
@@ -39,10 +59,10 @@ public class Movement : MonoBehaviour
 
     private bool TileExists(Vector2 position)
     {
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
-        foreach (GameObject tile in tiles)
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.1f);
+        foreach (Collider2D collider in colliders)
         {
-            if ((Vector2)tile.transform.position == position)
+            if (collider.CompareTag("Tile"))
             {
                 return true;
             }
@@ -51,41 +71,47 @@ public class Movement : MonoBehaviour
     }
 
     private void RotateSprite(Vector2 direction)
-{
-    // Calculate the angle to rotate the sprite towards the target
-    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    {
+        // Calculate the angle to rotate the sprite towards the target
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-     // Calculate the screen's center in world coordinates
-  Vector3 screenCenter = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+        // Calculate the screen's center in world coordinates
+        Vector3 screenCenter = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
 
-  // Check if the sprite's position is left of the screen center
-  bool isLeftOfScreen = transform.position.x < screenCenter.x;
+        // Check if the sprite's position is left of the screen center
+        bool isLeftOfScreen = transform.position.x < screenCenter.x;
 
-  if (isLeftOfScreen)
-{
-  transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-} 
-else
-{
-  // Flip on X and Y axis
-  transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), -Mathf.Abs(transform.localScale.y), transform.localScale.z);
-}
-
-}
+        if (isLeftOfScreen)
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            // Flip on X and Y axis
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), -Mathf.Abs(transform.localScale.y), transform.localScale.z);
+        }
+    }
 
     private GameObject FindNearestTile()
     {
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, enemyStats.TargetingRadius);
         float nearestDistance = Mathf.Infinity;
         GameObject nearestTile = null;
-        foreach (GameObject tile in tiles)
+        foreach (Collider2D collider in colliders)
         {
-            float distance = Vector2.Distance(transform.position, tile.transform.position);
-            if (distance < nearestDistance)
+            if (collider.CompareTag("Tile"))
             {
-                nearestDistance = distance;
-                nearestTile = tile;
+                Tile tile = collider.GetComponent<Tile>();
+                if (tile != null)
+                {
+                    float distance = Vector2.Distance(transform.position, collider.transform.position);
+                    if (distance < nearestDistance)
+                    {
+                        nearestDistance = distance;
+                        nearestTile = collider.gameObject;
+                    }
+                }
             }
         }
         return nearestTile;
@@ -93,16 +119,19 @@ else
 
     private GameObject FindNearestTower()
     {
-        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, enemyStats.TargetingRadius);
         float nearestDistance = Mathf.Infinity;
         GameObject nearestTower = null;
-        foreach (GameObject tower in towers)
+        foreach (Collider2D collider in colliders)
         {
-            float distance = Vector2.Distance(transform.position, tower.transform.position);
-            if (distance < nearestDistance)
+            if (collider.CompareTag("Tower"))
             {
-                nearestDistance = distance;
-                nearestTower = tower;
+                float distance = Vector2.Distance(transform.position, collider.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestTower = collider.gameObject;
+                }
             }
         }
         return nearestTower;
@@ -113,46 +142,19 @@ else
         GameObject nearestTower = FindNearestTower();
         if (nearestTower != null)
         {
-            // Raycast to the nearest tower
-            Vector2 direction = (nearestTower.transform.position - transform.position).normalized;
-            float distance = Vector2.Distance(transform.position, nearestTower.transform.position);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, LayerMask.GetMask("Tiles"));
+            targetPosition = nearestTower.transform.position;
+            return nearestTower;
+        }
 
-            if (hit.collider != null && hit.collider.CompareTag("Tile"))
-            {
-                // If the raycast hits a Tile collider, find the nearest tile and target it
-                GameObject nearestTile = FindNearestTile();
-                if (nearestTile != null)
-                {
-                    targetPosition = nearestTile.transform.position;
-                    return nearestTile; // Return the new target
-                }
-                else
-                {
-                    targetPosition = Vector2.positiveInfinity;
-                    return null; // Return null if no valid target is found
-                }
-            }
-            else
-            {
-                targetPosition = nearestTower.transform.position;
-                return nearestTower; // Return the tower as the target
-            }
-        }
-        else
+        GameObject nearestTile = FindNearestTile();
+        if (nearestTile != null)
         {
-            // If no tower is found, target the nearest tile
-            GameObject nearestTile = FindNearestTile();
-            if (nearestTile != null)
-            {
-                targetPosition = nearestTile.transform.position;
-                return nearestTile; // Return the tile as the target
-            }
-            else
-            {
-                targetPosition = Vector2.positiveInfinity;
-                return null; // Return null if no valid target is found
-            }
+            targetPosition = nearestTile.transform.position;
+            return nearestTile;
         }
+
+        // If no target is found, set target position to (0, 0)
+        targetPosition = Vector2.zero;
+        return null;
     }
 }

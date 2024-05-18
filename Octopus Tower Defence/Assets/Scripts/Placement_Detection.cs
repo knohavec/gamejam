@@ -41,6 +41,17 @@ public class Placement_Detection : MonoBehaviour
         if (BuildManager.main.TryPlaceTower(placementPosition))
         {
             hasTower = true; // Set to true after placing tower
+
+            // Find the Tile GameObject at the position and set hasTower to true
+            Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
+            if (hitCollider != null)
+            {
+                Tile tile = hitCollider.GetComponent<Tile>();
+                if (tile != null)
+                {
+                    tile.SetTowerPresence(true);
+                }
+            }
         }
     }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Enemy_Stats : MonoBehaviour
 {
@@ -10,12 +9,13 @@ public class Enemy_Stats : MonoBehaviour
     [SerializeField] public float AttackSpeed = 1f;
     [SerializeField] public float AttackRange = 1f;
 
+    [SerializeField] public float TargetingRadius = 5f;
 
     public bool isDestroyed = false;
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
-        hitPoints -= dmg;
+        hitPoints -= Mathf.RoundToInt(dmg); // Convert float damage to int
 
         if (hitPoints <= 0 && !isDestroyed)
         {
