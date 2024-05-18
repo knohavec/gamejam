@@ -53,7 +53,7 @@ public class Research_Tower_Button_Script : MonoBehaviour
         }
 
         // Log the retrieved research cost
-        Debug.Log("Research cost: " + researchCost);
+        // Debug.Log("Research cost: " + researchCost);
 
         // Proceed with research using Pollutium only
         bool canResearch = PollutiumManager.instance.SpendPollutium(researchCost);
@@ -63,7 +63,7 @@ public class Research_Tower_Button_Script : MonoBehaviour
             buyButton.SetActive(true); // Show the buy button
             gameObject.SetActive(false); // Hide this game object
 
-            Debug.Log("Research successful.");
+            // Debug.Log("Research successful.");
         }
         else
         {

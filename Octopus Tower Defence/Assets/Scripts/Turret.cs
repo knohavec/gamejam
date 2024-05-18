@@ -10,42 +10,36 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject bullet_prefab;
     [SerializeField] private Transform firing_point;
     [SerializeField] private Tower tower; // Reference to the Tower instance
+    [SerializeField] private Animator animator;
 
     [Header("Attributes")]
 
     [SerializeField] private LayerMask enemy_mask;
     [SerializeField] private float rotation_speed = 5f;
     [SerializeField] private float bps = 1f; //bullets per second
-    
-    
 
-       private float targeting_range;
-       private Transform target;
+    private float targeting_range;
+    private Transform target;
+    private float time_until_fire;
 
-       private float time_until_fire;   
-
-       
     private void OnDrawGizmosSelected()
     {
         if (transform == null)
-    {
-        Debug.LogError("Transform is null!");
-        return;
-    }
+        {
+            Debug.LogError("Transform is null!");
+            return;
+        }
 
-    // Assuming targetingRange is a field in your class
-    if (targeting_range <= 0)
-    {
-        Debug.LogError("Invalid targeting range!");
-        return;
-    }
+        if (targeting_range <= 0)
+        {
+            Debug.LogError("Invalid targeting range!");
+            return;
+        }
 
-    // Draw the attack range in the scene view for debugging
-    Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
-    Gizmos.DrawSphere(transform.position, targeting_range);
+        // Draw the attack range in the scene view for debugging
+        Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
+        Gizmos.DrawSphere(transform.position, targeting_range);
     }
-
- 
 
     // Start is called before the first frame update
     void Start()
@@ -70,35 +64,44 @@ public class Turret : MonoBehaviour
         }
         RotateTowardsTarget();
 
-        if (!CheckTargetIsInRange()){
+        if (!CheckTargetIsInRange())
+        {
             target = null;
-        } else {
+        }
+        else
+        {
             time_until_fire += Time.deltaTime;
 
-            if (time_until_fire >= 1f/bps){
+            if (time_until_fire >= 1f / bps)
+            {
                 Shoot();
                 time_until_fire = 0f;
             }
-
         }
     }
 
+    private void Shoot()
+    {
+        StartCoroutine(ShootCoroutine());
+    }
 
+    private IEnumerator ShootCoroutine()
+    {
+        // Set the animation parameter to true
+        animator.SetBool("IsAttacking", true);
 
+        // Instantiate the bullet and set its target
+        Vector3 firingPosition = new Vector3(firing_point.position.x, firing_point.position.y, firing_point.position.z - 1);
+        GameObject bulletobj = Instantiate(bullet_prefab, firingPosition, Quaternion.identity);
+        seaweedbullet bulletScript = bulletobj.GetComponent<seaweedbullet>();
+        bulletScript.SetTarget(target);
 
-   private void Shoot()
-{
-    Vector3 firingPosition = new Vector3(firing_point.position.x, firing_point.position.y, firing_point.position.z - 1);
-    GameObject bulletobj = Instantiate(bullet_prefab, firingPosition, Quaternion.identity);
-    seaweedbullet bulletScript = bulletobj.GetComponent<seaweedbullet>();
-    bulletScript.SetTarget(target);
-}
+        // Wait for the animation to finish
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-
-
-
-
-
+        // Set the animation parameter to false
+        animator.SetBool("IsAttacking", false);
+    }
 
     private void FindTarget()
     {
@@ -118,10 +121,11 @@ public class Turret : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
         turret_rotate_point.rotation = Quaternion.RotateTowards(turret_rotate_point.rotation, targetRotation,
-        rotation_speed*Time.deltaTime);
+        rotation_speed * Time.deltaTime);
     }
 
-    private bool CheckTargetIsInRange(){
+    private bool CheckTargetIsInRange()
+    {
         return Vector2.Distance(target.position, transform.position) <= targeting_range;
     }
 }

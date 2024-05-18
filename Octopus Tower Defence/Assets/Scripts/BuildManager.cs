@@ -41,27 +41,14 @@ public class BuildManager : MonoBehaviour
 
     public void SelectTower(int _selectedTower)
     {
-        Tower tower = towers[_selectedTower];
-        bool canSelect = false;
-
-        switch (tower.currencyType)
-        {
-            case Tower.CurrencyType.SandDollars:
-                canSelect = SandDollarManager.instance.HasEnoughSandDollars(tower.tower_research_cost);
-                break;
-            case Tower.CurrencyType.Pollutium:
-                canSelect = PollutiumManager.instance.HasEnoughPollutium(tower.tower_research_cost);
-                break;
-        }
-
-        if (canSelect)
+        if (_selectedTower >= 0 && _selectedTower < towers.Length)
         {
             selectedTower = _selectedTower;
-            Debug.Log("Selected tower: " + tower.towername + " with research cost: " + tower.tower_research_cost);
+            Debug.Log("Selected tower: " + towers[selectedTower].towername);
         }
         else
         {
-            Debug.LogWarning("Not enough currency to select this tower.");
+            Debug.LogWarning("Invalid tower selection.");
         }
     }
 
