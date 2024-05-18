@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using TMPro;
 
 public class HexBuildManager : MonoBehaviour
 {
+    public static HexBuildManager main; // Static reference to the instance
+
     public RuleTile[] tiles;
     public GameObject[] tilePrefabs; // Array of prefabs containing the Tile component
     public int selectedTile = -1; // Initialize with no tile selected
@@ -23,8 +24,17 @@ public class HexBuildManager : MonoBehaviour
         new Vector3Int(-1, 0, 0), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, 0)
     };
 
-    private void Start()
+    private void Awake()
     {
+        if (main == null)
+        {
+            main = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         if (selectedTile < 0 || selectedTile >= tiles.Length)
         {
             selectedTile = -1; // Ensure no tile is selected
@@ -47,18 +57,17 @@ public class HexBuildManager : MonoBehaviour
 
     private bool IsInBounds(Vector3Int cellPos)
     {
-        return true; // Modify this as needed for your bounds check
+        // Modify this as needed for your bounds check
+        return true;
     }
 
     private void TryPlaceTile(Vector3Int cellPos)
     {
-        // Debug.Log("Attempting to place tile at: " + cellPos);
-
         if (selectedTile >= 0 && selectedTile < tiles.Length)
         {
             if (selectedTile >= tilePrefabs.Length)
             {
-                // Debug.LogError("selectedTile index is out of bounds for tilePrefabs array!");
+                Debug.LogError("selectedTile index is out of bounds for tilePrefabs array!");
                 return;
             }
 
@@ -67,46 +76,41 @@ public class HexBuildManager : MonoBehaviour
 
             if (selectedTileComponent == null)
             {
-                // Debug.LogError("Selected tile prefab does not have a Tile component!");
+                Debug.LogError("Selected tile prefab does not have a Tile component!");
                 return;
             }
 
             int cost = selectedTileComponent.GetCost();
             Tile.CurrencyType currencyType = selectedTileComponent.GetCurrencyType();
 
-            // Debug.Log("Tile Cost: " + cost + ", Currency Type: " + currencyType);
-
             bool canPlaceTile = false;
 
             switch (currencyType)
             {
                 case Tile.CurrencyType.SandDollars:
-                    // Debug.Log("Attempting to spend SandDollars");
                     canPlaceTile = SandDollarManager.instance.SpendSandDollars(cost);
                     break;
                 case Tile.CurrencyType.Pollutium:
-                    // Debug.Log("Attempting to spend Pollutium");
                     canPlaceTile = PollutiumManager.instance.SpendPollutium(cost);
                     break;
                 default:
-                    // Debug.LogError("Unknown CurrencyType: " + currencyType);
+                    Debug.LogError("Unknown CurrencyType: " + currencyType);
                     return;
             }
 
             if (canPlaceTile)
             {
-                // Debug.Log("Placing tile...");
                 PlaceTile(cellPos);
                 ClearSelectedTile();
             }
             else
             {
-                // Debug.LogWarning("Not enough resources to place tile.");
+                Debug.LogWarning("Not enough resources to place tile.");
             }
         }
         else
         {
-            // Debug.LogError("selectedTile index is out of bounds for tiles array!");
+            Debug.LogError("selectedTile index is out of bounds for tiles array!");
         }
     }
 
@@ -132,7 +136,16 @@ public class HexBuildManager : MonoBehaviour
         }
         else
         {
-            // Debug.LogError("Invalid tile index!");
+            Debug.LogError("Invalid tile index!");
         }
+    }
+
+    public GameObject GetTilePrefab(int index)
+    {
+        if (index >= 0 && index < tilePrefabs.Length)
+        {
+            return tilePrefabs[index];
+        }
+        return null;
     }
 }

@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     public float flashDuration = 0.1f; // Duration of the flash
 
     private SpriteRenderer spriteRenderer;
-    private Color originalColor; // Store the original color of the sprite
+    private Color originalColor;
     private Coroutine flashDamageCoroutine;
 
     public enum CurrencyType
@@ -20,14 +20,14 @@ public class Tile : MonoBehaviour
     }
 
     [SerializeField]
-    private CurrencyType currencyType; // Add this line to make it appear in the Inspector
+    private CurrencyType currencyType;
     [SerializeField]
-    private int cost; // Cost to place this tile
+    private int cost;
 
     private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        originalColor = spriteRenderer.color; // Store the original color of the sprite
+        originalColor = spriteRenderer.color;
     }
 
     public CurrencyType GetCurrencyType()
@@ -51,7 +51,7 @@ public class Tile : MonoBehaviour
             {
                 RemoveFromTilemap();
                 isDestroyed = true;
-                StopFlashDamage(); // Stop flashing when destroyed
+                StopFlashDamage();
             }
             else
             {
@@ -100,7 +100,7 @@ public class Tile : MonoBehaviour
         {
             StopCoroutine(flashDamageCoroutine);
             flashDamageCoroutine = null;
-            spriteRenderer.color = originalColor; // Reset the color
+            spriteRenderer.color = originalColor;
         }
     }
 }

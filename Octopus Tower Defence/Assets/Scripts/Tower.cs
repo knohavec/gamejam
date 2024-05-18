@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-
 [Serializable]
 public class Tower : MonoBehaviour
 {
@@ -15,9 +14,9 @@ public class Tower : MonoBehaviour
     public int towerdamage;
     public float tower_attack_speed;
     public int tower_research_cost;
-    public Color damageColor = Color.red; // Selectable damage color
-    public float flashDuration = 0.1f; // Duration of the flash effect
-    public CurrencyType currencyType; // Add this line to define the currency type
+    public Color damageColor = Color.red;
+    public float flashDuration = 0.1f;
+    public CurrencyType currencyType;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -39,7 +38,8 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public Tower (string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange, CurrencyType _currencyType){
+    public Tower(string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange, CurrencyType _currencyType)
+    {
         towername = _name;
         towercost = _cost;
         towerprefab = _prefab;
@@ -65,7 +65,6 @@ public class Tower : MonoBehaviour
 
         if (towerhealth <= 0)
         {
-            // Stop the attack and the damage flash coroutine
             StopAttack();
             Destroy(gameObject);
             isDestroyed = true;

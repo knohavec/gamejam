@@ -202,9 +202,10 @@ MonoBehaviour:
   tower_attack_range: 7
   towerdamage: 0
   tower_attack_speed: 0
-  tower_research_cost: 10
+  tower_research_cost: 15
   damageColor: {r: 1, g: 0, b: 0, a: 0.4392157}
   flashDuration: 0.5
+  currencyType: 0
 --- !u!114 &-5112331992063032206
 MonoBehaviour:
   m_ObjectHideFlags: 0

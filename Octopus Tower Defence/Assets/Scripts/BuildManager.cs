@@ -30,6 +30,15 @@ public class BuildManager : MonoBehaviour
         return null;
     }
 
+    public Tower GetTower(int index)
+    {
+        if (index >= 0 && index < towers.Length)
+        {
+            return towers[index];
+        }
+        return null;
+    }
+
     public void SelectTower(int _selectedTower)
     {
         Tower tower = towers[_selectedTower];
@@ -48,6 +57,7 @@ public class BuildManager : MonoBehaviour
         if (canSelect)
         {
             selectedTower = _selectedTower;
+            Debug.Log("Selected tower: " + tower.towername + " with research cost: " + tower.tower_research_cost);
         }
         else
         {
