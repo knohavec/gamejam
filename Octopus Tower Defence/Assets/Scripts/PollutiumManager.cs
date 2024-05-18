@@ -1,8 +1,6 @@
 using UnityEngine;
 using System;
-using System.Collections;
 using TMPro;
-
 
 public class PollutiumManager : MonoBehaviour
 {
@@ -13,15 +11,16 @@ public class PollutiumManager : MonoBehaviour
 
     private void Awake()
     {
-        UpdatePollutiumUI();
         if (instance == null)
         {
             instance = this;
+            UpdatePollutiumUI();
+            DontDestroyOnLoad(gameObject); // Optional: keep the instance across scenes
         }
         else
         {
             Debug.LogWarning("Another instance of PollutiumManager already exists, destroying this one.");
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -33,7 +32,6 @@ public class PollutiumManager : MonoBehaviour
         }
     }
 
-    // Example method to add or subtract pollutium
     public void AddPollutium(int amount)
     {
         pollutiumAmount += amount;
@@ -52,19 +50,18 @@ public class PollutiumManager : MonoBehaviour
     }
 
     public bool SpendPollutium(int amount)
-{
-    if (HasEnoughPollutium(amount))
     {
-        Debug.Log("Spending " + amount + " Pollutium");
-        pollutiumAmount -= amount;
-        UpdatePollutiumUI();
-        return true;
+        if (HasEnoughPollutium(amount))
+        {
+            Debug.Log("Spending " + amount + " Pollutium");
+            pollutiumAmount -= amount;
+            UpdatePollutiumUI();
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("Not enough Pollutium to spend.");
+            return false;
+        }
     }
-    else
-    {
-        Debug.LogWarning("Not enough Pollutium to spend.");
-        return false;
-    }
-}
-
 }

@@ -88,10 +88,12 @@ public class Turret : MonoBehaviour
 
    private void Shoot()
 {
-    GameObject bulletobj = Instantiate(bullet_prefab, firing_point.position, Quaternion.identity);
+    Vector3 firingPosition = new Vector3(firing_point.position.x, firing_point.position.y, firing_point.position.z - 1);
+    GameObject bulletobj = Instantiate(bullet_prefab, firingPosition, Quaternion.identity);
     seaweedbullet bulletScript = bulletobj.GetComponent<seaweedbullet>();
     bulletScript.SetTarget(target);
 }
+
 
 
 
