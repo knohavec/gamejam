@@ -137,6 +137,7 @@ MonoBehaviour:
   bullet_prefab: {fileID: 2365814205605098040, guid: 549713b9a27e77c4dbae6f3ebd442851, type: 3}
   firing_point: {fileID: 8094599351226700826}
   tower: {fileID: 7684039098689182727}
+  animator: {fileID: 2478677981871330711}
   enemy_mask:
     serializedVersion: 2
     m_Bits: 64
