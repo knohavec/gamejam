@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SquareSpawningEnemySpawner : MonoBehaviour
 {
-    public List<GameObject> enemyPrefabs;
+    public List<Level> levels; // List of levels
     public Transform baseTransform;
 
     [Header("Spawn Settings")]
@@ -15,6 +16,7 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
     public float difficultyScaling = 0.75f;
 
     private int currentWave = 1;
+    private int currentLevel = 0;
     private bool isSpawning = false;
 
     void Start()
@@ -26,12 +28,12 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
     {
         isSpawning = true;
         int enemiesToSpawn = EnemiesPerWave();
-        Debug.Log("Wave " + currentWave + ": Spawning " + enemiesToSpawn + " enemies."); // Debug message
+        Debug.Log("Level " + (currentLevel + 1) + " Wave " + currentWave + ": Spawning " + enemiesToSpawn + " enemies."); // Debug message
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Vector3 spawnPosition = GetRandomSpawnPosition();
             spawnPosition.z -= 1f;
-            Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
+            Instantiate(levels[currentLevel].enemyPrefabs[Random.Range(0, levels[currentLevel].enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(0.5f); // Adjust spawn delay as needed
         }
         isSpawning = false;
@@ -43,6 +45,22 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(timeBetweenWaves);
             currentWave++;
+            if (currentWave > levels[currentLevel].waveCap)
+            {
+                currentWave = 1;
+                currentLevel++;
+                if (currentLevel >= levels.Count)
+                {
+                    Debug.Log("All levels completed!");
+                    yield break; // Exit the coroutine when all levels are completed
+                }
+                Debug.Log("Proceeding to Level " + (currentLevel + 1));
+            }
+            // Wait until all enemies are destroyed before starting the next wave
+            while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+            {
+                yield return new WaitForSeconds(1f);
+            }
             StartCoroutine(SpawnEnemies());
         }
     }
@@ -60,7 +78,7 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
         Vector3 spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, 0);
 
         // Check if the spawn position is within the inner no-spawn range, if so, reposition
-        while (Mathf.Abs(randomOffset.x) < innerNoSpawnRange && Mathf.Abs(randomOffset.y) < innerNoSpawnRange)
+        while (Vector2.Distance(Vector2.zero, randomOffset) < innerNoSpawnRange)
         {
             randomOffset = new Vector2(Random.Range(-outerSpawnRange, outerSpawnRange), Random.Range(-outerSpawnRange, outerSpawnRange));
             spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, 0);

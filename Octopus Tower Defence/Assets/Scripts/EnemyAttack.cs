@@ -21,29 +21,48 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
-        GameObject target = FindTarget();
-        if (target != null)
+        // Check if the enemy is alive
+        if (!enemyStats.isDestroyed)
         {
-            movement.targetPosition = target.transform.position;
-            if (IsInRange() && canAttack)
+            GameObject target = FindTarget();
+            if (target != null)
             {
-                StartCoroutine(Attack());
-                canAttack = false;
+                movement.targetPosition = target.transform.position;
+                if (IsInRange() && canAttack)
+                {
+                    StartCoroutine(Attack(target));
+                    canAttack = false;
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime; // Decrement the attack timer
+                    if (attackTimer <= 0)
+                    {
+                        canAttack = true;
+                        attackTimer = attackCooldown; // Reset the attack timer
+                        ResetAttackAnimation(); // Reset the attack trigger
+
+                        // Ensure target stops flashing when not being attacked
+                        StopAttacking(target);
+                    }
+                }
             }
             else
             {
-                attackTimer -= Time.deltaTime; // Decrement the attack timer
-                if (attackTimer <= 0)
-                {
-                    canAttack = true;
-                    attackTimer = attackCooldown; // Reset the attack timer
-                    ResetAttackAnimation(); // Reset the attack trigger
-                }
+                Debug.Log("No valid target found.");
             }
         }
         else
         {
-            Debug.Log("No valid target found.");
+            // Stop attacking if the enemy is no longer alive
+            canAttack = false;
+
+            // Ensure the tile stops flashing when the enemy dies
+            GameObject target = movement.FindTarget();
+            if (target != null)
+            {
+                StopAttacking(target);
+            }
         }
     }
 
@@ -74,7 +93,7 @@ public class EnemyAttack : MonoBehaviour
         return distance <= enemyStats.AttackRange;
     }
 
-    private IEnumerator Attack()
+    private IEnumerator Attack(GameObject target)
     {
         // Set the attack trigger
         animator.SetTrigger("Attack");
@@ -83,7 +102,7 @@ public class EnemyAttack : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
 
         // Get the target object (tower or tile)
-        GameObject targetObject = movement.FindTarget();
+        GameObject targetObject = target;
 
         if (targetObject != null && targetObject.activeSelf)
         {
@@ -109,6 +128,7 @@ public class EnemyAttack : MonoBehaviour
             // If the target is destroyed, find a new target
             if (targetIsDestroyed)
             {
+                StopAttacking(targetObject);
                 targetObject = movement.FindTarget();
                 if (targetObject == null || !targetObject.activeSelf)
                 {
@@ -121,7 +141,7 @@ public class EnemyAttack : MonoBehaviour
                 Tower towerComponent = targetObject.GetComponent<Tower>();
                 if (towerComponent != null)
                 {
-                    towerComponent.TakeDamage(enemyStats.Damage);
+                    towerComponent.TakeDamage(enemyStats.Damage, attackCooldown);
                 }
             }
             else if (targetObject.CompareTag("Tile"))
@@ -129,7 +149,7 @@ public class EnemyAttack : MonoBehaviour
                 Tile tileComponent = targetObject.GetComponent<Tile>();
                 if (tileComponent != null && !tileComponent.isDestroyed)
                 {
-                    tileComponent.TakeDamage(enemyStats.Damage);
+                    tileComponent.TakeDamage(enemyStats.Damage, attackCooldown);
                 }
             }
         }
@@ -137,5 +157,38 @@ public class EnemyAttack : MonoBehaviour
         {
             Debug.Log("No valid target found");
         }
+    }
+
+    private void StopAttacking(GameObject target)
+    {
+        if (target != null)
+        {
+            if (target.CompareTag("Tower"))
+            {
+                Tower towerComponent = target.GetComponent<Tower>();
+                if (towerComponent != null)
+                {
+                    towerComponent.StopAttack();
+                }
+            }
+            else if (target.CompareTag("Tile"))
+            {
+                Tile tileComponent = target.GetComponent<Tile>();
+                if (tileComponent != null)
+                {
+                    tileComponent.StopAttack();
+                }
+            }
+        }
+    }
+
+    public void EnemyDestroyed()
+    {
+        GameObject target = movement.FindTarget();
+        if (target != null)
+        {
+            StopAttacking(target);
+        }
+        StopAttacking(gameObject);
     }
 }
