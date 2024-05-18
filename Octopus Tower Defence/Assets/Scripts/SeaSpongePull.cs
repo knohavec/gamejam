@@ -5,7 +5,6 @@ using UnityEngine;
 public class SeaSpongePull : MonoBehaviour
 {
     [SerializeField] private float pullSpeed = 2f; // Speed at which sand dollars are pulled towards the sea sponge
-
     [SerializeField] private Animator animator;
     public Tower tower; // Reference to the Tower instance
     private float targetingRange;
@@ -47,53 +46,39 @@ public class SeaSpongePull : MonoBehaviour
     }
 
     private void OnDrawGizmosSelected()
-{
-    if (transform == null)
     {
-        Debug.LogError("Transform is null!");
-        return;
-    }
-
-    // Assuming targetingRange is a field in your class
-    if (targetingRange <= 0)
-    {
-        Debug.LogError("Invalid targeting range!");
-        return;
-    }
-
-    // Draw the attack range in the scene view for debugging
-    Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
-    Gizmos.DrawSphere(transform.position, targetingRange);
-}
-
-    private void OnTriggerEnter2D(Collider2D other)
-{
-    SandDollar sandDollar = other.GetComponent<SandDollar>();
-    if (sandDollar != null)
-    {
-        // Update the sand dollar counter and destroy the sand dollar
-        SandDollarSpawning.sand_dollar_total += sandDollar.worth;
-        if (SandDollar.counterText != null)
+        if (transform == null)
         {
-            SandDollar.counterText.text = SandDollarSpawning.sand_dollar_total.ToString();
+            Debug.LogError("Transform is null!");
+            return;
         }
 
-        // Set the animator parameter
-        animator.SetBool("IsSucking", true);
-
-        Destroy(sandDollar.gameObject);
-        
-        // Reset the animator parameter after a delay (if needed)
-        StartCoroutine(ResetSuckingAnimation());
+        // Draw the attack range in the scene view for debugging
+        Gizmos.color = new Color(0, 1, 1, 0.5f); // Cyan color with 50% transparency
+        Gizmos.DrawSphere(transform.position, targetingRange);
     }
-}
 
-private IEnumerator ResetSuckingAnimation()
-{
-    yield return new WaitForSeconds(0.5f); // Adjust the delay as needed
-    animator.SetBool("IsSucking", false);
-}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        SandDollar sandDollar = other.GetComponent<SandDollar>();
+        if (sandDollar != null)
+        {
+            // Update the sand dollar counter and destroy the sand dollar
+            SandDollarManager.instance.AddSandDollars(sandDollar.worth);
 
+            // Set the animator parameter
+            animator.SetBool("IsSucking", true);
 
+            Destroy(sandDollar.gameObject);
+            
+            // Reset the animator parameter after a delay (if needed)
+            StartCoroutine(ResetSuckingAnimation());
+        }
+    }
 
+    private IEnumerator ResetSuckingAnimation()
+    {
+        yield return new WaitForSeconds(0.5f); // Adjust the delay as needed
+        animator.SetBool("IsSucking", false);
+    }
 }

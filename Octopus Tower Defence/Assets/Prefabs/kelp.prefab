@@ -207,3 +207,4 @@ MonoBehaviour:
   tower_research_cost: 5
   damageColor: {r: 1, g: 0, b: 0, a: 0.45490196}
   flashDuration: 0.5
+  currencyType: 0

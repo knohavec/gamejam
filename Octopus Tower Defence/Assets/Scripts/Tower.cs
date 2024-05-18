@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
+
 [Serializable]
 public class Tower : MonoBehaviour
 {
@@ -16,11 +17,18 @@ public class Tower : MonoBehaviour
     public int tower_research_cost;
     public Color damageColor = Color.red; // Selectable damage color
     public float flashDuration = 0.1f; // Duration of the flash effect
+    public CurrencyType currencyType; // Add this line to define the currency type
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine damageFlashCoroutine;
     private bool isBeingAttacked = false;
+
+    public enum CurrencyType
+    {
+        SandDollars,
+        Pollutium
+    }
 
     void Start()
     {
@@ -31,7 +39,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public Tower (string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange){
+    public Tower (string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange, CurrencyType _currencyType){
         towername = _name;
         towercost = _cost;
         towerprefab = _prefab;
@@ -40,41 +48,40 @@ public class Tower : MonoBehaviour
         towerdamage = _damage;
         tower_attack_speed = _attackspeed;
         tower_research_cost = _research_cost;
+        currencyType = _currencyType;
     }
 
     public void TakeDamage(int dmg, float attackSpeed)
-{
-    towerhealth -= dmg;
-    isBeingAttacked = true;
-    if (spriteRenderer != null)
     {
-        if (damageFlashCoroutine == null)
+        towerhealth -= dmg;
+        isBeingAttacked = true;
+        if (spriteRenderer != null)
         {
-            damageFlashCoroutine = StartCoroutine(DamageFlash(attackSpeed));
+            if (damageFlashCoroutine == null)
+            {
+                damageFlashCoroutine = StartCoroutine(DamageFlash(attackSpeed));
+            }
+        }
+
+        if (towerhealth <= 0)
+        {
+            // Stop the attack and the damage flash coroutine
+            StopAttack();
+            Destroy(gameObject);
+            isDestroyed = true;
         }
     }
 
-    if (towerhealth <= 0)
-    {
-        // Stop the attack and the damage flash coroutine
-        StopAttack();
-        Destroy(gameObject);
-        isDestroyed = true;
-    }
-}
-
-
     public void StopAttack()
-{
-    isBeingAttacked = false;
-    if (damageFlashCoroutine != null)
     {
-        StopCoroutine(damageFlashCoroutine);
-        spriteRenderer.color = originalColor;
-        damageFlashCoroutine = null;
+        isBeingAttacked = false;
+        if (damageFlashCoroutine != null)
+        {
+            StopCoroutine(damageFlashCoroutine);
+            spriteRenderer.color = originalColor;
+            damageFlashCoroutine = null;
+        }
     }
-}
-
 
     private IEnumerator DamageFlash(float attackSpeed)
     {

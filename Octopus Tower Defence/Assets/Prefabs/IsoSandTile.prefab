@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5120822530899401776}
   - component: {fileID: 4407267834734174117}
   - component: {fileID: 4752692872180168706}
+  - component: {fileID: 4396263000275810829}
   m_Layer: 3
   m_Name: IsoSandTile
   m_TagString: Tile
@@ -48,14 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a0df224a1229c409f0b8bc2d849b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilename: IsoSandTile
-  tilecost: 0
   tilehealth: 25
-  prefab: {fileID: 2992906538528824484}
-  tilemap: {fileID: 0}
   isDestroyed: 0
   damageColor: {r: 1, g: 0.3785736, b: 0, a: 1}
   flashDuration: 0.1
+  currencyType: 1
+  cost: 2
 --- !u!212 &5030849127804406024
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -204,3 +203,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4396263000275810829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992906538528824484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133b5e802816efa4386e915bf4fc867e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleTile: {fileID: 0}
+  tileComponent: {fileID: 6779696439212186468}

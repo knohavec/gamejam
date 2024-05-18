@@ -13,10 +13,31 @@ public class Tile : MonoBehaviour
     private Color originalColor; // Store the original color of the sprite
     private Coroutine flashDamageCoroutine;
 
+    public enum CurrencyType
+    {
+        SandDollars,
+        Pollutium
+    }
+
+    [SerializeField]
+    private CurrencyType currencyType; // Add this line to make it appear in the Inspector
+    [SerializeField]
+    private int cost; // Cost to place this tile
+
     private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalColor = spriteRenderer.color; // Store the original color of the sprite
+    }
+
+    public CurrencyType GetCurrencyType()
+    {
+        return currencyType;
+    }
+
+    public int GetCost()
+    {
+        return cost;
     }
 
     public void TakeDamage(int dmg, float attackSpeed)
