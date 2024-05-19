@@ -30,6 +30,19 @@ public class GameOverManager : MonoBehaviour
 
     public void EndGame()
     {
+        CleanupGameObjects();
         SceneManager.LoadScene("Game Over");
+    }
+
+    private void CleanupGameObjects()
+    {
+        // Find and destroy dynamically created objects
+        foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())
+        {
+            if (obj.name.Contains("polluted_meat(Clone)"))
+            {
+                Destroy(obj);
+            }
+        }
     }
 }

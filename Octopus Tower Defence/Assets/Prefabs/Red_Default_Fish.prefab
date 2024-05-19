@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3522546797855332493}
   - component: {fileID: -7108975494750857146}
   m_Layer: 6
-  m_Name: toxfish_1_walk_0
+  m_Name: Red_Default_Fish
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -31202816, guid: 7b199273988ce05449a413b4a7175b32, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.42477313, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
-  speed: 5
+  speed: 7
 --- !u!70 &1481133252284299676
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -201,12 +201,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 2
-  Damage: 2
-  AttackSpeed: 1
+  Damage: 4
+  AttackSpeed: 2
   AttackRange: 2.5
   TargetingRadius: 2
   isDestroyed: 0
-  damageColor: {r: 1, g: 0, b: 0, a: 0.5}
+  damageColor: {r: 0, g: 0, b: 0, a: 0.79607844}
   flashDuration: 2
 --- !u!114 &3522546797855332493
 MonoBehaviour:

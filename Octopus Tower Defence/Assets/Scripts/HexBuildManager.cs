@@ -55,13 +55,13 @@ public class HexBuildManager : MonoBehaviour
         }
     }
 
-    private bool IsInBounds(Vector3Int cellPos)
+    public bool IsInBounds(Vector3Int cellPos)
     {
         // Modify this as needed for your bounds check
         return true;
     }
 
-    private void TryPlaceTile(Vector3Int cellPos)
+    public void TryPlaceTile(Vector3Int cellPos)
     {
         if (selectedTile >= 0 && selectedTile < tiles.Length)
         {

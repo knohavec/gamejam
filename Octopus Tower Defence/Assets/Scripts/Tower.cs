@@ -48,17 +48,10 @@ public class Tower : MonoBehaviour
         CreateAttackRadiusCircle();
     }
 
-    public Tower(string _name, float _attackspeed, int _research_cost, int _damage, int _cost, GameObject _prefab, int _health, float _attackrange, CurrencyType _currencyType)
+    public void Initialize(Tile parentTile)
     {
-        towername = _name;
-        towercost = _cost;
-        towerprefab = _prefab;
-        tower_attack_range = _attackrange;
-        towerhealth = _health;
-        towerdamage = _damage;
-        tower_attack_speed = _attackspeed;
-        tower_research_cost = _research_cost;
-        currencyType = _currencyType;
+        this.parentTile = parentTile;
+        parentTile.SetTowerPresence(true); // Set the tower presence on the parent tile
     }
 
     public void TakeDamage(int dmg, float attackSpeed)
@@ -88,15 +81,13 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public void SetParentTile(Tile tile)
-    {
-        parentTile = tile;
-        Debug.Log("Parent tile set for the tower.");
-    }
-
     private void DestroyTower()
     {
         OnTowerDestroyed?.Invoke(this); // Notify subscribers that the tower is destroyed
+        if (parentTile != null)
+        {
+            parentTile.SetTowerPresence(false); // Notify the parent tile
+        }
         Destroy(gameObject);
     }
 
