@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Placement_Detection : MonoBehaviour
@@ -24,39 +22,34 @@ public class Placement_Detection : MonoBehaviour
     }
 
     private void OnMouseEnter()
-{
-    if (sr != null)
     {
-        sr.color = hover_color;
-    }
-}
-
-private void OnMouseExit()
-{
-    if (sr != null)
-    {
-        sr.color = start_color;
-    }
-}
-
-
-   private void OnMouseDown()
-{
-    if (cam == null)
-    {
-        Debug.LogError("Camera is not assigned.");
-        return;
+        if (sr != null)
+        {
+            sr.color = hover_color;
+        }
     }
 
-    // Convert the mouse position to world point
-    Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
-    Vector2 detectionPoint = new Vector2(mousePosition.x, mousePosition.y);
-
-    // Find the Tile GameObject at the position and check if it has a tower
-    RaycastHit2D hit = Physics2D.Raycast(detectionPoint, Vector2.zero);
-    if (hit.collider != null)
+    private void OnMouseExit()
     {
-        Tile tile = hit.collider.GetComponent<Tile>();
+        if (sr != null)
+        {
+            sr.color = start_color;
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        if (cam == null)
+        {
+            Debug.LogError("Camera is not assigned.");
+            return;
+        }
+
+        // Convert the mouse position to world point
+        Vector3 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int cellPos = HexBuildManager.main.tilemap.WorldToCell(mousePosition);
+
+        Tile tile = GetComponent<Tile>();
         if (tile != null)
         {
             if (tile.hasTower)
@@ -71,10 +64,10 @@ private void OnMouseExit()
                 tile.SetTowerPresence(true);
                 Debug.Log("Tower placed successfully.");
 
-                Tower towerInstance = hit.collider.GetComponentInChildren<Tower>();
+                Tower towerInstance = GetComponentInChildren<Tower>();
                 if (towerInstance != null)
                 {
-                    towerInstance.SetParentTile(tile); // Assign the parent tile
+                    towerInstance.Initialize(tile); // Assign the parent tile
                     Debug.Log("Parent tile set for the placed tower.");
                 }
             }
@@ -84,11 +77,6 @@ private void OnMouseExit()
             }
         }
     }
-    else
-    {
-        Debug.LogWarning("No tile detected at the specified point.");
-    }
-}
 
     private void Update()
     {

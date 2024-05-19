@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using System.Collections;
+using UnityEngine.Tilemaps;
 
 public class Tile : MonoBehaviour
 {
@@ -9,13 +9,11 @@ public class Tile : MonoBehaviour
     public bool hasTower = false;
     public Color damageColor = new Color(1f, 0f, 0f, 0.5f);
     public float flashDuration = 2.0f; // Duration to stop flashing if no damage is taken
-    public float checkTowerInterval = 5.0f; // Interval to check for tower presence
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine flashDamageCoroutine;
     private Coroutine damageStopCoroutine;
-    private Coroutine checkTowerCoroutine;
 
     public enum CurrencyType
     {
@@ -39,30 +37,11 @@ public class Tile : MonoBehaviour
         {
             Debug.LogError("SpriteRenderer not found on Tile.");
         }
-
-        Tower.OnTowerDestroyed += HandleTowerDestroyed;
-        
-        // Start the coroutine to periodically check for tower presence
-        checkTowerCoroutine = StartCoroutine(CheckForTowerPresence());
     }
 
-    private void OnDestroy()
+    private void Update()
     {
-        Tower.OnTowerDestroyed -= HandleTowerDestroyed;
-
-        if (checkTowerCoroutine != null)
-        {
-            StopCoroutine(checkTowerCoroutine);
-        }
-    }
-
-    private void HandleTowerDestroyed(Tower tower)
-    {
-        if (tower.transform.parent == transform)
-        {
-            SetTowerPresence(false);
-            Debug.Log("Tile updated: tower destroyed.");
-        }
+        CheckForTowerPresence();
     }
 
     public CurrencyType GetCurrencyType()
@@ -79,6 +58,23 @@ public class Tile : MonoBehaviour
     {
         hasTower = presence;
         Debug.Log("Tile hasTower set to: " + presence);
+    }
+
+    public void CheckForTowerPresence()
+    {
+        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
+        bool towerFound = false;
+
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Tower"))
+            {
+                towerFound = true;
+                break;
+            }
+        }
+
+        SetTowerPresence(towerFound);
     }
 
     public void TakeDamage(int dmg, float attackSpeed)
@@ -178,21 +174,6 @@ public class Tile : MonoBehaviour
         {
             StopCoroutine(damageStopCoroutine);
             damageStopCoroutine = null;
-        }
-    }
-
-    private IEnumerator CheckForTowerPresence()
-    {
-        while (true)
-        {
-            // Check for tower presence every checkTowerInterval seconds
-            bool towerPresent = transform.childCount > 0;
-            if (hasTower != towerPresent)
-            {
-                SetTowerPresence(towerPresent);
-            }
-
-            yield return new WaitForSeconds(checkTowerInterval);
         }
     }
 }

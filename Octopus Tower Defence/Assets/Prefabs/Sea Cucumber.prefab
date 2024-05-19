@@ -175,8 +175,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.061571717, y: -0.62131476}
-  m_Size: {x: 0.62314343, y: 1.4589894}
+  m_Offset: {x: -0.061571717, y: -0.8}
+  m_Size: {x: 0.25, y: 0.5}
   m_Direction: 0
 --- !u!50 &2238999636215547429
 Rigidbody2D:
@@ -222,13 +222,13 @@ MonoBehaviour:
   towerprefab: {fileID: 729118177691507758}
   towerhealth: 10
   isDestroyed: 0
-  tower_attack_range: 20
+  tower_attack_range: 10
   towerdamage: 0
   tower_attack_speed: 0
   tower_research_cost: 10
   damageColor: {r: 1, g: 0, b: 0, a: 0.49803922}
   currencyType: 0
-  radiusColor: {r: 0.006026745, g: 0, b: 0.34901962, a: 0.78039217}
+  radiusColor: {r: 0.34901962, g: 0.17632008, b: 0, a: 0.78039217}
   flashDuration: 2
 --- !u!1 &5377627653931084493
 GameObject:

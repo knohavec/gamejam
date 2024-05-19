@@ -53,7 +53,6 @@ MonoBehaviour:
   hasTower: 0
   damageColor: {r: 1, g: 0.3785736, b: 0, a: 1}
   flashDuration: 2
-  checkTowerInterval: 5
   currencyType: 1
   cost: 2
 --- !u!212 &5030849127804406024
@@ -122,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 5030849127804406024}
   hover_color: {r: 0, g: 1, b: 0.122285604, a: 0.3529412}
-  yOffset: 0.6
+  yOffset: 0.75
   zOffset: -1
 --- !u!60 &4407267834734174117
 PolygonCollider2D:

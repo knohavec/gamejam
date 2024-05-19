@@ -6,10 +6,16 @@ public class Movement : MonoBehaviour
     public float speed = 5f;
     private Enemy_Stats enemyStats;
 
+    private Vector2 lastPosition;
+    private float stuckTimer;
+    private float stuckCheckInterval = 1f; // Time interval to check if the enemy is stuck
+
     private void Start()
     {
         enemyStats = GetComponent<Enemy_Stats>();
         targetPosition = Vector2.positiveInfinity;
+        lastPosition = transform.position;
+        stuckTimer = stuckCheckInterval;
     }
 
     private void Update()
@@ -22,6 +28,8 @@ public class Movement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = direction * speed;
             RotateSprite(direction);
         }
+
+        CheckIfStuck();
     }
 
     private void UpdateTargetPosition()
@@ -156,5 +164,23 @@ public class Movement : MonoBehaviour
         // If no target is found, set target position to (0, 0)
         targetPosition = Vector2.zero;
         return null;
+    }
+
+    private void CheckIfStuck()
+    {
+        stuckTimer -= Time.deltaTime;
+
+        if (stuckTimer <= 0)
+        {
+            if (Vector2.Distance(transform.position, lastPosition) < 0.1f)
+            {
+                // The enemy is stuck, find a new target
+                targetPosition = Vector2.positiveInfinity;
+            }
+
+            // Reset the timer and update last position
+            stuckTimer = stuckCheckInterval;
+            lastPosition = transform.position;
+        }
     }
 }

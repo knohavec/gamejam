@@ -154,8 +154,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.4375, y: 1.0039062}
+  m_Offset: {x: 0, y: -0.35}
+  m_Size: {x: 0.25, y: 0.25}
   m_Direction: 0
 --- !u!50 &7941597123454764951
 Rigidbody2D:
@@ -207,5 +207,5 @@ MonoBehaviour:
   tower_research_cost: 5
   damageColor: {r: 1, g: 0, b: 0, a: 0.45490196}
   currencyType: 0
-  radiusColor: {r: 0, g: 0.3207547, b: 0.005644843, a: 0.7529412}
+  radiusColor: {r: 0, g: 0.8207547, b: 0.010009194, a: 0.6156863}
   flashDuration: 2

@@ -126,7 +126,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMeatPrefab: {fileID: 5439127548350827364, guid: 61582fc76830e9b4bac294cbbfd27aba, type: 3}
-  amountOfMeat: 2
+  amountOfMeat: 3
   spawnRadius: 1
 --- !u!114 &-5587472060878345590
 MonoBehaviour:
