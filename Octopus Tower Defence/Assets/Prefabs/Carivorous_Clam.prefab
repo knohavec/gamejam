@@ -133,8 +133,8 @@ MonoBehaviour:
   tower_attack_speed: 1
   tower_research_cost: 0
   damageColor: {r: 1, g: 0, b: 0, a: 0.3764706}
-  flashDuration: 0.5
   currencyType: 0
+  radiusColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &6991542140122444299
 MonoBehaviour:
   m_ObjectHideFlags: 0

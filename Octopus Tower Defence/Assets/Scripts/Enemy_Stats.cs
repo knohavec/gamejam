@@ -1,21 +1,23 @@
+using System.Collections;
 using UnityEngine;
+
+using System;
+using System.Collections.Generic;
 
 public class Enemy_Stats : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] public int hitPoints = 2;
+    [SerializeField] public float hitPoints = 2f;
     [SerializeField] public int Damage = 2;
-    
     [SerializeField] public float AttackSpeed = 1f;
     [SerializeField] public float AttackRange = 1f;
-
     [SerializeField] public float TargetingRadius = 5f;
 
     public bool isDestroyed = false;
 
     public void TakeDamage(float dmg)
     {
-        hitPoints -= Mathf.RoundToInt(dmg); // Convert float damage to int
+        hitPoints -= dmg;
 
         if (hitPoints <= 0 && !isDestroyed)
         {

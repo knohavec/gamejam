@@ -197,7 +197,7 @@ MonoBehaviour:
   towername: SeaSponge
   towercost: 10
   towerprefab: {fileID: 3823565041535211356}
-  towerhealth: 0
+  towerhealth: 10
   isDestroyed: 0
   tower_attack_range: 7
   towerdamage: 0
@@ -219,5 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullSpeed: 2
+  increment_amount: 1
   animator: {fileID: 6164323673279523575}
   tower: {fileID: -4159597593566756427}

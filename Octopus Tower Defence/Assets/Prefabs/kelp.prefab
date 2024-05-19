@@ -199,7 +199,7 @@ MonoBehaviour:
   towername: Kelp
   towercost: 5
   towerprefab: {fileID: 6107903137028798062}
-  towerhealth: 0
+  towerhealth: 10
   isDestroyed: 0
   tower_attack_range: 2.5
   towerdamage: 5
@@ -208,3 +208,4 @@ MonoBehaviour:
   damageColor: {r: 1, g: 0, b: 0, a: 0.45490196}
   flashDuration: 0.5
   currencyType: 0
+  radiusColor: {r: 0, g: 0.3207547, b: 0.005644843, a: 0.7529412}
