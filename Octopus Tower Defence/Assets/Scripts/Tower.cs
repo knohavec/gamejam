@@ -1,5 +1,6 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections;
 using System;
 
 [Serializable]
@@ -14,9 +15,9 @@ public class Tower : MonoBehaviour
     public int towerdamage;
     public float tower_attack_speed;
     public int tower_research_cost;
-    public Color damageColor = new Color(1f, 0f, 0f, 0.5f); // Semi-transparent red color to flash when taking damage
+    public Color damageColor = new Color(1f, 0f, 0f, 0.5f);
     public CurrencyType currencyType;
-    [SerializeField] private Color radiusColor = Color.green; // Color of the attack radius
+    [SerializeField] private Color radiusColor = Color.green;
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -33,10 +34,8 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        // First, try to get the SpriteRenderer from the parent object
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // If not found in the parent object, try to get it from the children
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -48,8 +47,6 @@ public class Tower : MonoBehaviour
         }
 
         parentTile = GetComponentInParent<Tile>();
-
-        // Create the attack radius circle
         CreateAttackRadiusCircle();
     }
 
@@ -68,6 +65,7 @@ public class Tower : MonoBehaviour
 
     public void TakeDamage(int dmg, float attackSpeed)
     {
+        Debug.Log("Tower taking damage");
         if (!isDestroyed)
         {
             towerhealth -= dmg;
@@ -87,14 +85,22 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void DestroyTower()
+   public void SetParentTile(Tile tile)
+{
+    parentTile = tile;
+    Debug.Log("Parent tile set for the tower.");
+}
+
+private void DestroyTower()
+{
+    if (parentTile != null)
     {
-        if (parentTile != null)
-        {
-            parentTile.SetTowerPresence(false);
-        }
-        Destroy(gameObject);
+        Debug.Log("Tower destroyed. Setting hasTower to false on parent tile.");
+        parentTile.SetTowerPresence(false); // Ensure the Tile's hasTower is set to false
     }
+    Destroy(gameObject);
+}
+
 
     public void StopAttack()
     {
@@ -113,7 +119,7 @@ public class Tower : MonoBehaviour
 
     private IEnumerator DamageFlash(float attackSpeed)
     {
-        float flashDuration = attackSpeed * 0.5f; // Adjust the flash duration based on the attack speed
+        float flashDuration = attackSpeed * 0.5f;
         while (!isDestroyed)
         {
             if (spriteRenderer != null)
@@ -126,6 +132,10 @@ public class Tower : MonoBehaviour
                 spriteRenderer.color = originalColor;
             }
             yield return new WaitForSeconds(attackSpeed - flashDuration);
+        }
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
         }
     }
 

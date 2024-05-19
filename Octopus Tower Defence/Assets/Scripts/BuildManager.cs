@@ -59,45 +59,58 @@ public class BuildManager : MonoBehaviour
     }
 
     public bool TryPlaceTower(Vector3 position)
+{
+    Tower towerToBuild = GetSelectedTower();
+    if (towerToBuild != null)
     {
-        Tower towerToBuild = GetSelectedTower();
-        if (towerToBuild != null)
+        bool hasCurrency = false;
+        switch (towerToBuild.currencyType)
         {
-            bool hasCurrency = false;
-            switch (towerToBuild.currencyType)
-            {
-                case Tower.CurrencyType.SandDollars:
-                    hasCurrency = SandDollarManager.instance.SpendSandDollars(towerToBuild.towercost);
-                    break;
-                case Tower.CurrencyType.Pollutium:
-                    hasCurrency = PollutiumManager.instance.SpendPollutium(towerToBuild.towercost);
-                    break;
-            }
+            case Tower.CurrencyType.SandDollars:
+                hasCurrency = SandDollarManager.instance.SpendSandDollars(towerToBuild.towercost);
+                break;
+            case Tower.CurrencyType.Pollutium:
+                hasCurrency = PollutiumManager.instance.SpendPollutium(towerToBuild.towercost);
+                break;
+        }
 
-            if (hasCurrency)
-            {
-                Instantiate(towerToBuild.towerprefab, position, Quaternion.identity);
+        if (hasCurrency)
+        {
+            GameObject towerObject = Instantiate(towerToBuild.towerprefab, position, Quaternion.identity);
+            Tower towerInstance = towerObject.GetComponent<Tower>();
 
-                // Find the Tile GameObject at the position and set hasTower to true
-                Collider2D hitCollider = Physics2D.OverlapPoint(position);
-                if (hitCollider != null)
+            // Find the Tile GameObject at the position and set hasTower to true
+            Collider2D hitCollider = Physics2D.OverlapPoint(position);
+            if (hitCollider != null)
+            {
+                Tile tile = hitCollider.GetComponent<Tile>();
+                if (tile != null)
                 {
-                    Tile tile = hitCollider.GetComponent<Tile>();
-                    if (tile != null)
-                    {
-                        tile.SetTowerPresence(true);
-                    }
+                    Debug.Log("Tile found. Setting hasTower to true.");
+                    tile.SetTowerPresence(true);
+                    towerInstance.SetParentTile(tile); // Set the parent tile
                 }
-
-                return true;
+                else
+                {
+                    Debug.LogWarning("No Tile component found at the given position.");
+                }
             }
             else
             {
-                Debug.LogWarning("Not enough currency to place this tower.");
+                Debug.LogWarning("No Collider2D found at the given position.");
             }
+
+            return true;
         }
-        return false;
+        else
+        {
+            Debug.LogWarning("Not enough currency to place this tower.");
+        }
     }
+    return false;
+}
+
+
 
     void Start()
     {

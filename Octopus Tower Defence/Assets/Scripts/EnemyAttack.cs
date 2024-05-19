@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using System;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -11,14 +10,14 @@ public class EnemyAttack : MonoBehaviour
     private float attackCooldown;
     private float attackTimer;
     private bool canAttack = true;
-    private GameObject currentTarget; // Track the current target
+    private GameObject currentTarget;
 
     private void Start()
     {
         enemyStats = GetComponent<Enemy_Stats>();
         movement = GetComponent<Movement>();
-        attackCooldown = 1f / enemyStats.AttackSpeed; // Calculate the initial attack cooldown
-        attackTimer = attackCooldown; // Start with the attack cooldown
+        attackCooldown = 1f / enemyStats.AttackSpeed;
+        attackTimer = attackCooldown;
     }
 
     private void Update()
@@ -26,7 +25,7 @@ public class EnemyAttack : MonoBehaviour
         if (!enemyStats.isDestroyed)
         {
             GameObject target = FindTarget();
-            if (target != currentTarget) // Check if the target has changed
+            if (target != currentTarget)
             {
                 if (currentTarget != null)
                 {
@@ -57,7 +56,7 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                movement.targetPosition = Vector2.zero; // Move towards (0, 0) if no target is found
+                movement.targetPosition = Vector2.zero;
             }
         }
         else
@@ -164,7 +163,7 @@ public class EnemyAttack : MonoBehaviour
                 Tile tileComponent = target.GetComponent<Tile>();
                 if (tileComponent != null)
                 {
-                    tileComponent.StopAttack();
+                    tileComponent.StopFlashDamage();
                 }
             }
         }

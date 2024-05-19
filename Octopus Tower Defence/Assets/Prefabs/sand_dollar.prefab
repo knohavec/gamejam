@@ -135,5 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worth: 5
   despawnDelay: 15
-  moveSpeed: 8
-  targetOffset: {x: -1, y: -3, z: 0}
+  moveSpeed: 15
+  targetOffset: {x: 0, y: 0, z: 0}

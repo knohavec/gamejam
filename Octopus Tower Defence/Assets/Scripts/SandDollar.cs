@@ -6,33 +6,33 @@ public class SandDollar : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private int worth = 1;
     [SerializeField] private float despawnDelay = 5f; // Delay before despawning if not clicked
-    [SerializeField] private float moveSpeed = 3f; // Speed at which sand dollar moves towards the UI
+    [SerializeField] private float moveSpeed = 3f; // Speed at which sand dollar moves towards the target
     [SerializeField] private Vector3 targetOffset = Vector3.zero; // Offset for the target position
 
-    private RectTransform targetUI;
+    private Transform targetTransform;
     private bool isClicked = false;
 
     void Start()
     {
         Invoke(nameof(DespawnOnDelay), despawnDelay); // Start the despawn delay
 
-        // Find the target UI element by tag
-        GameObject targetUIObject = GameObject.FindGameObjectWithTag("SandDollarTarget");
-        if (targetUIObject != null)
+        // Find the target object by tag
+        GameObject targetObject = GameObject.FindGameObjectWithTag("SandDollarTarget");
+        if (targetObject != null)
         {
-            targetUI = targetUIObject.GetComponent<RectTransform>();
+            targetTransform = targetObject.transform;
         }
         else
         {
-            Debug.LogError("Target UI element with tag 'SandDollarTarget' not found.");
+            Debug.LogError("Target object with tag 'SandDollarTarget' not found.");
         }
     }
 
     void OnMouseDown()
     {
-        if (isClicked || targetUI == null) return; // Prevent double clicking and check if targetUI is assigned
+        if (isClicked || targetTransform == null) return; // Prevent double clicking and check if targetTransform is assigned
         isClicked = true;
-        StartCoroutine(MoveToUI());
+        StartCoroutine(MoveToTarget());
     }
 
     void UpdateCounter()
@@ -48,9 +48,9 @@ public class SandDollar : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveToUI()
+    private IEnumerator MoveToTarget()
     {
-        Vector3 targetPosition = GetWorldPositionFromUI(targetUI) + targetOffset;
+        Vector3 targetPosition = targetTransform.position + targetOffset;
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
@@ -62,12 +62,5 @@ public class SandDollar : MonoBehaviour
         // Once the sand dollar reaches the target, update the counter and destroy it
         UpdateCounter();
         Destroy(gameObject);
-    }
-
-    private Vector3 GetWorldPositionFromUI(RectTransform uiElement)
-    {
-        Vector3 worldPosition;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiElement, uiElement.position, Camera.main, out worldPosition);
-        return worldPosition;
     }
 }
