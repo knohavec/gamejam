@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
-  speed: 0.5
+  speed: 1
 --- !u!114 &1215881590836408147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +171,8 @@ MonoBehaviour:
   AttackRange: 1
   TargetingRadius: 5
   isDestroyed: 0
+  damageColor: {r: 1, g: 0, b: 0, a: 0.5}
+  flashDuration: 2
 --- !u!70 &1134389784785403248
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

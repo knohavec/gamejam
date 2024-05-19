@@ -135,6 +135,7 @@ MonoBehaviour:
   damageColor: {r: 1, g: 0, b: 0, a: 0.3764706}
   currencyType: 0
   radiusColor: {r: 0, g: 0, b: 0, a: 0}
+  flashDuration: 3
 --- !u!114 &6991542140122444299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792a24190e949864198a790d0fd8a058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullSpeed: 2
-  pollutiumSpeed: 4
+  pullSpeed: 4
+  pollutiumSpeed: 15
   animator: {fileID: 6598229420251406348}
   pollutiumPrefab: {fileID: 3179698443824611676, guid: 54a88d81f5ca7664cb0dda141dbcaa48, type: 3}
   pollutiumTargetUI: {fileID: 0}
@@ -188,8 +189,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.9, y: 2.54}
+  m_Offset: {x: 0, y: 1}
+  m_Size: {x: 1.5, y: 2}
   m_Direction: 0
 --- !u!50 &-3912183251901087667
 Rigidbody2D:
@@ -201,7 +202,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 2821179856933983372}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0

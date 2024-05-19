@@ -52,7 +52,8 @@ MonoBehaviour:
   isDestroyed: 0
   hasTower: 0
   damageColor: {r: 1, g: 0.3785736, b: 0, a: 1}
-  flashDuration: 0
+  flashDuration: 2
+  checkTowerInterval: 5
   currencyType: 1
   cost: 2
 --- !u!212 &5030849127804406024

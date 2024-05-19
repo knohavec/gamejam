@@ -167,7 +167,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 6107903137028798062}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -206,6 +206,6 @@ MonoBehaviour:
   tower_attack_speed: 2
   tower_research_cost: 5
   damageColor: {r: 1, g: 0, b: 0, a: 0.45490196}
-  flashDuration: 0.5
   currencyType: 0
   radiusColor: {r: 0, g: 0.3207547, b: 0.005644843, a: 0.7529412}
+  flashDuration: 2
