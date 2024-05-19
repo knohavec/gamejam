@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using System.Collections;
 using System;
+using System.Collections;
 
 [Serializable]
 public class Tower : MonoBehaviour
@@ -26,6 +25,8 @@ public class Tower : MonoBehaviour
     private bool isRadiusVisible = false;
     private GameObject attackRadiusCircle;
 
+    public static event Action<Tower> OnTowerDestroyed;
+
     public enum CurrencyType
     {
         SandDollars,
@@ -34,12 +35,7 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        }
+        spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>();
 
         if (spriteRenderer != null)
         {
@@ -65,7 +61,6 @@ public class Tower : MonoBehaviour
 
     public void TakeDamage(int dmg, float attackSpeed)
     {
-        Debug.Log("Tower taking damage");
         if (!isDestroyed)
         {
             towerhealth -= dmg;
@@ -85,22 +80,17 @@ public class Tower : MonoBehaviour
         }
     }
 
-   public void SetParentTile(Tile tile)
-{
-    parentTile = tile;
-    Debug.Log("Parent tile set for the tower.");
-}
-
-private void DestroyTower()
-{
-    if (parentTile != null)
+    public void SetParentTile(Tile tile)
     {
-        Debug.Log("Tower destroyed. Setting hasTower to false on parent tile.");
-        parentTile.SetTowerPresence(false); // Ensure the Tile's hasTower is set to false
+        parentTile = tile;
+        Debug.Log("Parent tile set for the tower.");
     }
-    Destroy(gameObject);
-}
 
+    private void DestroyTower()
+    {
+        OnTowerDestroyed?.Invoke(this); // Notify subscribers that the tower is destroyed
+        Destroy(gameObject);
+    }
 
     public void StopAttack()
     {
@@ -112,7 +102,6 @@ private void DestroyTower()
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
-                Debug.Log("Stopped DamageFlash coroutine and reset color");
             }
         }
     }

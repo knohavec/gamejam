@@ -1904,6 +1904,7 @@ GameObject:
   - component: {fileID: 615554880}
   - component: {fileID: 615554882}
   - component: {fileID: 615554881}
+  - component: {fileID: 615554883}
   m_Layer: 11
   m_Name: IsoTilemap
   m_TagString: Untagged
@@ -2113,6 +2114,42 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &615554883
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615554879}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &655264321
 GameObject:
   m_ObjectHideFlags: 0
@@ -8452,7 +8489,7 @@ MonoBehaviour:
   - {fileID: -4159597593566756427, guid: 80fdfa78891e2664d843585abd290b99, type: 3}
   - {fileID: 5597949971654218654, guid: 2ca9a239ab15e184ab8b6eaf6422d4d6, type: 3}
   - {fileID: 3766777022420647761, guid: 394109fd2cedd814eb91948bdf780e05, type: 3}
-  selectedTower: 0
+  selectedTower: -1
 --- !u!1 &7407000821118340372
 GameObject:
   m_ObjectHideFlags: 0
