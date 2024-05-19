@@ -142,6 +142,8 @@ MonoBehaviour:
   Damage: 5
   AttackSpeed: 0.5
   AttackRange: 6
+  TargetingRadius: 5
+  isDestroyed: 0
 --- !u!114 &2948269125130990007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMeatPrefab: {fileID: 5439127548350827364, guid: 61582fc76830e9b4bac294cbbfd27aba, type: 3}
+  amountOfMeat: 1
+  spawnRadius: 1
 --- !u!70 &7154101437324979399
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

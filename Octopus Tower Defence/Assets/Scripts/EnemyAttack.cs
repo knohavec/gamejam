@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using System;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemyAttack : MonoBehaviour
     private float attackCooldown;
     private float attackTimer;
     private bool canAttack = true;
+    private GameObject currentTarget; // Track the current target
 
     private void Start()
     {
@@ -21,10 +23,18 @@ public class EnemyAttack : MonoBehaviour
 
     private void Update()
     {
-        // Check if the enemy is alive
         if (!enemyStats.isDestroyed)
         {
             GameObject target = FindTarget();
+            if (target != currentTarget) // Check if the target has changed
+            {
+                if (currentTarget != null)
+                {
+                    StopAttacking(currentTarget);
+                }
+                currentTarget = target;
+            }
+
             if (target != null)
             {
                 movement.targetPosition = target.transform.position;
@@ -35,14 +45,12 @@ public class EnemyAttack : MonoBehaviour
                 }
                 else
                 {
-                    attackTimer -= Time.deltaTime; // Decrement the attack timer
+                    attackTimer -= Time.deltaTime;
                     if (attackTimer <= 0)
                     {
                         canAttack = true;
-                        attackTimer = attackCooldown; // Reset the attack timer
-                        ResetAttackAnimation(); // Reset the attack trigger
-
-                        // Ensure target stops flashing when not being attacked
+                        attackTimer = attackCooldown;
+                        ResetAttackAnimation();
                         StopAttacking(target);
                     }
                 }
@@ -54,14 +62,11 @@ public class EnemyAttack : MonoBehaviour
         }
         else
         {
-            // Stop attacking if the enemy is no longer alive
             canAttack = false;
-
-            // Ensure the tile stops flashing when the enemy dies
-            GameObject target = movement.FindTarget();
-            if (target != null)
+            if (currentTarget != null)
             {
-                StopAttacking(target);
+                StopAttacking(currentTarget);
+                currentTarget = null;
             }
         }
     }
@@ -86,7 +91,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (movement.targetPosition == Vector2.positiveInfinity)
         {
-            return false; // No valid target set
+            return false;
         }
 
         float distance = Vector2.Distance(transform.position, movement.targetPosition);
@@ -95,10 +100,7 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator Attack(GameObject target)
     {
-        // Set the attack trigger
         animator.SetTrigger("Attack");
-
-        // Wait for the attack animation to play
         yield return new WaitForSeconds(attackCooldown);
 
         if (target != null && target.activeSelf)
@@ -118,7 +120,6 @@ public class EnemyAttack : MonoBehaviour
                 {
                     if (tileComponent.hasTower)
                     {
-                        // Attack the tower on the tile
                         Collider2D[] colliders = Physics2D.OverlapPointAll(tileComponent.transform.position);
                         foreach (var collider in colliders)
                         {
@@ -135,7 +136,6 @@ public class EnemyAttack : MonoBehaviour
                     }
                     else
                     {
-                        // Attack the tile itself
                         tileComponent.TakeDamage(enemyStats.Damage, attackCooldown);
                     }
                 }
@@ -172,11 +172,10 @@ public class EnemyAttack : MonoBehaviour
 
     public void EnemyDestroyed()
     {
-        GameObject target = movement.FindTarget();
-        if (target != null)
+        if (currentTarget != null)
         {
-            StopAttacking(target);
+            StopAttacking(currentTarget);
+            currentTarget = null;
         }
-        StopAttacking(gameObject);
     }
 }
