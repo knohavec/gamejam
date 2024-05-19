@@ -9,11 +9,13 @@ public class Tile : MonoBehaviour
     public bool hasTower = false;
     public Color damageColor = new Color(1f, 0f, 0f, 0.5f);
     public float flashDuration = 2.0f; // Duration to stop flashing if no damage is taken
+    public float checkTowerInterval = 5.0f; // Interval to check for tower presence
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine flashDamageCoroutine;
     private Coroutine damageStopCoroutine;
+    private Coroutine checkTowerCoroutine;
 
     public enum CurrencyType
     {
@@ -37,6 +39,30 @@ public class Tile : MonoBehaviour
         {
             Debug.LogError("SpriteRenderer not found on Tile.");
         }
+
+        Tower.OnTowerDestroyed += HandleTowerDestroyed;
+        
+        // Start the coroutine to periodically check for tower presence
+        checkTowerCoroutine = StartCoroutine(CheckForTowerPresence());
+    }
+
+    private void OnDestroy()
+    {
+        Tower.OnTowerDestroyed -= HandleTowerDestroyed;
+
+        if (checkTowerCoroutine != null)
+        {
+            StopCoroutine(checkTowerCoroutine);
+        }
+    }
+
+    private void HandleTowerDestroyed(Tower tower)
+    {
+        if (tower.transform.parent == transform)
+        {
+            SetTowerPresence(false);
+            Debug.Log("Tile updated: tower destroyed.");
+        }
     }
 
     public CurrencyType GetCurrencyType()
@@ -49,12 +75,11 @@ public class Tile : MonoBehaviour
         return cost;
     }
 
-   public void SetTowerPresence(bool presence)
-{
-    hasTower = presence;
-    Debug.Log("Tile hasTower set to: " + presence);
-}
-
+    public void SetTowerPresence(bool presence)
+    {
+        hasTower = presence;
+        Debug.Log("Tile hasTower set to: " + presence);
+    }
 
     public void TakeDamage(int dmg, float attackSpeed)
     {
@@ -73,7 +98,6 @@ public class Tile : MonoBehaviour
             {
                 if (flashDamageCoroutine == null)
                 {
-                    Debug.Log("Starting FlashDamage coroutine");
                     flashDamageCoroutine = StartCoroutine(FlashDamage(attackSpeed));
                 }
 
@@ -94,14 +118,12 @@ public class Tile : MonoBehaviour
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = damageColor;
-                Debug.Log("Flashing damage color");
             }
             yield return new WaitForSeconds(attackSpeed * 0.5f);
 
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
-                Debug.Log("Reverting to original color");
             }
             yield return new WaitForSeconds(attackSpeed * 0.5f);
         }
@@ -119,7 +141,6 @@ public class Tile : MonoBehaviour
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
-                Debug.Log("Stopped FlashDamage coroutine and reset color");
             }
         }
     }
@@ -149,7 +170,6 @@ public class Tile : MonoBehaviour
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
-                Debug.Log("Stopped FlashDamage coroutine and reset color");
             }
         }
 
@@ -157,6 +177,24 @@ public class Tile : MonoBehaviour
         {
             StopCoroutine(damageStopCoroutine);
             damageStopCoroutine = null;
+        }
+    }
+
+    private IEnumerator CheckForTowerPresence()
+    {
+        while (true)
+        {
+            // Check for tower presence every checkTowerInterval seconds
+            if (transform.childCount > 0)
+            {
+                SetTowerPresence(true);
+            }
+            else
+            {
+                SetTowerPresence(false);
+            }
+
+            yield return new WaitForSeconds(checkTowerInterval);
         }
     }
 }
