@@ -156,6 +156,7 @@ public class Tile : MonoBehaviour
             if (tile != null)
             {
                 tilemap.SetTile(cellPosition, null);
+                SetTowerPresence(false); // Reset tower presence when the tile is removed
             }
         }
     }
@@ -185,13 +186,10 @@ public class Tile : MonoBehaviour
         while (true)
         {
             // Check for tower presence every checkTowerInterval seconds
-            if (transform.childCount > 0)
+            bool towerPresent = transform.childCount > 0;
+            if (hasTower != towerPresent)
             {
-                SetTowerPresence(true);
-            }
-            else
-            {
-                SetTowerPresence(false);
+                SetTowerPresence(towerPresent);
             }
 
             yield return new WaitForSeconds(checkTowerInterval);

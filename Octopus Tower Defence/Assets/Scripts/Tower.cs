@@ -17,10 +17,12 @@ public class Tower : MonoBehaviour
     public Color damageColor = new Color(1f, 0f, 0f, 0.5f);
     public CurrencyType currencyType;
     [SerializeField] private Color radiusColor = Color.green;
+    public float flashDuration = 3.0f; // Duration to stop flashing if no damage is taken
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine damageFlashCoroutine;
+    private Coroutine stopFlashCoroutine;
     private Tile parentTile;
     private bool isRadiusVisible = false;
     private GameObject attackRadiusCircle;
@@ -76,6 +78,12 @@ public class Tower : MonoBehaviour
                 {
                     damageFlashCoroutine = StartCoroutine(DamageFlash(attackSpeed));
                 }
+                // Reset the stop flash coroutine to ensure the flashing continues until the delay elapses
+                if (stopFlashCoroutine != null)
+                {
+                    StopCoroutine(stopFlashCoroutine);
+                }
+                stopFlashCoroutine = StartCoroutine(StopFlashingAfterDelay());
             }
         }
     }
@@ -104,6 +112,12 @@ public class Tower : MonoBehaviour
                 spriteRenderer.color = originalColor;
             }
         }
+
+        if (stopFlashCoroutine != null)
+        {
+            StopCoroutine(stopFlashCoroutine);
+            stopFlashCoroutine = null;
+        }
     }
 
     private IEnumerator DamageFlash(float attackSpeed)
@@ -125,6 +139,22 @@ public class Tower : MonoBehaviour
         if (spriteRenderer != null)
         {
             spriteRenderer.color = originalColor;
+        }
+    }
+
+    private IEnumerator StopFlashingAfterDelay()
+    {
+        yield return new WaitForSeconds(flashDuration);
+
+        if (damageFlashCoroutine != null)
+        {
+            StopCoroutine(damageFlashCoroutine);
+            damageFlashCoroutine = null;
+
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = originalColor;
+            }
         }
     }
 

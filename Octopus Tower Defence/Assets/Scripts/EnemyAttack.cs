@@ -83,7 +83,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void ResetAttackAnimation()
     {
-        animator.ResetTrigger("Attack");
+        animator.SetBool("Attack", false);
     }
 
     private bool IsInRange()
@@ -99,7 +99,7 @@ public class EnemyAttack : MonoBehaviour
 
     private IEnumerator Attack(GameObject target)
     {
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attack", true);
         yield return new WaitForSeconds(attackCooldown);
 
         if (target != null && target.activeSelf)
@@ -155,7 +155,7 @@ public class EnemyAttack : MonoBehaviour
                 Tower towerComponent = target.GetComponent<Tower>();
                 if (towerComponent != null)
                 {
-                    towerComponent.StopAttack();
+                    towerComponent.StopFlashing();
                 }
             }
             else if (target.CompareTag("Tile"))
