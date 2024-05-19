@@ -7,11 +7,13 @@ public class Tile : MonoBehaviour
     public int tilehealth;
     public bool isDestroyed = false;
     public bool hasTower = false;
-    public Color damageColor = new Color(1f, 0f, 0f, 0.5f); // Semi-transparent red color to flash when taking damage
+    public Color damageColor = new Color(1f, 0f, 0f, 0.5f);
+    public float flashDuration = 2.0f; // Duration to stop flashing if no damage is taken
 
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
     private Coroutine flashDamageCoroutine;
+    private Coroutine damageStopCoroutine;
 
     public enum CurrencyType
     {
@@ -47,10 +49,12 @@ public class Tile : MonoBehaviour
         return cost;
     }
 
-    public void SetTowerPresence(bool presence)
-    {
-        hasTower = presence;
-    }
+   public void SetTowerPresence(bool presence)
+{
+    hasTower = presence;
+    Debug.Log("Tile hasTower set to: " + presence);
+}
+
 
     public void TakeDamage(int dmg, float attackSpeed)
     {
@@ -61,9 +65,9 @@ public class Tile : MonoBehaviour
 
             if (tilehealth <= 0)
             {
-                RemoveFromTilemap();
                 isDestroyed = true;
                 StopFlashDamage();
+                RemoveFromTilemap();
             }
             else
             {
@@ -72,13 +76,19 @@ public class Tile : MonoBehaviour
                     Debug.Log("Starting FlashDamage coroutine");
                     flashDamageCoroutine = StartCoroutine(FlashDamage(attackSpeed));
                 }
+
+                // Reset the stop coroutine to ensure the flashing continues until the delay elapses
+                if (damageStopCoroutine != null)
+                {
+                    StopCoroutine(damageStopCoroutine);
+                }
+                damageStopCoroutine = StartCoroutine(StopFlashingAfterDelay());
             }
         }
     }
 
     private IEnumerator FlashDamage(float attackSpeed)
     {
-        float flashDuration = attackSpeed * 0.5f; // Adjust the flash duration based on the attack speed
         while (!isDestroyed)
         {
             if (spriteRenderer != null)
@@ -86,14 +96,31 @@ public class Tile : MonoBehaviour
                 spriteRenderer.color = damageColor;
                 Debug.Log("Flashing damage color");
             }
-            yield return new WaitForSeconds(flashDuration);
+            yield return new WaitForSeconds(attackSpeed * 0.5f);
 
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
                 Debug.Log("Reverting to original color");
             }
-            yield return new WaitForSeconds(attackSpeed - flashDuration);
+            yield return new WaitForSeconds(attackSpeed * 0.5f);
+        }
+    }
+
+    private IEnumerator StopFlashingAfterDelay()
+    {
+        yield return new WaitForSeconds(flashDuration);
+
+        if (flashDamageCoroutine != null)
+        {
+            StopCoroutine(flashDamageCoroutine);
+            flashDamageCoroutine = null;
+
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = originalColor;
+                Debug.Log("Stopped FlashDamage coroutine and reset color");
+            }
         }
     }
 
@@ -112,12 +139,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void StopAttack()
-    {
-        StopFlashDamage();
-    }
-
-    private void StopFlashDamage()
+    public void StopFlashDamage()
     {
         if (flashDamageCoroutine != null)
         {
@@ -129,6 +151,12 @@ public class Tile : MonoBehaviour
                 spriteRenderer.color = originalColor;
                 Debug.Log("Stopped FlashDamage coroutine and reset color");
             }
+        }
+
+        if (damageStopCoroutine != null)
+        {
+            StopCoroutine(damageStopCoroutine);
+            damageStopCoroutine = null;
         }
     }
 }

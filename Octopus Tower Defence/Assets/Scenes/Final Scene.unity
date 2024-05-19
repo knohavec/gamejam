@@ -347,6 +347,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43037414}
   m_CullTransparentMesh: 1
+--- !u!1 &89091976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89091977}
+  m_Layer: 8
+  m_Name: SANDDOLLARTRGER
+  m_TagString: SandDollarTarget
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &89091977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89091976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1391970863}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &135237106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,7 +2983,7 @@ GameObject:
   - component: {fileID: 781142838}
   m_Layer: 5
   m_Name: Sanddollar_ICON
-  m_TagString: SandDollarTarget
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3972,6 +4003,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6056393908647468711, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2821179856933983372, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
       propertyPath: m_Name
       value: Carivorous_Clam
@@ -4022,7 +4057,10 @@ PrefabInstance:
       objectReference: {fileID: 291238163}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4299061490805606042, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 89091977}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
 --- !u!1 &1179315799

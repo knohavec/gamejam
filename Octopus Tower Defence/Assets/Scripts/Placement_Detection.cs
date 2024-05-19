@@ -29,31 +29,43 @@ public class Placement_Detection : MonoBehaviour
     }
 
     private void OnMouseDown()
+{
+    if (hasTower) // Check if a tower is already present
     {
-        if (hasTower) // Check if a tower is already present
+        Debug.Log("Tower already present!");
+        return;
+    }
+
+    Vector3 placementPosition = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z + zOffset);
+
+    if (BuildManager.main.TryPlaceTower(placementPosition))
+    {
+        hasTower = true; // Set to true after placing tower
+        Debug.Log("Tower placed successfully.");
+
+        // Find the Tile GameObject at the position and set hasTower to true
+        Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
+        if (hitCollider != null)
         {
-            Debug.Log("Tower already present!");
-            return;
-        }
-
-        Vector3 placementPosition = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z + zOffset);
-
-        if (BuildManager.main.TryPlaceTower(placementPosition))
-        {
-            hasTower = true; // Set to true after placing tower
-
-            // Find the Tile GameObject at the position and set hasTower to true
-            Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
-            if (hitCollider != null)
+            Tile tile = hitCollider.GetComponent<Tile>();
+            if (tile != null)
             {
-                Tile tile = hitCollider.GetComponent<Tile>();
-                if (tile != null)
+                tile.SetTowerPresence(true);
+                Tower towerInstance = hitCollider.GetComponent<Tower>();
+                if (towerInstance != null)
                 {
-                    tile.SetTowerPresence(true);
+                    towerInstance.SetParentTile(tile); // Assign the parent tile
+                    Debug.Log("Parent tile set for the placed tower.");
                 }
             }
         }
     }
+    else
+    {
+        Debug.LogWarning("Failed to place tower.");
+    }
+}
+
 
     private void Update()
     {
