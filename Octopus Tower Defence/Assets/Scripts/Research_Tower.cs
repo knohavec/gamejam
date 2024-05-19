@@ -40,20 +40,18 @@ public class Research_Tower_Button_Script : MonoBehaviour
         }
         else
         {
-            Tower tower = BuildManager.main.GetTower(researchIndex);
-            if (tower != null)
+            // Assuming BuildManager.main.GetTower() returns the Tower object without selecting it
+            Tower towerPrefab = BuildManager.main.GetTower(researchIndex);
+            if (towerPrefab != null)
             {
-                researchCost = tower.tower_research_cost;
+                researchCost = towerPrefab.tower_research_cost;
             }
             else
             {
-                Debug.LogError("Tower not found!");
+                Debug.LogError("Tower prefab not found!");
                 return;
             }
         }
-
-        // Log the retrieved research cost
-        // Debug.Log("Research cost: " + researchCost);
 
         // Proceed with research using Pollutium only
         bool canResearch = PollutiumManager.instance.SpendPollutium(researchCost);
@@ -62,8 +60,6 @@ public class Research_Tower_Button_Script : MonoBehaviour
         {
             buyButton.SetActive(true); // Show the buy button
             gameObject.SetActive(false); // Hide this game object
-
-            // Debug.Log("Research successful.");
         }
         else
         {
