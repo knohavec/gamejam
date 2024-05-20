@@ -53,8 +53,8 @@ MonoBehaviour:
   hasTower: 0
   damageColor: {r: 1, g: 0.3785736, b: 0, a: 1}
   flashDuration: 2
-  currencyType: 1
-  cost: 2
+  currencyType: 0
+  cost: 10
 --- !u!212 &5030849127804406024
 SpriteRenderer:
   m_ObjectHideFlags: 0
