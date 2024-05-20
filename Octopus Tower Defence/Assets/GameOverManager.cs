@@ -30,17 +30,21 @@ public class GameOverManager : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log("Ending game...");
         CleanupGameObjects();
         SceneManager.LoadScene("MainMenu");
+        enabled = false; // Disable this script to stop further updates
     }
 
     private void CleanupGameObjects()
     {
+        Debug.Log("Cleaning up game objects...");
         // Find and destroy dynamically created objects
         foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())
         {
             if (obj.name.Contains("polluted_meat(Clone)"))
             {
+                Debug.Log("Destroying: " + obj.name);
                 Destroy(obj);
             }
         }

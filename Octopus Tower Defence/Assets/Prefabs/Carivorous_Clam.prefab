@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6991542140122444299}
   - component: {fileID: -6056393908647468711}
   - component: {fileID: -3912183251901087667}
-  - component: {fileID: 8326023018904989372}
   m_Layer: 8
   m_Name: Carivorous_Clam
   m_TagString: Tower
@@ -219,15 +218,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &8326023018904989372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821179856933983372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bc09bbd53839124ea7861976ff7fee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
