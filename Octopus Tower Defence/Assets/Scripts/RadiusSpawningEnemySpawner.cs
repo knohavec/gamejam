@@ -25,19 +25,37 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
     }
 
     IEnumerator SpawnEnemies()
+{
+    isSpawning = true;
+    int enemiesToSpawn = EnemiesPerWave();
+    Debug.Log("Level " + (currentLevel + 1) + " Wave " + currentWave + ": Spawning " + enemiesToSpawn + " enemies."); // Debug message
+
+    for (int i = 0; i < enemiesToSpawn; i++)
     {
-        isSpawning = true;
-        int enemiesToSpawn = EnemiesPerWave();
-        Debug.Log("Level " + (currentLevel + 1) + " Wave " + currentWave + ": Spawning " + enemiesToSpawn + " enemies."); // Debug message
-        for (int i = 0; i < enemiesToSpawn; i++)
+        Vector3 spawnPosition = GetRandomSpawnPosition();
+        GameObject enemy = Instantiate(levels[currentLevel].enemyPrefabs[Random.Range(0, levels[currentLevel].enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
+
+        // Ensure the enemy has the correct sorting layer and order
+        SpriteRenderer enemyRenderer = enemy.GetComponent<SpriteRenderer>();
+        if (enemyRenderer != null)
         {
-            Vector3 spawnPosition = GetRandomSpawnPosition();
-            spawnPosition.z -= 1f;
-            Instantiate(levels[currentLevel].enemyPrefabs[Random.Range(0, levels[currentLevel].enemyPrefabs.Count)], spawnPosition, Quaternion.identity);
-            yield return new WaitForSeconds(0.5f); // Adjust spawn delay as needed
+            enemyRenderer.sortingLayerName = "Enemy"; // Ensure the sorting layer is set correctly
+            enemyRenderer.sortingOrder = 1; // Adjust as needed
         }
-        isSpawning = false;
+        else
+        {
+            Debug.LogWarning("Enemy does not have a SpriteRenderer component.");
+        }
+
+        // Debug log to check where the enemy is instantiated
+        Debug.Log($"Spawned enemy at position: {spawnPosition}");
+
+        yield return new WaitForSeconds(0.5f); // Adjust spawn delay as needed
     }
+    isSpawning = false;
+}
+
+
 
     IEnumerator StartWave()
     {

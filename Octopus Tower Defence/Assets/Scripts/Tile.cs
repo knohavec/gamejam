@@ -57,7 +57,7 @@ public class Tile : MonoBehaviour
     public void SetTowerPresence(bool presence)
     {
         hasTower = presence;
-        Debug.Log("Tile hasTower set to: " + presence);
+        // Debug.Log("Tile hasTower set to: " + presence);
     }
 
     public void CheckForTowerPresence()
@@ -81,7 +81,7 @@ public class Tile : MonoBehaviour
     {
         if (!isDestroyed)
         {
-            Debug.Log("Tile Hit");
+            // Debug.Log("Tile Hit");
             tilehealth -= dmg;
 
             if (tilehealth <= 0)
