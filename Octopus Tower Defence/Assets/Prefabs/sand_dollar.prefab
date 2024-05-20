@@ -135,6 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worth: 1
   despawnDelay: 15
-  moveSpeed: 30
+  moveSpeed: 40
   targetOffset: {x: 0, y: 0, z: 0}
   highlightColor: {r: 0.02721463, g: 1, b: 0.015686274, a: 1}

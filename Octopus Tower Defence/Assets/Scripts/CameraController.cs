@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Camera cam;
     [SerializeField]
-    private float zoomStep, minCamSize, maxCamSize;
+    private float zoomStep, minCamSize, maxCamSize, sensitivity;
     private Vector3 dragOrigin;
 
     private void Update()
@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetMouseButton(1))
         {
-            Vector3 difference = (dragOrigin - Input.mousePosition) * 0.01f; // Adjust sensitivity by multiplying by a small value
+            Vector3 difference = (dragOrigin - Input.mousePosition) * sensitivity; // Adjust sensitivity by multiplying by a small value
             cam.transform.position += difference;
             dragOrigin = Input.mousePosition; // Update dragOrigin for next frame
         }

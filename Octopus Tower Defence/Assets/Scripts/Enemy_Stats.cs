@@ -25,6 +25,7 @@ public class Enemy_Stats : MonoBehaviour
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.color;
+            Debug.Log("SpriteRenderer found, original color: " + originalColor);
         }
         else
         {
@@ -34,12 +35,15 @@ public class Enemy_Stats : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        Debug.Log("TakeDamage called with dmg: " + dmg);
         hitPoints -= dmg;
+        Debug.Log("Enemy took damage: " + dmg + ", remaining hitPoints: " + hitPoints);
 
         if (hitPoints <= 0 && !isDestroyed)
         {
-            FindObjectOfType<SquareSpawningEnemySpawner>().EnemyDestroyed();
             isDestroyed = true;
+            // Debug.Log("Enemy is destroyed");
+            FindObjectOfType<SquareSpawningEnemySpawner>().EnemyDestroyed();
 
             // Notify the EnemyAttack script
             EnemyAttack enemyAttack = GetComponent<EnemyAttack>();
@@ -54,33 +58,38 @@ public class Enemy_Stats : MonoBehaviour
         {
             if (flashDamageCoroutine == null)
             {
-                flashDamageCoroutine = StartCoroutine(FlashDamage(AttackSpeed));
+                flashDamageCoroutine = StartCoroutine(FlashDamage());
+                // Debug.Log("Started FlashDamage Coroutine");
             }
 
             // Reset the stop coroutine to ensure the flashing continues until the delay elapses
             if (damageStopCoroutine != null)
             {
                 StopCoroutine(damageStopCoroutine);
+                // Debug.Log("Stopped existing StopFlashingAfterDelay Coroutine");
             }
             damageStopCoroutine = StartCoroutine(StopFlashingAfterDelay());
+            // Debug.Log("Started StopFlashingAfterDelay Coroutine");
         }
     }
 
-    private IEnumerator FlashDamage(float attackSpeed)
+    private IEnumerator FlashDamage()
     {
         while (!isDestroyed)
         {
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = damageColor;
+                // Debug.Log("Changed color to damageColor");
             }
-            yield return new WaitForSeconds(attackSpeed * 0.5f);
+            yield return new WaitForSeconds(0.1f); // Use a fixed short duration for flashing
 
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
+                // Debug.Log("Reverted color to originalColor");
             }
-            yield return new WaitForSeconds(attackSpeed * 0.5f);
+            yield return new WaitForSeconds(0.1f); // Use a fixed short duration for flashing
         }
     }
 
@@ -96,6 +105,7 @@ public class Enemy_Stats : MonoBehaviour
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
+                // Debug.Log("Stopped FlashDamage Coroutine and reset color");
             }
         }
     }
@@ -110,6 +120,7 @@ public class Enemy_Stats : MonoBehaviour
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = originalColor;
+                // Debug.Log("Stopped FlashDamage Coroutine in StopFlashDamage");
             }
         }
 
@@ -117,6 +128,7 @@ public class Enemy_Stats : MonoBehaviour
         {
             StopCoroutine(damageStopCoroutine);
             damageStopCoroutine = null;
+            // Debug.Log("Stopped StopFlashingAfterDelay Coroutine in StopFlashDamage");
         }
     }
 }
