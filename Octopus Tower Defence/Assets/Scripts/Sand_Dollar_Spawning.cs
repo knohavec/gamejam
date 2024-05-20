@@ -40,8 +40,11 @@ public class SandDollarSpawning : MonoBehaviour
         if (timeSinceLastSpawn >= spawn_rate)
         {
             Vector2 position = RandomPositionOnMap();
-            Instantiate(sand_dollar_prefab, position, Quaternion.identity);
-            timeSinceLastSpawn = 0;
+            if (!IsPositionOccupied(position))
+            {
+                Instantiate(sand_dollar_prefab, position, Quaternion.identity);
+                timeSinceLastSpawn = 0;
+            }
         }
     }
 
@@ -50,6 +53,19 @@ public class SandDollarSpawning : MonoBehaviour
         float randomX = Random.Range(-spawn_range, spawn_range);
         float randomY = Random.Range(-spawn_range, spawn_range);
         return new Vector2(randomX, randomY);
+    }
+
+    private bool IsPositionOccupied(Vector2 position)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 0.1f);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Tile") || collider.CompareTag("Tower"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void Update()
