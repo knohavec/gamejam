@@ -92,4 +92,14 @@ public class SandDollar : MonoBehaviour
             spriteRenderer.color = originalColor;
         }
     }
+
+    // Handle collision with Tile or Tower
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Tile") || collision.CompareTag("Tower"))
+        {
+            UpdateCounter();
+            Destroy(gameObject);
+        }
+    }
 }
