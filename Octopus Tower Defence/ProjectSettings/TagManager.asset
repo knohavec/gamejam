@@ -11,6 +11,7 @@ TagManager:
   - SandDollar
   - Meat
   - SandDollarTarget
+  - PollutiumTarget
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7137082043646683460}
   - component: {fileID: 2180251525751489201}
   - component: {fileID: -7241177530987615479}
-  - component: {fileID: 4522377773525147251}
   - component: {fileID: 8862907360319456435}
   m_Layer: 9
   m_Name: polluted_meat
@@ -116,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.11288476, y: 0.150513}
@@ -132,20 +131,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6719728, y: 1.6569213}
   m_EdgeRadius: 0
---- !u!114 &4522377773525147251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5439127548350827364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d1413b2f2e1b0a4c809f533a3557866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  despawnTime: 5
-  despawnPrefab: {fileID: 2821179856933983372, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
 --- !u!114 &8862907360319456435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pollution_value: 1
+  chewDelay: 0.01

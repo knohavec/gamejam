@@ -12,6 +12,7 @@ public class SandDollar : MonoBehaviour
 
     private Transform targetTransform;
     private bool isClicked = false;
+    private bool isCollected = false; // Flag to ensure the sand dollar is only collected once
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
@@ -43,19 +44,23 @@ public class SandDollar : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (isClicked || targetTransform == null) return; // Prevent double clicking and check if targetTransform is assigned
+        if (isClicked || isCollected || targetTransform == null) return; // Prevent double clicking and check if targetTransform is assigned
         isClicked = true;
         StartCoroutine(MoveToTarget());
     }
 
     void UpdateCounter()
     {
-        SandDollarManager.instance.AddSandDollars(worth);
+        if (!isCollected)
+        {
+            isCollected = true; // Ensure this is only called once
+            SandDollarManager.instance.AddSandDollars(worth);
+        }
     }
 
     void DespawnOnDelay()
     {
-        if (!isClicked)
+        if (!isClicked && !isCollected)
         {
             Destroy(gameObject);
         }
@@ -96,7 +101,7 @@ public class SandDollar : MonoBehaviour
     // Handle collision with Tile or Tower
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Tile") || collision.CompareTag("Tower"))
+        if (!isCollected && (collision.CompareTag("Tile") || collision.CompareTag("Tower")))
         {
             UpdateCounter();
             Destroy(gameObject);

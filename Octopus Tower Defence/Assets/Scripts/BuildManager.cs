@@ -85,18 +85,18 @@ public class BuildManager : MonoBehaviour
                     Tile tile = hitCollider.GetComponent<Tile>();
                     if (tile != null)
                     {
-                        Debug.Log("Tile found. Setting hasTower to true.");
+                        // Debug.Log("Tile found. Setting hasTower to true.");
                         tile.SetTowerPresence(true);
                         towerInstance.Initialize(tile); // Set the parent tile
                     }
                     else
                     {
-                        Debug.LogWarning("No Tile component found at the given position.");
+                        // Debug.LogWarning("No Tile component found at the given position.");
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("No Collider2D found at the given position.");
+                    // Debug.LogWarning("No Collider2D found at the given position.");
                 }
 
                 return true;

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 824523609001058087}
   - component: {fileID: 4580597049202517936}
-  - component: {fileID: 1958841848760467712}
   - component: {fileID: -5878502659383121292}
+  - component: {fileID: 7813623389759333994}
   m_Layer: 9
   m_Name: pollutium
   m_TagString: Untagged
@@ -86,23 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1958841848760467712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179698443824611676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1602e182c7f666c44b2353d3213111ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 32
-  skinWidth: 0.1
-  searchCollisionVerticalOffset: 0.5
 --- !u!58 &-5878502659383121292
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +121,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.28
+--- !u!114 &7813623389759333994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179698443824611676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77bcc14111463354798ce1dd97880a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 40
+  targetOffset: {x: 0, y: 0, z: 0}
+  delayBeforeDestroy: 0.05

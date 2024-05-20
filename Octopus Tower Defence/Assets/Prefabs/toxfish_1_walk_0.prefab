@@ -207,7 +207,7 @@ MonoBehaviour:
   AttackRange: 3
   TargetingRadius: 2
   isDestroyed: 0
-  damageColor: {r: 1, g: 0, b: 0, a: 0.5}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 2
 --- !u!114 &3522546797855332493
 MonoBehaviour:
