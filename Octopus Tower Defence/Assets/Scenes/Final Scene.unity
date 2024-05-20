@@ -312,7 +312,6 @@ GameObject:
   - component: {fileID: 20801901}
   - component: {fileID: 20801900}
   - component: {fileID: 20801899}
-  - component: {fileID: 20801898}
   m_Layer: 5
   m_Name: Polluitum Sea Sponge Research Button (2)
   m_TagString: Untagged
@@ -342,21 +341,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: -50}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &20801898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20801896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82b28c6e9591e649abda3a119398189, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buyButton: {fileID: 1748017658}
-  researchIndex: 2
-  isTile: 0
 --- !u!114 &20801899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,14 +385,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 20801898}
-        m_TargetAssemblyTypeName: Research_Tower_Button_Script, Assembly-CSharp
-        m_MethodName: Research
-        m_Mode: 1
+      - m_Target: {fileID: 7369467521821131603}
+        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_MethodName: SelectTower
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1338,6 +1322,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6056393908647468711, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6056393908647468711, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6056393908647468711, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2821179856933983372, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
       propertyPath: m_Name
       value: Carivorous_Clam
@@ -1384,7 +1380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6991542140122444299, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
       propertyPath: pollutiumSpeed
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6991542140122444299, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
       propertyPath: pollutiumTargetUI
@@ -4184,7 +4180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pollutium \nSturdy Scallop (5)"
+  m_text: "Pollutium \nSturdy Scallop (30)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5354,6 +5350,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 613461292}
+        m_TargetAssemblyTypeName: UIButtonToggle, Assembly-CSharp
+        m_MethodName: ToggleUIElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7548,7 +7556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pollutium \nSlurping Sponge(15)"
+  m_text: "Pollutium \nSlurping Sponge(20)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8972,7 +8980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.12156863, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10335,7 +10343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.16470589, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12100,7 +12108,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pollutium \nSlurping Sponge(15)"
+  m_text: "Pollutium \nSlurping Sponge(50)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14393,6 +14401,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1620029596}
+        m_TargetAssemblyTypeName: UIButtonToggle, Assembly-CSharp
+        m_MethodName: ToggleUIElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1620029594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14501,7 +14521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pollutium \nSturdy Scallop (5)"
+  m_text: "Pollutium \nSturdy Scallop (25)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15687,7 +15707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.16470589, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -16276,7 +16296,6 @@ GameObject:
   - component: {fileID: 1888190998}
   - component: {fileID: 1888190997}
   - component: {fileID: 1888190996}
-  - component: {fileID: 1888190995}
   m_Layer: 5
   m_Name: Pollutium SturdyScallop (2)
   m_TagString: Untagged
@@ -16306,21 +16325,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: -50}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1888190995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888190993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82b28c6e9591e649abda3a119398189, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buyButton: {fileID: 2040079517}
-  researchIndex: 4
-  isTile: 0
 --- !u!114 &1888190996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16365,14 +16369,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1888190995}
-        m_TargetAssemblyTypeName: Research_Tower_Button_Script, Assembly-CSharp
-        m_MethodName: Research
-        m_Mode: 1
+      - m_Target: {fileID: 7369467521821131603}
+        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_MethodName: SelectTower
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -16674,7 +16678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.12156863, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17268,8 +17272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82b28c6e9591e649abda3a119398189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyButton: {fileID: 2040079517}
-  researchIndex: 4
+  buyButton: {fileID: 1888190993}
+  researchIndex: 8
   isTile: 0
 --- !u!114 &1937541277
 MonoBehaviour:
@@ -18139,8 +18143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82b28c6e9591e649abda3a119398189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyButton: {fileID: 1748017658}
-  researchIndex: 2
+  buyButton: {fileID: 20801896}
+  researchIndex: 7
   isTile: 0
 --- !u!114 &2066832760
 MonoBehaviour:
@@ -19771,6 +19775,8 @@ MonoBehaviour:
   - {fileID: 3766777022420647761, guid: 394109fd2cedd814eb91948bdf780e05, type: 3}
   - {fileID: 449386643551386474, guid: 6ea5fd51bb4f05648a54f59acd8dd5ac, type: 3}
   - {fileID: 7684039098689182727, guid: f3c254f1bdf547449a7164bcc397c0e3, type: 3}
+  - {fileID: -4159597593566756427, guid: be9405da0bb01d84caf01b69197b6366, type: 3}
+  - {fileID: 3766777022420647761, guid: f3e059fb127f527408ae6f8ec5785a29, type: 3}
   selectedTower: -1
 --- !u!224 &7655798176453938436
 RectTransform:
@@ -19966,7 +19972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7e323dbdcabe149a10700597cb7b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pollutiumAmount: 669
+  pollutiumAmount: 10
   pollutiumText: {fileID: 291238164}
 --- !u!114 &9169062099563909039
 MonoBehaviour:
@@ -19993,7 +19999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d76afc7dbe8d944abee04172ea72b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sandDollarTotal: 420
+  sandDollarTotal: 0
   sandDollarText: {fileID: 6368858640232604840}
 --- !u!114 &9192042994925718340
 MonoBehaviour:

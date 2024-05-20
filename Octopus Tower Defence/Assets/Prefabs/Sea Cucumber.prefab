@@ -142,7 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotation_speed: 250
-  bps: 1
+  bps: 0.5
 --- !u!70 &-7996542921249053580
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

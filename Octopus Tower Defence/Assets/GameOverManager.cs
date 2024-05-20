@@ -31,7 +31,7 @@ public class GameOverManager : MonoBehaviour
     public void EndGame()
     {
         CleanupGameObjects();
-        SceneManager.LoadScene("Game Over");
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void CleanupGameObjects()
