@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a0df224a1229c409f0b8bc2d849b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilehealth: 25
+  tilehealth: 35
   isDestroyed: 0
   hasTower: 0
   damageColor: {r: 1, g: 0.3785736, b: 0, a: 1}

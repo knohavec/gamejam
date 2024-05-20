@@ -201,7 +201,7 @@ MonoBehaviour:
   towerprefab: {fileID: 6107903137028798062}
   towerhealth: 10
   isDestroyed: 0
-  tower_attack_range: 2.5
+  tower_attack_range: 3
   towerdamage: 5
   tower_attack_speed: 2
   tower_research_cost: 5
