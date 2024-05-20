@@ -222,9 +222,9 @@ MonoBehaviour:
   towerprefab: {fileID: 729118177691507758}
   towerhealth: 10
   isDestroyed: 0
-  tower_attack_range: 10
+  tower_attack_range: 25
   towerdamage: 0
-  tower_attack_speed: 0
+  tower_attack_speed: 1
   tower_research_cost: 10
   damageColor: {r: 1, g: 0, b: 0, a: 0.49803922}
   currencyType: 0
