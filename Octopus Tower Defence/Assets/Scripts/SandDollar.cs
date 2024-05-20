@@ -8,12 +8,25 @@ public class SandDollar : MonoBehaviour
     [SerializeField] private float despawnDelay = 5f; // Delay before despawning if not clicked
     [SerializeField] private float moveSpeed = 3f; // Speed at which sand dollar moves towards the target
     [SerializeField] private Vector3 targetOffset = Vector3.zero; // Offset for the target position
+    [SerializeField] private Color highlightColor = Color.yellow; // Color to highlight on mouse enter
 
     private Transform targetTransform;
     private bool isClicked = false;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer component not found on SandDollar object.");
+        }
+
         Invoke(nameof(DespawnOnDelay), despawnDelay); // Start the despawn delay
 
         // Find the target object by tag
@@ -62,5 +75,21 @@ public class SandDollar : MonoBehaviour
         // Once the sand dollar reaches the target, update the counter and destroy it
         UpdateCounter();
         Destroy(gameObject);
+    }
+
+    void OnMouseEnter()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = highlightColor;
+        }
+    }
+
+    void OnMouseExit()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
+        }
     }
 }

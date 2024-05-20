@@ -203,7 +203,7 @@ MonoBehaviour:
   hitPoints: 20
   Damage: 5
   AttackSpeed: 2
-  AttackRange: 2.5
+  AttackRange: 3
   TargetingRadius: 2
   isDestroyed: 0
   damageColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -234,5 +234,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMeatPrefab: {fileID: 5439127548350827364, guid: 61582fc76830e9b4bac294cbbfd27aba, type: 3}
-  amountOfMeat: 1
+  amountOfMeat: 4
   spawnRadius: 1
