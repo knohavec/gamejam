@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6498826321378283263}
   - component: {fileID: 7154101437324979399}
   - component: {fileID: 6128006550927256331}
+  - component: {fileID: -1069876117183894475}
   m_Layer: 6
   m_Name: Pink_Fish_hook
   m_TagString: Enemy
@@ -236,3 +237,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &-1069876117183894475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4863905022610800399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602e182c7f666c44b2353d3213111ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 392
+  skinWidth: 0.1
+  searchCollisionVerticalOffset: 0.5

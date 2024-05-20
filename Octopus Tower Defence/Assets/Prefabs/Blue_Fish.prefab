@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2740267422075393546}
   - component: {fileID: 3522546797855332493}
   - component: {fileID: -7108975494750857146}
+  - component: {fileID: 5921997241855519444}
   m_Layer: 6
   m_Name: Blue_Fish
   m_TagString: Enemy
@@ -236,3 +237,20 @@ MonoBehaviour:
   enemyMeatPrefab: {fileID: 5439127548350827364, guid: 61582fc76830e9b4bac294cbbfd27aba, type: 3}
   amountOfMeat: 3
   spawnRadius: 1
+--- !u!114 &5921997241855519444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118282856799405829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602e182c7f666c44b2353d3213111ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 392
+  skinWidth: 0.1
+  searchCollisionVerticalOffset: 0.5

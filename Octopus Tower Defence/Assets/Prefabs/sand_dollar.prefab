@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7605550783728338909}
   - component: {fileID: 3728845055152902676}
   - component: {fileID: 5555875767712593218}
+  - component: {fileID: -6975766158577614651}
   m_Layer: 9
   m_Name: sand_dollar
   m_TagString: Untagged
@@ -138,3 +139,20 @@ MonoBehaviour:
   moveSpeed: 30
   targetOffset: {x: 0, y: 0, z: 0}
   highlightColor: {r: 0.02721463, g: 1, b: 0.015686274, a: 1}
+--- !u!114 &-6975766158577614651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648373867816879276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602e182c7f666c44b2353d3213111ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  skinWidth: 0.1
+  searchCollisionVerticalOffset: 0.5

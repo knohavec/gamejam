@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1134389784785403248}
   - component: {fileID: 6029156853314167847}
   - component: {fileID: -5587472060878345590}
+  - component: {fileID: 2654634900170760808}
   m_Layer: 6
   m_Name: toxfish_1_tire_final_0
   m_TagString: Enemy
@@ -236,3 +237,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8665592855825845136}
+--- !u!114 &2654634900170760808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358277632710468026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602e182c7f666c44b2353d3213111ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 392
+  skinWidth: 0.1
+  searchCollisionVerticalOffset: 0.5
