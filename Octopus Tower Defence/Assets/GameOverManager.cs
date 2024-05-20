@@ -20,6 +20,16 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Update()
     {
         if (object_to_check == null)
@@ -31,22 +41,15 @@ public class GameOverManager : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("Ending game...");
-        CleanupGameObjects();
         SceneManager.LoadScene("MainMenu");
-        enabled = false; // Disable this script to stop further updates
     }
 
-    private void CleanupGameObjects()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Cleaning up game objects...");
-        // Find and destroy dynamically created objects
-        foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())
+        if (scene.name == "MainMenu")
         {
-            if (obj.name.Contains("polluted_meat(Clone)"))
-            {
-                Debug.Log("Destroying: " + obj.name);
-                Destroy(obj);
-            }
+            Time.timeScale = 1f;
+            Debug.Log("Time scale reset to 1");
         }
     }
 }
