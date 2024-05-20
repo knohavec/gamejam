@@ -93,13 +93,13 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
     {
         Vector3 basePosition = baseTransform.position;
         Vector2 randomOffset = new Vector2(Random.Range(-outerSpawnRange, outerSpawnRange), Random.Range(-outerSpawnRange, outerSpawnRange));
-        Vector3 spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, -1);
+        Vector3 spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, 0);
 
         // Check if the spawn position is within the inner no-spawn range, if so, reposition
         while (Vector2.Distance(Vector2.zero, randomOffset) < innerNoSpawnRange)
         {
             randomOffset = new Vector2(Random.Range(-outerSpawnRange, outerSpawnRange), Random.Range(-outerSpawnRange, outerSpawnRange));
-            spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, -1);
+            spawnPosition = basePosition + new Vector3(randomOffset.x, randomOffset.y, 0);
         }
 
         return spawnPosition;
