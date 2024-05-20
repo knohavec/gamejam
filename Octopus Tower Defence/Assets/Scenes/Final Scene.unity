@@ -1410,6 +1410,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6991542140122444299, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
+      propertyPath: conversion_rate
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991542140122444299, guid: ee6819571e8841d4892f7f105a7a6904, type: 3}
       propertyPath: pollutiumTargetUI
       value: 
       objectReference: {fileID: 291238163}
@@ -19841,8 +19845,8 @@ MonoBehaviour:
   - {fileID: 176865111}
   baseTransform: {fileID: 89091977}
   timeBetweenWaves: 15
-  outerSpawnRange: 40
-  innerNoSpawnRange: 30
+  outerSpawnRange: 100
+  innerNoSpawnRange: 80
   difficultyScaling: 0.75
 --- !u!224 &5058539177121649738
 RectTransform:
