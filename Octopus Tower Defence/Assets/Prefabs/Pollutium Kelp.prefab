@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7941597123454764951}
   - component: {fileID: 449386643551386474}
   m_Layer: 8
-  m_Name: kelp
+  m_Name: Pollutium Kelp
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -561476475, guid: f783c8cf879b1d24684a76dea646d26c, type: 3}
-  m_Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
+  m_Color: {r: 0.4056604, g: 0.17439605, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -199,13 +199,13 @@ MonoBehaviour:
   towername: Kelp
   towercost: 5
   towerprefab: {fileID: 6107903137028798062}
-  towerhealth: 10
+  towerhealth: 30
   isDestroyed: 0
-  tower_attack_range: 2.5
-  towerdamage: 10
+  tower_attack_range: 4
+  towerdamage: 25
   tower_attack_speed: 2
-  tower_research_cost: 5
+  tower_research_cost: 20
   damageColor: {r: 1, g: 0, b: 0, a: 0.45490196}
-  currencyType: 0
+  currencyType: 1
   radiusColor: {r: 0, g: 0.8207547, b: 0.010009194, a: 0.6156863}
   flashDuration: 2
