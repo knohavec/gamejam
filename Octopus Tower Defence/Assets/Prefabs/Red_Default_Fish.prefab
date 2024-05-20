@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 2
   Damage: 4
-  AttackSpeed: 2
+  AttackSpeed: 1
   AttackRange: 2.5
   TargetingRadius: 2
   isDestroyed: 0
