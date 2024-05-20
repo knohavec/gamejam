@@ -4874,7 +4874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SandTile(5)
+  m_text: SandTile(10)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9485,7 +9485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sand Tile(5)
+  m_text: Sand Tile(10)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19885,8 +19885,8 @@ MonoBehaviour:
   - {fileID: 176865111}
   baseTransform: {fileID: 89091977}
   timeBetweenWaves: 15
-  outerSpawnRange: 100
-  innerNoSpawnRange: 80
+  outerSpawnRange: 70
+  innerNoSpawnRange: 60
   difficultyScaling: 0.75
 --- !u!224 &5058539177121649738
 RectTransform:
@@ -20670,7 +20670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sand_dollar_prefab: {fileID: 1648373867816879276, guid: a831a711a3902c247a224972388ef60e, type: 3}
   spawn_rate: 1
-  spawn_range: 40
+  spawn_range: 28
 --- !u!1 &7190316190064113717
 GameObject:
   m_ObjectHideFlags: 0
@@ -20982,7 +20982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb7e323dbdcabe149a10700597cb7b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pollutiumAmount: 2
+  pollutiumAmount: 0
   pollutiumText: {fileID: 291238164}
 --- !u!114 &9169062099563909039
 MonoBehaviour:
