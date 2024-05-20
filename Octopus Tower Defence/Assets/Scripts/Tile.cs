@@ -57,7 +57,7 @@ public class Tile : MonoBehaviour
     public void SetTowerPresence(bool presence)
     {
         hasTower = presence;
-        Debug.Log("Tile hasTower set to: " + presence);
+        // Debug.Log("Tile hasTower set to: " + presence);
     }
 
     public void CheckForTowerPresence()

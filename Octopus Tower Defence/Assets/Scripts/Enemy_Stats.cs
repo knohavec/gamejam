@@ -19,6 +19,8 @@ public class Enemy_Stats : MonoBehaviour
     private Coroutine flashDamageCoroutine;
     private Coroutine damageStopCoroutine;
 
+
+    
     private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();

@@ -16,6 +16,9 @@ public class Movement : MonoBehaviour
         targetPosition = Vector2.positiveInfinity;
         lastPosition = transform.position;
         stuckTimer = stuckCheckInterval;
+
+        gameObject.SetActive(true);
+       
     }
 
     private void Update()
