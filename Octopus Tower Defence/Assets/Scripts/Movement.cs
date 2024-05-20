@@ -10,31 +10,46 @@ public class Movement : MonoBehaviour
     private float stuckTimer;
     private float stuckCheckInterval = 1f; // Time interval to check if the enemy is stuck
 
+    private Rigidbody2D rb;
+    private bool hasValidTarget;
+
     private void Start()
     {
         enemyStats = GetComponent<Enemy_Stats>();
-        targetPosition = Vector2.positiveInfinity;
+        targetPosition = Vector2.zero;
         lastPosition = transform.position;
         stuckTimer = stuckCheckInterval;
+        rb = GetComponent<Rigidbody2D>();
+        hasValidTarget = false;
     }
 
     private void Update()
     {
         UpdateTargetPosition();
 
-        if (targetPosition != Vector2.positiveInfinity)
+        Vector2 direction = (targetPosition - (Vector2)transform.position);
+
+        // Ensure the direction vector is not zero
+        if (direction != Vector2.zero)
         {
-            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-            GetComponent<Rigidbody2D>().velocity = direction * speed;
+            direction.Normalize();
+            rb.velocity = direction * speed;
             RotateSprite(direction);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero; // If the direction is zero, stop the enemy
         }
 
         CheckIfStuck();
+
+        // Debug logs to track position and velocity
+        // Debug.Log($"Enemy position: {transform.position}, velocity: {rb.velocity}, target: {targetPosition}");
     }
 
     private void UpdateTargetPosition()
     {
-        if (targetPosition == Vector2.positiveInfinity || !TileExists(targetPosition))
+        if (!hasValidTarget || !TileExists(targetPosition))
         {
             GameObject nearestTile = FindNearestTile();
             if (nearestTile == null)
@@ -43,25 +58,31 @@ public class Movement : MonoBehaviour
                 if (nearestTower != null)
                 {
                     targetPosition = nearestTower.transform.position;
+                    hasValidTarget = true;
                 }
                 else
                 {
                     // If no target is found, move towards (0, 0)
                     targetPosition = Vector2.zero;
+                    hasValidTarget = true;
                 }
             }
             else
             {
                 targetPosition = nearestTile.transform.position;
+                hasValidTarget = true;
             }
         }
 
         // Check if there is a clear path to the target position
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, targetPosition);
-        if (hit.collider != null && hit.collider.CompareTag("Tile"))
+        if (hasValidTarget)
         {
-            // If there is an obstacle in the way, find a new target
-            targetPosition = Vector2.positiveInfinity;
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, targetPosition);
+            if (hit.collider != null && !hit.collider.CompareTag("Tile"))
+            {
+                // If there is an obstacle in the way, find a new target
+                hasValidTarget = false;
+            }
         }
     }
 
@@ -151,6 +172,7 @@ public class Movement : MonoBehaviour
         if (nearestTower != null)
         {
             targetPosition = nearestTower.transform.position;
+            hasValidTarget = true;
             return nearestTower;
         }
 
@@ -158,11 +180,13 @@ public class Movement : MonoBehaviour
         if (nearestTile != null)
         {
             targetPosition = nearestTile.transform.position;
+            hasValidTarget = true;
             return nearestTile;
         }
 
         // If no target is found, set target position to (0, 0)
         targetPosition = Vector2.zero;
+        hasValidTarget = true;
         return null;
     }
 
@@ -175,7 +199,8 @@ public class Movement : MonoBehaviour
             if (Vector2.Distance(transform.position, lastPosition) < 0.1f)
             {
                 // The enemy is stuck, find a new target
-                targetPosition = Vector2.positiveInfinity;
+                hasValidTarget = false;
+                // Debug.Log($"Enemy is stuck at position {transform.position}, finding new target.");
             }
 
             // Reset the timer and update last position

@@ -48,7 +48,7 @@ public class SquareSpawningEnemySpawner : MonoBehaviour
         }
 
         // Debug log to check where the enemy is instantiated
-        Debug.Log($"Spawned enemy at position: {spawnPosition}");
+        // Debug.Log($"Spawned enemy at position: {spawnPosition}");
 
         yield return new WaitForSeconds(0.5f); // Adjust spawn delay as needed
     }

@@ -6,6 +6,7 @@ public class GameOverManager : MonoBehaviour
     public static GameOverManager instance;
 
     public GameObject object_to_check;
+    private bool isGameOver = false;
 
     private void Awake()
     {
@@ -32,24 +33,35 @@ public class GameOverManager : MonoBehaviour
 
     private void Update()
     {
-        if (object_to_check == null)
+        if (object_to_check == null && !isGameOver)
         {
+            // Debug.Log("Triggering EndGame from Update");
             EndGame();
         }
     }
 
     public void EndGame()
     {
-        Debug.Log("Ending game...");
-        SceneManager.LoadScene("MainMenu");
+        if (!isGameOver)
+        {
+            isGameOver = true;
+            // Debug.Log("Ending game...");
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            // Debug.Log("EndGame was already called");
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Debug.Log("Scene loaded: " + scene.name);
         if (scene.name == "MainMenu")
         {
             Time.timeScale = 1f;
-            Debug.Log("Time scale reset to 1");
+            // Debug.Log("Time scale reset to 1");
+            // Do not reset isGameOver here. Only reset it when starting a new game.
         }
     }
 }
